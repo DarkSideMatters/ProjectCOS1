@@ -12,6 +12,13 @@
         <title>Create a Building</title>
     </head>
     <body>
-        <h1></h1>
+        <table>
+        <h1>Please fill in all the layers in order to create the building!</h1>
+        <tr><td>Owner Name:</td><td> <input type="text" name="id" value="" /></td></tr>
+        <tr><td>Address:   </td><td> <input type="text" name="id" value="" /></td></tr>
+        <tr><td>ParcelNo:</td><td> <input type="text" name="id" value="" /></td></tr>
+        <tr><td>Size:</td><td> <input type="text" name="id" value="" /></td></tr>
+        <tr><td></td><td><input type="submit" value="Create Building" /></td></tr>
+        </table>
     </body>
 </html>
