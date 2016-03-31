@@ -1,14 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Entity;
 
-/**
- *
- * @author Plamen
- */
-public class DomainFacade {
+import java.util.ArrayList;
+import dataSource.*;
+//=== hau
+
+public class DomainFacade
+{
+
     
+    private DBFacade dbf;
+
+    private DomainFacade()
+    {
+        
+        dbf = DBFacade.getInstance();
+    }
+
+    public static DomainFacade getInstance()
+    {
+         return new DomainFacade();
+    }
 }
