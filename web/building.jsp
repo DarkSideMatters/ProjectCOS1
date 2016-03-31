@@ -12,13 +12,16 @@
         <title>Create a Building</title>
     </head>
     <body>
+        <form name="Form" action="UIServlet" method="POST">
         <table>
-        <h1>Please fill in all the layers in order to create the building!</h1>
-        <tr><td>Owner Name:</td><td> <input type="text" name="id" value="" /></td></tr>
-        <tr><td>Address:   </td><td> <input type="text" name="id" value="" /></td></tr>
-        <tr><td>ParcelNo:</td><td> <input type="text" name="id" value="" /></td></tr>
-        <tr><td>Size:</td><td> <input type="text" name="id" value="" /></td></tr>
-        <tr><td></td><td><input type="submit" value="Create Building" /></td></tr>
+            <h1>Please fill in all the layers in order to create the building!</h1>
+            <tr><td>Owner Name:</td><td> <input type="text" name="name" value="" /></td></tr>
+            <tr><td>Address:   </td><td> <input type="text" name="address" value="" /></td></tr>
+            <tr><td>ParcelNo:</td><td> <input type="text" name="pno" value="" /></td></tr>
+            <tr><td>Size:</td><td> <input type="text" name="size" value="" /></td></tr>
+            <tr><td></td><td><input type="submit" value="Submit" /></td></tr>
+            <input type="hidden" name="origin" value="building" />
         </table>
+        </form>
     </body>
 </html>
