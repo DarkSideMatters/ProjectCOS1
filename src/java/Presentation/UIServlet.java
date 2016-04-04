@@ -5,6 +5,7 @@
  */
 package Presentation;
 
+import Entity.DomainFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Mircea
  */
-@WebServlet(name = "UIServlet", urlPatterns = {"/UIServlet"})
+@WebServlet(name = "Presentation", urlPatterns = {"/UIServlet"})
 public class UIServlet extends HttpServlet {
 
     /**
@@ -30,10 +31,11 @@ public class UIServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
             response.setContentType("text/html;charset=UTF-8");
+            DomainFacade df = new DomainFacade();
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession(true);
             String origin = request.getParameter("origin");
             switch(origin){
                 case "building":
@@ -41,12 +43,13 @@ public class UIServlet extends HttpServlet {
                     String address = request.getParameter("address");
                     int pno = Integer.parseInt(request.getParameter("parcelno"));
                     String size = request.getParameter("size");
-                    //method to add to db
-                    response.sendRedirect("mainpage.jsp");
+                    df.addBuilding(name, address, pno, size);
+                    response.sendRedirect("building.jsp");
                     return;
                 case "customer":
-                    
+                    return;
                 case "report":
+                    return;
             }
         }
     }
