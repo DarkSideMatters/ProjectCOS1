@@ -16,9 +16,7 @@ import java.sql.Statement;
  */
 public class DBFacade {
 
-    private final Connection con;
-    private Statement statement;
-    private static DBFacade instance;
+    
     
     
     public DBFacade(){
@@ -32,12 +30,15 @@ public class DBFacade {
 		  return instance;
 	  }
     
-    
+    private final Connection con;
+    private static DBFacade instance;
     
    public void addBuilding(String name, String address, int pno, String size){
+       System.out.println(name + address + pno + size);
        try { 	
+            Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into buildings (cname,address,parcelno,size) values (?,?,?,?,?);";
+            String sql = "INSERT into buildings (name,address,pno,size) values (?,?,?,?);";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, name);
             stmt.setString(2, address);
