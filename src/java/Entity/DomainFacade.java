@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import dataSource.*;
 //=== hau
 
-public class DomainFacade
-{
+public class DomainFacade{
 
     
-    private DBFacade dbf;
+    public DBFacade dbf;
 
-    private DomainFacade()
+    public DomainFacade()
     {
         
         dbf = DBFacade.getInstance();
@@ -19,5 +18,9 @@ public class DomainFacade
     public static DomainFacade getInstance()
     {
          return new DomainFacade();
+    }
+    
+    public void addBuilding(String name, String address, int pno, String size){
+        dbf.addBuilding(name,address,pno,size);
     }
 }
