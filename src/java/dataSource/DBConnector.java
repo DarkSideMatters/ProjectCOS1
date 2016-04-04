@@ -1,18 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dataSource;
-
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-// Encapsulates code to connect to DB
-// Implemented as a Singleton to ensure max one connection
-public class DBConnector
-{
-
+/**
+ *
+ * @author Mircea
+ */
+public class DBConnector {
+    
     private static String driver = "com.mysql.jdbc.Driver";
     private static String URL = "jdbc:mysql://localhost:3306/polygon";
-    private static String id = "root1";			
-    private static String pw = "Passvord123";
+    private static String id = "root";			
+    private static String pw = "Conciousn3ss";
     
     private Connection con;
 
@@ -46,4 +51,3 @@ public class DBConnector
       return con;
     }
 }
-
