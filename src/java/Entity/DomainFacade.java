@@ -2,6 +2,7 @@ package Entity;
 
 import java.util.ArrayList;
 import dataSource.*;
+import java.sql.SQLException;
 //=== hau
 
 public class DomainFacade{
@@ -22,5 +23,9 @@ public class DomainFacade{
     
     public void addBuilding(String name, String address, int pno, String size){
         dbf.addBuilding(name,address,pno,size);
+    }
+
+    public void addCustomer(String cname, String email, String telephone, String caddress) {
+        dbf.addCustomer(cname,email,telephone,caddress);
     }
 }
