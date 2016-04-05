@@ -48,6 +48,22 @@ public class DBFacade {
         }catch (SQLException ex){}
         
     }
+
+    public void addCustomer(String cname, String email, String telephone, String caddress){
+        System.out.println(cname + email + telephone + caddress);
+        try{
+            Statement statement1;
+            statement1 = con.createStatement();
+            String sqlC = "INSERT into customers (cname,email,telephone,caddress) values (?,?,?,?);";
+            PreparedStatement stmtC = con.prepareStatement(sqlC);
+            stmtC.setString(1,cname);
+            stmtC.setString(2,email);
+            stmtC.setString(3,telephone);
+            stmtC.setString(4,caddress);
+            stmtC.execute();
+        } catch (SQLException ex){}
+        
+    }
 }
     
 
