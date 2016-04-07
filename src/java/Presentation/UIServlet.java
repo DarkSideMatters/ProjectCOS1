@@ -43,25 +43,24 @@ public class UIServlet extends HttpServlet {
                     String address = request.getParameter("address");
                     int pno = Integer.parseInt(request.getParameter("parcelno"));
                     String size = request.getParameter("size");
-                    df.addBuilding(name, address, pno, size);
+                    String cname = request.getParameter("cname");
+                    df.addBuilding(name, address, pno, size, cname);
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "customer":
-                    String cname = request.getParameter("cname");
+                    String cuname = request.getParameter("cuname");
                     String email = request.getParameter("email");
-                    String telephone = request.getParameter("telephone");
+                    int telephone = Integer.parseInt(request.getParameter("telephone"));
                     String caddress = request.getParameter("caddress");
-                    df.addCustomer(cname,email,telephone,caddress);
+                    df.addCustomer(cuname,email,telephone,caddress);
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "report":
-                    String reportno = request.getParameter("reportno");
+                    int reportno = Integer.parseInt(request.getParameter("reportno"));
                     String rdate = request.getParameter("rdate");
                     String bname = request.getParameter("bname");
-                    String baddress = request.getParameter("baddress");
-                    String postno = request.getParameter("postno");
                     String rcomment = request.getParameter("rcomment");
-                    df.addReport(reportno,rdate,bname,baddress,postno,rcomment);
+                    df.addReport(reportno,rdate,bname,rcomment);
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "buildingpage":
