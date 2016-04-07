@@ -43,17 +43,18 @@ public class DBFacade {
     private final Connection con;
     private static DBFacade instance;
     
-   public void addBuilding(String name, String address, int pno, String size){
-       System.out.println(name + address + pno + size);
+   public void addBuilding(String name, String address, int pno, String size, String cname){
+       System.out.println(name + address + pno + size + cname);
        try { 	
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into buildings (name,address,pno,size) values (?,?,?,?)";
+            String sql = "INSERT into buildings (name,address,pno,size) values (?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, name);
             stmt.setString(2, address);
             stmt.setInt(3, pno);
             stmt.setString(4, size);
+            stmt.setString(5, cname);
             stmt.execute();
             
         }catch (SQLException ex){}
@@ -74,6 +75,7 @@ public class DBFacade {
             bd.setAddress(rs.getString("address"));
             bd.setPno(rs.getInt("pno"));
             bd.setSize(rs.getString("size"));
+            bd.setCname(rs.getString("cname"));
             
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -81,16 +83,16 @@ public class DBFacade {
         return bd;
     }
 
-    public void addCustomer(String cname, String email, String telephone, String caddress){
-        System.out.println(cname + email + telephone + caddress);
+    public void addCustomer(String cuname, String email, int telephone, String caddress){
+        System.out.println(cuname + email + telephone + caddress);
         try{
             Statement statement;
             statement = con.createStatement();
             String sql = "INSERT into customers (cname,email,telephone,caddress) values (?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,cname);
+            stmt.setString(1,cuname);
             stmt.setString(2,email);
-            stmt.setString(3,telephone);
+            stmt.setInt(3,telephone);
             stmt.setString(4,caddress);
             stmt.executeUpdate();
         } catch (SQLException ex){
@@ -99,20 +101,20 @@ public class DBFacade {
         
     }
     
-    public Customer getCustomer(String cname){
+    public Customer getCustomer(String cuname){
         Customer ct = new Customer();
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "SELECT cname,email,telephone,caddress from CUSTOMERS where cname = ?";
+            String sql = "SELECT cuname,email,telephone,caddress from CUSTOMERS where cuname = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,cname);
+            stmt.setString(1,cuname);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            ct.setCname(rs.getString("cname"));
-            System.out.println(ct.getCname());
+            ct.setCuname(rs.getString("cuname"));
+            System.out.println(ct.getCuname());
             ct.setEmail(rs.getString("email"));
-            ct.setTelephone(rs.getString("telephone"));
+            ct.setTelephone(rs.getInt("telephone"));
             ct.setCaddress(rs.getString("caddress"));
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -120,18 +122,16 @@ public class DBFacade {
         return ct;
     }
 
-    public void addReport(String reportno, String rdate, String bname, String baddress, String postno, String rcomment) {
-        System.out.println(reportno + rdate + bname + baddress + postno + rcomment);
+    public void addReport(int reportno, String rdate, String bname, String rcomment) {
+        System.out.println(reportno + rdate + bname + rcomment);
         try{
             Statement statement2;
             statement2 = con.createStatement();
-            String sqlR = "INSERT into reports (reportno,rdate,bname,baddress,postno,rcomment) values (?,?,?,?,?,?);";
+            String sqlR = "INSERT into reports (reportno,rdate,bname,baddress,postno,rcomment) values (?,?,?,?);";
             PreparedStatement stmtR = con.prepareStatement(sqlR);
-            stmtR.setString(1,reportno);
+            stmtR.setInt(1,reportno);
             stmtR.setString(2,rdate );
             stmtR.setString(3,bname );
-            stmtR.setString(4,baddress );
-            stmtR.setString(5,postno );
             stmtR.setString(6,rcomment );
             stmtR.execute();
         }catch (SQLException ex){
@@ -149,11 +149,9 @@ public class DBFacade {
             stmt.setString(1,reportno);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            rp.setReportno(rs.getString("reportno"));
+            rp.setReportno(rs.getInt("reportno"));
             rp.setRdate(rs.getString("rdate"));
             rp.setBname(rs.getString("bname"));
-            rp.setBaddress(rs.getString("baddress"));
-            rp.setPostno(rs.getString("potsno"));
             rp.setRcomment(rs.getString("rcomment"));
         }catch (SQLException ex){
             ex.printStackTrace();
