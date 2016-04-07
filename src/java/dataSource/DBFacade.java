@@ -88,7 +88,7 @@ public class DBFacade {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into customers (cname,email,telephone,caddress) values (?,?,?,?)";
+            String sql = "INSERT into customers (cuname,email,telephone,caddress) values (?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1,cuname);
             stmt.setString(2,email);
@@ -132,7 +132,7 @@ public class DBFacade {
             stmtR.setInt(1,reportno);
             stmtR.setString(2,rdate );
             stmtR.setString(3,bname );
-            stmtR.setString(6,rcomment );
+            stmtR.setString(4,rcomment );
             stmtR.execute();
         }catch (SQLException ex){
         ex.printStackTrace();
