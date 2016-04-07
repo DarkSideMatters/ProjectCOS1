@@ -14,14 +14,16 @@ public class Building {
     String address;
     int pno;
     String size;
+    String cname;
     
     public Building(){}
 
-    public Building(String name, String address, int pno, String size) {
+    public Building(String name, String address, int pno, String size, String cname) {
         this.name = name;
         this.address = address;
         this.pno = pno;
         this.size = size;
+        this.cname = cname;
     }
 
     public String getName() {
@@ -55,10 +57,16 @@ public class Building {
     public void setSize(String size) {
         this.size = size;
     }
+    public String getCname() {
+        return cname;
+    }
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
 
     @Override
     public String toString() {
-        return "Building{" + "name=" + name + ", address=" + address + ", pno=" + pno + ", size=" + size + '}';
+        return "Building{" + "name=" + name + ", address=" + address + ", pno=" + pno + ", size=" + size + ", cname=" + cname + '}';
     }
     
     
