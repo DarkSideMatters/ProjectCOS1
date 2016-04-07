@@ -55,6 +55,14 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("customer.jsp");
                     return;
                 case "report":
+                    String reportno = request.getParameter("reportno");
+                    String rdate = request.getParameter("rdate");
+                    String bname = request.getParameter("bname");
+                    String baddress = request.getParameter("baddress");
+                    String postno = request.getParameter("postno");
+                    String rcomment = request.getParameter("rcomment");
+                    df.addReport(reportno,rdate,bname,baddress,postno,rcomment);
+                    response.sendRedirect("reportpage.jsp");
                     return;
             }
         }

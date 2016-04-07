@@ -28,4 +28,8 @@ public class DomainFacade{
     public void addCustomer(String cname, String email, String telephone, String caddress) {
         dbf.addCustomer(cname,email,telephone,caddress);
     }
+
+    public void addReport(String reportno, String rdate, String bname, String baddress, String postno, String rcomment) {
+        dbf.addReport(reportno,rdate,bname,baddress,postno,rcomment);
+    }
 }

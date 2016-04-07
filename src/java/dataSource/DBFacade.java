@@ -116,8 +116,29 @@ public class DBFacade {
             ct.setEmail(rs.getString("email"));
             ct.setTelephone(rs.getString("telephone"));
             ct.setCaddress(rs.getString("caddress"));
-        }catch (SQLException ex){}
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
         return ct;
+    }
+
+    public void addReport(String reportno, String rdate, String bname, String baddress, String postno, String rcomment) {
+        System.out.println(reportno + rdate + bname + baddress + postno + rcomment);
+        try{
+            Statement statement2;
+            statement2 = con.createStatement();
+            String sqlR = "INSERT into reports (reportno,rdate,bname,baddress,postno,rcomment) values (?,?,?,?,?,?);";
+            PreparedStatement stmtR = con.prepareStatement(sqlR);
+            stmtR.setString(1,reportno);
+            stmtR.setString(2,rdate );
+            stmtR.setString(3,bname );
+            stmtR.setString(4,baddress );
+            stmtR.setString(5,postno );
+            stmtR.setString(6,rcomment );
+            stmtR.execute();
+        }catch (SQLException ex){
+        ex.printStackTrace();
+        }
     }
 }
     
