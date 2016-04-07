@@ -21,15 +21,15 @@ public class DomainFacade{
          return new DomainFacade();
     }
     
-    public void addBuilding(String name, String address, int pno, String size){
-        dbf.addBuilding(name,address,pno,size);
+    public void addBuilding(String name, String address, int pno, String size,String cname){
+        dbf.addBuilding(name,address,pno,size,cname);
     }
 
-    public void addCustomer(String cname, String email, String telephone, String caddress) {
-        dbf.addCustomer(cname,email,telephone,caddress);
+    public void addCustomer(String cuname, String email, int telephone, String caddress) {
+        dbf.addCustomer(cuname,email,telephone,caddress);
     }
 
-    public void addReport(String reportno, String rdate, String bname, String baddress, String postno, String rcomment) {
-        dbf.addReport(reportno,rdate,bname,baddress,postno,rcomment);
+    public void addReport(int reportno, String rdate, String bname, String rcomment) {
+        dbf.addReport(reportno,rdate,bname,rcomment);
     }
 }
