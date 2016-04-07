@@ -48,7 +48,7 @@ public class DBFacade {
        try { 	
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into buildings (name,address,pno,size) values (?,?,?,?,?)";
+            String sql = "INSERT into buildings (name,address,pno,size,cname) values (?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, name);
             stmt.setString(2, address);
@@ -65,7 +65,7 @@ public class DBFacade {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "SELECT name,address,pno,size from BUILDINGS where name = ? ";
+            String sql = "SELECT name,address,pno,size,cname from BUILDINGS where name = ? ";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1,bname);
             ResultSet rs = stmt.executeQuery();
@@ -127,7 +127,7 @@ public class DBFacade {
         try{
             Statement statement2;
             statement2 = con.createStatement();
-            String sqlR = "INSERT into reports (reportno,rdate,bname,baddress,postno,rcomment) values (?,?,?,?);";
+            String sqlR = "INSERT into reports (reportno,rdate,bname,rcomment) values (?,?,?,?);";
             PreparedStatement stmtR = con.prepareStatement(sqlR);
             stmtR.setInt(1,reportno);
             stmtR.setString(2,rdate );
@@ -139,14 +139,14 @@ public class DBFacade {
         }
     }
     
-    public Report getReport(String reportno){
+    public Report getReport(int reportno){
         Report rp = new Report();
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "SELECT reportno,rdate,bname,baddress,postno,rcomment from REPORTS where reportno = ?";
+            String sql = "SELECT reportno,rdate,bname,rcomment from REPORTS where reportno = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,reportno);
+            stmt.setInt(1,reportno);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             rp.setReportno(rs.getInt("reportno"));
