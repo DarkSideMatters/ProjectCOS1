@@ -10,13 +10,13 @@ package Entity;
  * @author Mircea
  */
 public class Customer {
-    String cname;
+    String cuname;
     String email;
-    String telephone;
+    int telephone;
     String caddress;
 
-    public Customer(String cname, String email, String telephone, String caddress) {
-        this.cname = cname;
+    public Customer(String cuname, String email, int telephone, String caddress) {
+        this.cuname = cuname;
         this.email = email;
         this.telephone = telephone;
         this.caddress = caddress;
@@ -25,12 +25,12 @@ public class Customer {
     public Customer() {
     }
 
-    public String getCname() {
-        return cname;
+    public String getCuname() {
+        return cuname;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setCuname(String cuname) {
+        this.cuname = cuname;
     }
 
     public String getEmail() {
@@ -41,11 +41,11 @@ public class Customer {
         this.email = email;
     }
 
-    public String getTelephone() {
+    public int getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(int telephone) {
         this.telephone = telephone;
     }
 
@@ -59,7 +59,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "cname=" + cname + ", email=" + email + ", telephone=" + telephone + ", caddress=" + caddress + '}';
+        return "Customer{" + "cuname=" + cuname + ", email=" + email + ", telephone=" + telephone + ", caddress=" + caddress + '}';
     }
     
     
