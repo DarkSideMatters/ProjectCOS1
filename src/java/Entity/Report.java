@@ -25,6 +25,15 @@ public class Report {
         this.postno = postno;
         this.rcomment = rcomment;
     }
+    
+    public Report() {
+        this.reportno = reportno;
+        this.rdate = rdate;
+        this.bname = bname;
+        this.baddress = baddress;
+        this.postno = postno;
+        this.rcomment = rcomment;
+    }
 
     public String getReportno() {
         return reportno;
@@ -72,6 +81,11 @@ public class Report {
 
     public void setRcomment(String rcomment) {
         this.rcomment = rcomment;
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" + "reportno=" + reportno + ", rdate=" + rdate + ", bname=" + bname + ", baddress=" + baddress + ", postno=" + postno + ", rcomment=" + rcomment + '}';
     }
     
     
