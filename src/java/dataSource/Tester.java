@@ -5,7 +5,9 @@
  */
 package dataSource;
 
+import Entity.Building;
 import Entity.Customer;
+import Entity.Report;
 
 /**
  *
@@ -14,14 +16,15 @@ import Entity.Customer;
 public class Tester {
     public static void main(String[] args) {
     DBFacade dbf = new DBFacade(TestDBConnector.getTestInstance().getTestConnection());
-        Customer ct = new Customer();
-        String name = "Henrik";
-        String email = "henrik@genericmail.dk";
-        String tel = "52222222";
+        Building bd = new Building();
+        String name = "The Building";
         String address = "The strasse";
-        dbf.addCustomer(name, email, tel, address);
-        ct = dbf.getCustomer(name);
-        System.out.println(ct);
+        int pno = 52222222;
+        String size = "big";
+        String cname = "Henrik";
+        dbf.addBuilding(name, address, pno, size, cname);
+        bd = dbf.getBuilding(name);
+        System.out.println(bd);
     }
         
 }
