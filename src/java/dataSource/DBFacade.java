@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import Entity.Building;
 import Entity.Customer;
+import Entity.Report;
 import java.sql.ResultSet;
 /**
  *
@@ -108,10 +109,7 @@ public class DBFacade {
             stmt.setString(1,cname);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            rs.next();
-            String name = rs.getString("cname");
-            System.out.println(name);
-            ct.setCname(name);
+            ct.setCname(rs.getString("cname"));
             System.out.println(ct.getCname());
             ct.setEmail(rs.getString("email"));
             ct.setTelephone(rs.getString("telephone"));
@@ -140,6 +138,29 @@ public class DBFacade {
         ex.printStackTrace();
         }
     }
+    
+    public Report getReport(String reportno){
+        Report rp = new Report();
+        try{
+            Statement statement;
+            statement = con.createStatement();
+            String sql = "SELECT reportno,rdate,bname,baddress,postno,rcomment from REPORTS where reportno = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,reportno);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            rp.setReportno(rs.getString("reportno"));
+            rp.setRdate(rs.getString("rdate"));
+            rp.setBname(rs.getString("bname"));
+            rp.setBaddress(rs.getString("baddress"));
+            rp.setPostno(rs.getString("potsno"));
+            rp.setRcomment(rs.getString("rcomment"));
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return rp;
+    }
+
 }
     
 
