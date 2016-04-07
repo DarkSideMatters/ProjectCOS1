@@ -32,7 +32,8 @@ public class DBFacadeTest {
         String baddress = "Noname Boulevard 64";
         int pno = 2000;
         String size = "Big";
-        dbf.addBuilding(bname, baddress, pno, size);
+        String cname = "Henrik";
+        dbf.addBuilding(bname, baddress, pno, size, cname);
         bd = dbf.getBuilding(bname);
         System.out.println(bd.getName());
         assertTrue(bname.equals(bd.getName()));
@@ -44,27 +45,25 @@ public class DBFacadeTest {
         Customer ct = new Customer();
         String name = "Henrik";
         String email = "henrik@genericmail.dk";
-        String tel = "52222222";
+        int tel = 52222222;
         String address = "The strasse";
         dbf.addCustomer(name, email, tel, address);
         ct = dbf.getCustomer(name);
-        System.out.println(ct.getCname());
-        assertTrue(name.equals(ct.getCname()));
+        System.out.println(ct.getCuname());
+        assertTrue(name.equals(ct.getCuname()));
     }
     
     @Test
     public void testReport() {
         Report rp = new Report();
-        String reportno = "1";
+        int reportno = 1;
         String rdate = "today";
         String bname = "The Building of Buildings";
-        String baddress = "Somewhere on the street it iz";
-        String postno = "20000";
         String rcomment = "A very nice building indeed";
-        dbf.addReport(reportno, rdate, bname, baddress, postno, rcomment);
+        dbf.addReport(reportno, rdate, bname, rcomment);
         rp = dbf.getReport(reportno);
         System.out.println(rp);
-        assertTrue(reportno.equals(rp.getReportno()));
+        assertTrue(reportno == rp.getReportno());
     }
     
 }
