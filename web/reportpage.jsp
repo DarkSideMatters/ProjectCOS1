@@ -18,11 +18,7 @@
             <tr><td>Report Number:</td><td> <input type="text" name="reportno" value="" /></td></tr>
             <tr><td>Date:</td><td> <input type="text" name="rdate" value="" /></td></tr>
             <tr><td>Name of building:</td><td> <input type="text" name="bname" value="" /></td></tr>
-            <tr><td>Address:   </td><td> <input type="text" name="baddress" value="" /></td></tr>
-            <tr><td>Post Number:</td><td> <input type="text" name="postno" value="" /></td></tr>
-            
-        
-        
+            <tr><td>Comment:</td><td> <input type="text" name="comment" value="" /></td></tr>
         </table><br>
         Additional Information:<br>
                <textarea name="rcomment" rows="4" cols="30">
