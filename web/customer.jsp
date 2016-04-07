@@ -15,7 +15,7 @@
         <h1>Please fill in your information!</h1>
         <form name="Form1" action="UIServlet" method="POST">
         <table>
-            <tr><td>Name:</td><td> <input type="text" name="cname" value="" /></td></tr>
+            <tr><td>Name:</td><td> <input type="text" name="cuname" value="" /></td></tr>
             <tr><td>E-mail:   </td><td> <input type="text" name="email" value="" /></td></tr>
             <tr><td>Telephone Number:</td><td> <input type="text" name="telephone" value="" /></td></tr>
             <tr><td>Address:</td><td> <input type="text" name="caddress" value="" /></td></tr>
