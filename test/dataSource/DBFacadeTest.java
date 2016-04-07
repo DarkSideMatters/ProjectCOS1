@@ -27,6 +27,13 @@ public class DBFacadeTest {
 
     @Test
     public void testBuilding() {
+        Customer ct = new Customer();
+        String name = "Henrik";
+        String email = "henrik@genericmail.dk";
+        int tel = 52222222;
+        String address = "The strasse";
+        dbf.addCustomer(name, email, tel, address);
+        
         Building bd = new Building();
         String bname = "Kommune";
         String baddress = "Noname Boulevard 64";
@@ -55,10 +62,25 @@ public class DBFacadeTest {
     
     @Test
     public void testReport() {
+        Customer ct = new Customer();
+        String cuname = "Henrik";
+        String email = "henrik@genericmail.dk";
+        int tel = 52222222;
+        String address = "The strasse";
+        dbf.addCustomer(cuname, email, tel, address);
+        
+        Building bd = new Building();
+        String name = "Kommune";
+        String baddress = "Noname Boulevard 64";
+        int pno = 2000;
+        String size = "Big";
+        String cname = "Henrik";
+        dbf.addBuilding(name, baddress, pno, size, cname);
+        
         Report rp = new Report();
         int reportno = 1;
         String rdate = "today";
-        String bname = "The Building of Buildings";
+        String bname = "Kommune";
         String rcomment = "A very nice building indeed";
         dbf.addReport(reportno, rdate, bname, rcomment);
         rp = dbf.getReport(reportno);
