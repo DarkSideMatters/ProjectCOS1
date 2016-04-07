@@ -7,6 +7,7 @@ package dataSource;
 
 import Entity.Building;
 import Entity.Customer;
+import Entity.Report;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -25,7 +26,7 @@ public class DBFacadeTest {
     }
 
     @Test
-    public void testAddBuilding() {
+    public void testBuilding() {
         Building bd = new Building();
         String bname = "Kommune";
         String baddress = "Noname Boulevard 64";
@@ -39,7 +40,7 @@ public class DBFacadeTest {
     }
 
     @Test
-    public void testAddCustomer() {
+    public void testCustomer() {
         Customer ct = new Customer();
         String name = "Henrik";
         String email = "henrik@genericmail.dk";
@@ -49,6 +50,21 @@ public class DBFacadeTest {
         ct = dbf.getCustomer(name);
         System.out.println(ct.getCname());
         assertTrue(name.equals(ct.getCname()));
+    }
+    
+    @Test
+    public void testReport() {
+        Report rp = new Report();
+        String reportno = "1";
+        String rdate = "today";
+        String bname = "The Building of Buildings";
+        String baddress = "Somewhere on the street it iz";
+        String postno = "20000";
+        String rcomment = "A very nice building indeed";
+        dbf.addReport(reportno, rdate, bname, baddress, postno, rcomment);
+        rp = dbf.getReport(reportno);
+        System.out.println(rp);
+        assertTrue(reportno.equals(rp.getReportno()));
     }
     
 }
