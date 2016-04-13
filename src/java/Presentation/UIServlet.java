@@ -67,10 +67,10 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("building.jsp");
                     return;
                 case "customerpage":
-                    response.sendRedirect("building.jsp");
+                    response.sendRedirect("customer.jsp");
                     return;
                 case "reportpage":
-                    response.sendRedirect("building.jsp");
+                    response.sendRedirect("reportpage.jsp");
                     return;
             }
         }
