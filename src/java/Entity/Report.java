@@ -5,32 +5,56 @@
  */
 package Entity;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author Mircea
+ * @author Berkant
  */
 public class Report {
-    int reportno;
+    int repid;
+    int bid;
+    String repname;
     String rdate;
-    String bname;
-    String rcomment;
+    int damid;
+    String conmanager;
+    String grade;
 
-    public Report(int reportno, String rdate, String bname, String rcomment) {
-        this.reportno = reportno;
+    public Report(int repid, int bid, String repname, String rdate, int damid, String conmanager, String grade) {
+        this.repid = repid;
+        this.bid = bid;
+        this.repname = repname;
         this.rdate = rdate;
-        this.bname = bname;
-        this.rcomment = rcomment;
+        this.damid = damid;
+        this.conmanager = conmanager;
+        this.grade = grade;
     }
-    
+
     public Report() {
     }
 
-    public int getReportno() {
-        return reportno;
+    public int getRepid() {
+        return repid;
     }
 
-    public void setReportno(int reportno) {
-        this.reportno = reportno;
+    public void setRepid(int repid) {
+        this.repid = repid;
+    }
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+
+    public String getRepname() {
+        return repname;
+    }
+
+    public void setRepname(String repname) {
+        this.repname = repname;
     }
 
     public String getRdate() {
@@ -41,29 +65,35 @@ public class Report {
         this.rdate = rdate;
     }
 
-    public String getBname() {
-        return bname;
+    public int getDamid() {
+        return damid;
     }
 
-    public void setBname(String bname) {
-        this.bname = bname;
+    public void setDamid(int damid) {
+        this.damid = damid;
     }
 
-    
-
-
-    public String getRcomment() {
-        return rcomment;
+    public String getConmanager() {
+        return conmanager;
     }
 
-    public void setRcomment(String rcomment) {
-        this.rcomment = rcomment;
+    public void setConmanager(String conmanager) {
+        this.conmanager = conmanager;
     }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
 
     @Override
     public String toString() {
-        return "Report{" + "reportno=" + reportno + ", rdate=" + rdate + ", bname=" + bname + ", rcomment=" + rcomment + '}';
+        return "Report{" + "repid=" + repid + ", bid=" + bid + ", repname=" + repname + ", rdate=" + rdate + ", damid=" + damid + ", conmanager=" + conmanager + ", grade=" + grade + '}';
     }
     
-    
+
 }
