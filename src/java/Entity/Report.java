@@ -5,7 +5,6 @@
  */
 package Entity;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,16 +13,16 @@ import java.util.ArrayList;
 public class Report {
     int repid;
     int bid;
-    String repname;
+    String repnum;
     String rdate;
     int damid;
     String conmanager;
     String grade;
 
-    public Report(int repid, int bid, String repname, String rdate, int damid, String conmanager, String grade) {
+    public Report(int repid, int bid, String repnum, String rdate, int damid, String conmanager, String grade) {
         this.repid = repid;
         this.bid = bid;
-        this.repname = repname;
+        this.repnum = repnum;
         this.rdate = rdate;
         this.damid = damid;
         this.conmanager = conmanager;
@@ -49,12 +48,12 @@ public class Report {
         this.bid = bid;
     }
 
-    public String getRepname() {
-        return repname;
+    public String getRepnum() {
+        return repnum;
     }
 
-    public void setRepname(String repname) {
-        this.repname = repname;
+    public void setRepnum(String repnum) {
+        this.repnum = repnum;
     }
 
     public String getRdate() {
@@ -92,7 +91,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report{" + "repid=" + repid + ", bid=" + bid + ", repname=" + repname + ", rdate=" + rdate + ", damid=" + damid + ", conmanager=" + conmanager + ", grade=" + grade + '}';
+        return "Report{" + "repid=" + repid + ", bid=" + bid + ", repnum=" + repnum + ", rdate=" + rdate + ", damid=" + damid + ", conmanager=" + conmanager + ", grade=" + grade + '}';
     }
     
 
