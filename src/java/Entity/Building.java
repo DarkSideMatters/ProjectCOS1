@@ -21,14 +21,15 @@ public class Building {
     String zip;   
     String year;
     String size;
-    Boolean roof;
+    boolean roof;
+    String extwalls;
     String usagecomment;
     ArrayList<Documents> documents;
     ArrayList<Bimages> bimages;
     ArrayList<Floor> floors;
     ArrayList<Report> reports;
     
-    public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size, Boolean roof, String usagecomment) {
+    public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size, boolean roof, String extwalls, String usagecomment) {
         this.cid = cid;
         this.bid = bid;
         this.bname = bname;
@@ -38,12 +39,21 @@ public class Building {
         this.year = year;
         this.size = size;
         this.roof = roof;
+        this.extwalls = extwalls;
         this.usagecomment = usagecomment;
     }
 
     public Building() {
     }
 
+    public String getExtwalls() {
+        return extwalls;
+    }
+
+    public void setExtwalls(String extwalls) {
+        this.extwalls = extwalls;
+    }
+    
     public int getCid() {
         return cid;
     }
@@ -108,11 +118,11 @@ public class Building {
         this.size = size;
     }
 
-    public Boolean getRoof() {
+    public boolean getRoof() {
         return roof;
     }
 
-    public void setRoof(Boolean roof) {
+    public void setRoof(boolean roof) {
         this.roof = roof;
     }
 
