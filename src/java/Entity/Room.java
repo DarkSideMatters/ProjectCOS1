@@ -17,6 +17,7 @@ public class Room {
     String rname;
     Boolean dam;
     ArrayList<Rimages> Rimages;
+    Damage dmg;
 
     public Room(int rid, int fid, String rname, boolean dam) {
         this.rid = rid;
@@ -26,6 +27,14 @@ public class Room {
     }
 
     public Room() {
+    }
+
+    public Damage getDmg() {
+        return dmg;
+    }
+
+    public void setDmg(Damage dmg) {
+        this.dmg = dmg;
     }
     
     public int getRid() {
