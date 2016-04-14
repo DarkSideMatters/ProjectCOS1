@@ -22,8 +22,6 @@ public class Tester {
         int pno = 52222222;
         String size = "big";
         String cname = "Henrik";
-        dbf.addBuilding(name, address, pno, size, cname);
-        bd = dbf.getBuilding(name);
         System.out.println(bd);
     }
         
