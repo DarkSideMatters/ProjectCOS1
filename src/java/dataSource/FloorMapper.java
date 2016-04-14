@@ -9,23 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 /**
  *
- * @author Plamen
+ * @author Berkant
  */
 public class FloorMapper {
-     public void createAdmin(Floor f,int bid,Connection con){
+     public void createFloor(Floor f,Connection con){
         try{
             Statement statement;
             statement = con.createStatement();
             String sql = "INSERT into floors (fid,bid,fname,fppath) values (?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, f.getFid());
-            stmt.setInt(2, bid);
+            stmt.setInt(2, f.getBid());
             stmt.setString(3, f.getFname());
             stmt.setString(4, f.getFppath());
             stmt.executeUpdate();
