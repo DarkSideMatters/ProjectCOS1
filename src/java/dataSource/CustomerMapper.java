@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Mircea
+ * @author Berkant
  */
 public class CustomerMapper {
     
