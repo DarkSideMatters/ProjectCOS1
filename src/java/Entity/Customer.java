@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mircea
+ * @author Berkant
  */
 public class Customer {
     int cid;
