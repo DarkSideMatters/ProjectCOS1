@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Plamen
+ * @author Berkant
  */
 public class AdminMapper{
     
