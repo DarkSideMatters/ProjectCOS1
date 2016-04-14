@@ -44,7 +44,6 @@ public class UIServlet extends HttpServlet {
                     int pno = Integer.parseInt(request.getParameter("parcelno"));
                     String size = request.getParameter("size");
                     String cname = request.getParameter("cname");
-                    df.addBuilding(name, address, pno, size, cname);
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "customer":
@@ -52,7 +51,6 @@ public class UIServlet extends HttpServlet {
                     String email = request.getParameter("email");
                     int telephone = Integer.parseInt(request.getParameter("telephone"));
                     String caddress = request.getParameter("caddress");
-                    df.addCustomer(cuname,email,telephone,caddress);
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "report":
@@ -60,7 +58,6 @@ public class UIServlet extends HttpServlet {
                     String rdate = request.getParameter("rdate");
                     String bname = request.getParameter("bname");
                     String rcomment = request.getParameter("rcomment");
-                    df.addReport(reportno,rdate,bname,rcomment);
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "buildingpage":
