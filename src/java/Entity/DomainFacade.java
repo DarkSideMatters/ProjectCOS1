@@ -8,12 +8,11 @@ import java.sql.SQLException;
 public class DomainFacade{
 
     
-    public DBFacade dbf;
+    public DBConnector dbc;
+    public BuildingMapper bm;
 
     public DomainFacade()
     {
-        
-        dbf = DBFacade.getInstance();
     }
 
     public static DomainFacade getInstance()
@@ -21,15 +20,16 @@ public class DomainFacade{
          return new DomainFacade();
     }
     
-    public void addBuilding(String name, String address, int pno, String size,String cname){
-        dbf.addBuilding(name,address,pno,size,cname);
+/////////////////////////////    
+    
+    public void addBuilding(int cid, int bid,String bname,String city,String address,String zip,String year,String size,boolean roof,String extwalls,String usagecomment){
+        Building bd = new Building(cid,bid,bname,city,address,zip,year,size,roof,extwalls,usagecomment);
+        bm.createBuilding(bd,dbc.getInstance().getConnection());
     }
 
-    public void addCustomer(String cuname, String email, int telephone, String caddress) {
-        dbf.addCustomer(cuname,email,telephone,caddress);
-    }
-
-    public void addReport(int reportno, String rdate, String bname, String rcomment) {
-        dbf.addReport(reportno,rdate,bname,rcomment);
-    }
+    
+    
+    
+/////////////////////////////    
+    
 }
