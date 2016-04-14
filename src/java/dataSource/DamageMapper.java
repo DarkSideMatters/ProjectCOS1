@@ -9,16 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 /**
  *
- * @author Plamen
+ * @author Berkant
  */
 public class DamageMapper {
-    public void createDamage(Damage dmg,int rid,Connection con){
+    public void createDamage(Damage dmg,Connection con){
         boolean moist;
         try{
             Statement statement;
@@ -26,7 +23,7 @@ public class DamageMapper {
             String sql = "INSERT into damage (damid,rid,descr,dtype,moist,moistpoint,wall,ceiling,floor,windoor,recommendation) values (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, dmg.getDamid());
-            stmt.setInt(2, rid);
+            stmt.setInt(2, dmg.getRid());
             stmt.setString(3, dmg.getDescr());
             stmt.setString(4, dmg.getDtype());
             if (dmg.getMoisture())
