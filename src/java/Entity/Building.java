@@ -21,7 +21,7 @@ public class Building {
     String zip;   
     String year;
     String size;
-    boolean roof;
+    String roof;
     String extwalls;
     String usagecomment;
     ArrayList<Documents> documents;
@@ -29,7 +29,7 @@ public class Building {
     ArrayList<Floor> floors;
     ArrayList<Report> reports;
     
-    public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size, boolean roof, String extwalls, String usagecomment) {
+    public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size, String roof, String extwalls, String usagecomment) {
         this.cid = cid;
         this.bid = bid;
         this.bname = bname;
@@ -41,6 +41,28 @@ public class Building {
         this.roof = roof;
         this.extwalls = extwalls;
         this.usagecomment = usagecomment;
+    }
+    
+    public Building( String bname, String city, String address, String zip, String year, String size, String roof, String extwalls, String usagecomment) {
+        this.bname = bname;
+        this.city = city;
+        this.address = address;
+        this.zip = zip;
+        this.year = year;
+        this.size = size;
+        this.roof = roof;
+        this.extwalls = extwalls;
+        this.usagecomment = usagecomment;
+    }
+    
+    public Building( int cid,String bname, String city, String address, String zip, String year, String size) {
+        this.cid = cid;
+        this.bname = bname;
+        this.city = city;
+        this.address = address;
+        this.zip = zip;
+        this.year = year;
+        this.size = size;
     }
 
     public Building() {
@@ -118,11 +140,11 @@ public class Building {
         this.size = size;
     }
 
-    public boolean getRoof() {
+    public String getRoof() {
         return roof;
     }
 
-    public void setRoof(boolean roof) {
+    public void setRoof(String roof) {
         this.roof = roof;
     }
 
