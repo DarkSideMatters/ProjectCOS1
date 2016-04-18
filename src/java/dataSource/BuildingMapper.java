@@ -24,24 +24,16 @@ public class BuildingMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into buildings (bid, cid, bname, size, roof, extwalls, usagecomment, year, city, address, zip) values (?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT into buildings (cid, bname, city, address, zip, year, size) values (?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, bd.getBid());
-            stmt.setInt(2, bd.getCid());
-            stmt.setString(3, bd.getBname());
-            stmt.setString(4, bd.getSize());
-            if(bd.getRoof())
-                stmt.setString(5, "yes");
-            else
-                stmt.setString(5, "no");
-            stmt.setString(6, bd.getExtwalls());
-            stmt.setString(7, bd.getUsagecomment());
-            stmt.setString(8, bd.getYear());
-            stmt.setString(9, bd.getCity());
-            stmt.setString(10, bd.getAddress());
-            stmt.setString(11, bd.getZip());
+            stmt.setInt(1, bd.getCid());
+            stmt.setString(2,bd.getBname());
+            stmt.setString(3, bd.getCity());
+            stmt.setString(4,bd.getAddress());
+            stmt.setString(5, bd.getZip());
+            stmt.setString(6, bd.getYear());
+            stmt.setString(7, bd.getSize());
             stmt.executeUpdate();
-            con.close();
             
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -61,11 +53,7 @@ public class BuildingMapper {
                 int cid = rs.getInt("cid");
                 String bname = rs.getString("bname");
                 String size = rs.getString("size");
-                boolean roof;
-                if(rs.getString("roof").equals("yes"))
-                    roof = true;
-                else
-                    roof = false;
+                String roof = rs.getString("roof");
                 String extwalls = rs.getString("extwalls");
                 String usagecomment = rs.getString("usagecomment");
                 String year = rs.getString("year");
@@ -74,7 +62,6 @@ public class BuildingMapper {
                 String zip = rs.getString("zip");
                 buildings.add(new Building(bid,cid,bname,city,address,zip,year,size,roof,extwalls,usagecomment));
             }
-            con.close();
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
@@ -111,16 +98,13 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateRoofBuilding(Building bd, boolean newroof, Connection con) throws SQLException{
+    public void updateRoofBuilding(Building bd, String newroof, Connection con) throws SQLException{
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update buildings set roof=?, where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            if(newroof)
-                stmt.setString(1, "yes");
-            else
-                stmt.setString(1, "no");
+            stmt.setString(1, newroof);
             stmt.setInt(2,bd.getBid());
             stmt.executeUpdate();
         
