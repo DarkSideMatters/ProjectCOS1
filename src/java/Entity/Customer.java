@@ -24,8 +24,7 @@ public class Customer {
     String zip;
     ArrayList<Building> buildings;
 
-    public Customer(int cid, String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip) {
-        this.cid = cid;
+    public Customer( String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
