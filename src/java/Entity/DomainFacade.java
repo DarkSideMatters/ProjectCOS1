@@ -27,54 +27,63 @@ public class DomainFacade{
          return new DomainFacade();
     }
     
-/////////////////////////////    
     
-    public void addBuilding(int cid, int bid,String bname,String city,String address,String zip,String year,String size,boolean roof,String extwalls,String usagecomment){
-        Building bd = new Building(cid,bid,bname,city,address,zip,year,size,roof,extwalls,usagecomment);
-        bm.createBuilding(bd,dbc.getInstance().getConnection());
+    public String checkCFields(String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
+        String result = new String("The Fields: ");
+        if(username.equals(""))
+            result += "\n" + "Username";
+        if(password.equals(""))
+            result += "\n" + "Password";
+        if(firstname.equals(""))
+            result += "\n" + "Firstname ";
+        if(lastname.equals(""))
+            result += "\n" + "Lastname ";
+        if(mail.equals(""))
+            result += "\n" + "E-mail ";
+        if(tel.equals(""))
+            result += "\n" + "Telephone ";
+        if(city.equals(""))
+            result += "\n" + "City ";
+        if(address.equals(""))
+            result += "\n" + "Address ";
+        if(zip.equals(""))
+            result += "\n" + "Zip ";
+        if(result.equals("The Fields: "))
+            return null;
+        else return result + "\n" + "have not been completed.";
     }
     
-/////////////////////////////    
-    
-    public void addAdmin(int aid, String username, String password, String firstname, String lastname, String mail, String tel){
-        Admin ad = new Admin(aid,username,password,firstname,lastname,mail,tel);
-        am.createAdmin(ad,dbc.getInstance().getConnection());
+    public String checkBFields( String bname, String bcity, String baddress, String bzip, String year, String size){
+        String result = new String("The Fields: ");
+        if(bname.equals(""))
+            result += "\n" + "Building Name";
+        if(bcity.equals(""))
+            result += "\n" + "City";
+        if(baddress.equals(""))
+            result += "\n" + "Address";
+        if(bzip.equals(""))
+            result += "\n" + "Zip";
+        if(year.equals(""))
+            result += "\n" + "Year";
+        if(size.equals(""))
+            result += "\n" + "Size";
+        if(result.equals("The Fields: "))
+            return null;
+        else return result + "\n" + "have not been  completed";
     }
-    
-////////////////////////////
     
     public void addCustomer(String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
         Customer ct = new Customer( username, password, firstname, lastname, mail, tel, city, address, zip);
         dbf.addCustomer(ct);
     }
     
-////////////////////////////
-    
-    public void addDamage(int damid, int rid, String descr, String dtype, Boolean moisture, String moisturepoint, String walls, String ceiling, String floor, String windoor, String recommendation){
-        Damage dg = new Damage(damid,rid,descr,dtype,moisture,moisturepoint,walls,ceiling,floor,windoor,recommendation);
-        dmg.createDamage(dg,dbc.getInstance().getConnection());
-    }
-
-///////////////////////////
-    
-    public void addFloor(int fid, int bid, String fname, String fppath){
-        Floor fl= new Floor(fid,bid,fname,fppath);
-        f.createFloor(fl,dbc.getInstance().getConnection());
+    public void readCustomers(Accounts acc){
+        dbf.readCustomers(acc);
     }
     
-///////////////////////////
     
-    public void addReport(int repid, int bid, String repnum, String rdate, int damid, String conmanager, String grade){
-        Report rt= new Report(repid,bid,repnum,rdate,damid,conmanager,grade);
-        r.createReport(rt,dbc.getInstance().getConnection());
+    public void addBuilding(int cid, String bname, String bcity, String baddress, String bzip, String year, String size){
+        Building bd = new Building (cid,bname,bcity,baddress,bzip,year,size);
+        dbf.addBuilding(bd);
     }
-
-///////////////////////////
-    
-    public void addRoom(int rid, int fid, String rname, boolean dam){
-        Room rm= new Room(rid,fid,rname,dam);
-        ro.createRoom(rm,dbc.getInstance().getConnection());
-    }
-    
-///////////////////////////
 }
