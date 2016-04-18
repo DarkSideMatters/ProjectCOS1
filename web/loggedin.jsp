@@ -13,5 +13,10 @@
     </head>
     <body>
         <h1>You are now logged in</h1>
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="buildingpage">
+            <input type="submit" name="buildingpage" value="Add Building"/>
+        <form/>
+        
     </body>
 </html>
