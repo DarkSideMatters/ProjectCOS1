@@ -14,9 +14,10 @@ public class DomainFacade{
     public FloorMapper f;
     public ReportMapper r;
     public RoomMapper ro;
-
+    public DBFacade dbf;
     public DomainFacade()
     {
+        
     }
 
     public static DomainFacade getInstance()
@@ -40,9 +41,9 @@ public class DomainFacade{
     
 ////////////////////////////
     
-    public void addCustomer(int cid, String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
-        Customer ct = new Customer(cid, username, password, firstname, lastname, mail, tel, city, address, zip);
-        cs.createCustomer(ct,dbc.getInstance().getConnection());
+    public void addCustomer(String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
+        Customer ct = new Customer( username, password, firstname, lastname, mail, tel, city, address, zip);
+        dbf.getInstance().addCustomer(ct);
     }
     
 ////////////////////////////
