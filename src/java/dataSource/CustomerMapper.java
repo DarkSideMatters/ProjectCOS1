@@ -24,18 +24,17 @@ public class CustomerMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into customers (cid, usrn, pwd, fn, ln, mail, tel, city, address, zip) values (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT into customers ( usrn, pwd, fn, ln, mail, tel, city, address, zip) values (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, c.getCid());
-            stmt.setString(2, c.getUsername());
-            stmt.setString(3, c.getPassword());
-            stmt.setString(4, c.getFirstname());
-            stmt.setString(5, c.getLastname());
-            stmt.setString(6, c.getMail());
-            stmt.setString(7, c.getTel());
-            stmt.setString(8, c.getCity());
-            stmt.setString(9, c.getAddress());
-            stmt.setString(10, c.getZip());
+            stmt.setString(1, c.getUsername());
+            stmt.setString(2, c.getPassword());
+            stmt.setString(3, c.getFirstname());
+            stmt.setString(4, c.getLastname());
+            stmt.setString(5, c.getMail());
+            stmt.setString(6, c.getTel());
+            stmt.setString(7, c.getCity());
+            stmt.setString(8, c.getAddress());
+            stmt.setString(9, c.getZip());
             stmt.executeUpdate();
             con.close();
             
@@ -53,7 +52,6 @@ public class CustomerMapper {
             PreparedStatement stmt = con.prepareStatement(sqlString);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int cid = rs.getInt("cid");
                 String usrn = rs.getString("usrn");
                 String pwd = rs.getString("pwd");
                 String fn = rs.getString("fn");
@@ -63,7 +61,7 @@ public class CustomerMapper {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String zip = rs.getString("zip");
-                customers.add(new Customer(cid,usrn,pwd,fn,ln,mail,tel,city,address,zip));
+                customers.add(new Customer(usrn,pwd,fn,ln,mail,tel,city,address,zip));
             }
             con.close();
 
