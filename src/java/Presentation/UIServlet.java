@@ -42,6 +42,7 @@ public class UIServlet extends HttpServlet {
             boolean accountfound = false;
             boolean passwordmatch = false;
             int i;
+            String FieldError;
             
             
             Accounts acc = new Accounts();
@@ -93,31 +94,60 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("feedback.jsp");
                     return;
                 case "customer":
-                    String usrn = request.getParameter("usrn");
-                    String pwd = request.getParameter("pwd");
+                    String cusrn = request.getParameter("usrn");
+                    String cpwd = request.getParameter("pwd");
                     String fn = request.getParameter("fn");
                     String ln = request.getParameter("ln");
-                    String email = request.getParameter("email");
+                    String cemail = request.getParameter("email");
                     String tel = request.getParameter("tel");
-                    String city = request.getParameter("city");
+                    String ccity = request.getParameter("city");
                     String caddress = request.getParameter("caddress");
-                    String zip = request.getParameter("zip");
+                    String czip = request.getParameter("zip");
                     
-                    
+                    FieldError = df.checkCFields(cusrn,cpwd,fn,ln,cemail,tel,ccity,caddress,czip);
+                    System.out.println(FieldError);
+                    if(FieldError!=null){
+                        request.getSession().setAttribute("message", FieldError);
+                        response.sendRedirect("feedback.jsp");
+                        return;
+                    }
                     
                     for( i = 0 ; i< customers.size(); i++)
-                        if(customers.get(i).getUsername().equals(usrn))
+                        if(customers.get(i).getUsername().equals(cusrn))
                         {
-                            response.sendRedirect("usernametaken.jsp");
+                            request.getSession().setAttribute("message", "Username Taken.");
+                            response.sendRedirect("feedback.jsp");
                             return;
                         }
                     
                     
-                    df.addCustomer(usrn, pwd, fn, ln, email, tel, city, caddress, zip);
+                    df.addCustomer(cusrn, cpwd, fn, ln, cemail, tel, ccity, caddress, czip);
                     
-                    response.sendRedirect("mainpage.jsp");
+                    response.sendRedirect("login.jsp");
                     return;
-                case "report":
+                case "building":
+                    String bname = request.getParameter("name");
+                    String bcity = request.getParameter("city");
+                    String baddress = request.getParameter("address");
+                    String bzip = request.getParameter("zip");
+                    String year = request.getParameter("year");
+                    String size = request.getParameter("size");
+                    
+                    
+                    FieldError = df.checkBFields(bname,bcity,baddress,bzip,year,size);
+                    System.out.println(FieldError);
+                    if(FieldError!=null){
+                        request.getSession().setAttribute("message", FieldError);
+                        response.sendRedirect("feedback.jsp");
+                        return;
+                    }
+                    
+                    
+                    currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                    
+                    df.addBuilding(currentcustomer.getCid(), bname, bcity, baddress, bzip, year, size);
+                    
+                    response.sendRedirect("loggedin.jsp");
                     return;
                 case "buildingpage":
                     response.sendRedirect("building.jsp");
