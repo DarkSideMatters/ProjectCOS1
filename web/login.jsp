@@ -20,7 +20,11 @@
             <input type="password" name="pass"><br><br>
             <input type="hidden" name="origin" value="login">
             <input type="submit" name="login" value="Log in"/>
-            <input type="submit" name="customer" value="Register"/>
+        </form>
+        <br><br/>
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="customerpage"/>
+            <input type="submit" name="register" value="Register"/>
         </form>
     </body>
 </html>
