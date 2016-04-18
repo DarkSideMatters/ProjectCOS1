@@ -47,10 +47,21 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "customer":
-                    String cuname = request.getParameter("cuname");
+                    String usrn = request.getParameter("usrn");
+                    String pwd = request.getParameter("pwd");
+                    String fn = request.getParameter("fn");
+                    String ln = request.getParameter("ln");
                     String email = request.getParameter("email");
-                    int telephone = Integer.parseInt(request.getParameter("telephone"));
+                    String tel = request.getParameter("tel");
+                    String city = request.getParameter("city");
                     String caddress = request.getParameter("caddress");
+                    String zip = request.getParameter("zip");
+                    try{
+                    df.addCustomer(usrn, pwd, fn, ln, email, tel, city, caddress, zip);
+                    }catch (NullPointerException ex){
+                        ex.printStackTrace();
+                        
+                    }
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "report":
