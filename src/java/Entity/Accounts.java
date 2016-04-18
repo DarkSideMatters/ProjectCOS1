@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author Berkant
  */
 public class Accounts {
-    ArrayList<Admin> admins;
-    ArrayList<Customer> customers;
+    ArrayList<Admin> admins = new ArrayList<>();
+    ArrayList<Customer> customers = new ArrayList<>();
 
     public Accounts() {
     }
@@ -22,7 +22,7 @@ public class Accounts {
         return admins;
     }
 
-    public void addAdmins(Admin admin) {
+    public void addAdmin(Admin admin) {
         admins.add(admin);
     }
 
@@ -30,7 +30,7 @@ public class Accounts {
         return customers;
     }
 
-    public void addCustomers(Customer customer) {
+    public void addCustomer(Customer customer) {
         customers.add(customer);
     }
 
