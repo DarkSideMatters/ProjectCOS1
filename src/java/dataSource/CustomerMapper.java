@@ -6,6 +6,7 @@
 package dataSource;
 
 import Entity.Customer;
+import Entity.Accounts;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ public class CustomerMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into customers ( usrn, pwd, fn, ln, mail, tel, city, address, zip) values (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT into customers (usrn, pwd, fn, ln, mail, tel, city, address, zip) values (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, c.getUsername());
             stmt.setString(2, c.getPassword());
@@ -35,16 +36,15 @@ public class CustomerMapper {
             stmt.setString(7, c.getCity());
             stmt.setString(8, c.getAddress());
             stmt.setString(9, c.getZip());
+            System.out.println(c.toString());
             stmt.executeUpdate();
-            con.close();
             
         }catch (SQLException ex){
             ex.printStackTrace();
         }
     }
     
-    public List<Customer> readCustomers(Customer c,Connection con){
-        List<Customer> customers = new ArrayList<>();
+    public void readCustomers(Accounts acc,Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -52,6 +52,7 @@ public class CustomerMapper {
             PreparedStatement stmt = con.prepareStatement(sqlString);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
+                int cid = rs.getInt("cid");
                 String usrn = rs.getString("usrn");
                 String pwd = rs.getString("pwd");
                 String fn = rs.getString("fn");
@@ -61,14 +62,17 @@ public class CustomerMapper {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String zip = rs.getString("zip");
-                customers.add(new Customer(usrn,pwd,fn,ln,mail,tel,city,address,zip));
+                Customer ex = new Customer(cid,usrn,pwd,fn,ln,mail,tel,city,address,zip);
+                if(ex==null)
+                    System.out.println("EX IS NULL IDIOT");
+                else
+                    System.out.println(ex.toString());
+                acc.addCustomer(ex);
             }
-            con.close();
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
-              } 
-        return customers;
+              }
     }
     
     public void updateUsrnCustomer(Customer c,String newusrn, Connection con) {
