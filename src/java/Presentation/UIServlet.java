@@ -6,8 +6,11 @@
 package Presentation;
 
 import Entity.DomainFacade;
+import Entity.Accounts;
+import Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,17 +37,60 @@ public class UIServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
             response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession(true);
             DomainFacade df = new DomainFacade();
+            boolean accountfound = false;
+            boolean passwordmatch = false;
+            int i;
+            
+            
+            Accounts acc = new Accounts();
+            ArrayList<Customer> customers = new ArrayList<>();
+            df.readCustomers(acc);
+            customers = acc.getCustomers();
+            
+            Customer currentcustomer = new Customer();
+            
+            
+            
         try (PrintWriter out = response.getWriter()) {
             String origin = request.getParameter("origin");
             switch(origin){
-                case "building":
-                    String name = request.getParameter("name");
-                    String address = request.getParameter("address");
-                    int pno = Integer.parseInt(request.getParameter("parcelno"));
-                    String size = request.getParameter("size");
-                    String cname = request.getParameter("cname");
-                    response.sendRedirect("mainpage.jsp");
+                case "login":
+                    String username = request.getParameter("username");
+                    String pass = request.getParameter("pass");
+                    
+                    
+                    for( i = 0 ; i< customers.size(); i++)
+                        if(customers.get(i).getUsername().equals(username))
+                        {
+                            accountfound = true;
+                            if(customers.get(i).getPassword().equals(pass))
+                            {
+                                currentcustomer = new Customer(
+                                        customers.get(i).getCid(),
+                                        customers.get(i).getUsername(),
+                                        customers.get(i).getPassword(),
+                                        customers.get(i).getFirstname(),
+                                        customers.get(i).getLastname(),
+                                        customers.get(i).getMail(),
+                                        customers.get(i).getTel(),
+                                        customers.get(i).getCity(),
+                                        customers.get(i).getAddress(),
+                                        customers.get(i).getZip());
+                                request.getSession().setAttribute("currentcustomer",currentcustomer);
+                                passwordmatch=true;
+                                response.sendRedirect("loggedin.jsp");
+                                return;
+                            }
+                        }
+                    
+                    
+                    if(!passwordmatch)
+                        request.getSession().setAttribute("message", "You entered the wrong password. Please try again.");
+                    if(!accountfound)
+                        request.getSession().setAttribute("message", "Account not found.");
+                    response.sendRedirect("feedback.jsp");
                     return;
                 case "customer":
                     String usrn = request.getParameter("usrn");
@@ -56,20 +102,22 @@ public class UIServlet extends HttpServlet {
                     String city = request.getParameter("city");
                     String caddress = request.getParameter("caddress");
                     String zip = request.getParameter("zip");
-                    try{
+                    
+                    
+                    
+                    for( i = 0 ; i< customers.size(); i++)
+                        if(customers.get(i).getUsername().equals(usrn))
+                        {
+                            response.sendRedirect("usernametaken.jsp");
+                            return;
+                        }
+                    
+                    
                     df.addCustomer(usrn, pwd, fn, ln, email, tel, city, caddress, zip);
-                    }catch (NullPointerException ex){
-                        ex.printStackTrace();
-                        
-                    }
+                    
                     response.sendRedirect("mainpage.jsp");
                     return;
                 case "report":
-                    int reportno = Integer.parseInt(request.getParameter("reportno"));
-                    String rdate = request.getParameter("rdate");
-                    String bname = request.getParameter("bname");
-                    String rcomment = request.getParameter("rcomment");
-                    response.sendRedirect("mainpage.jsp");
                     return;
                 case "buildingpage":
                     response.sendRedirect("building.jsp");
