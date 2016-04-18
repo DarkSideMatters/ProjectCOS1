@@ -14,12 +14,14 @@ import Entity.Building;
 import Entity.Customer;
 import Entity.Report;
 import java.sql.ResultSet;
+
 /**
  *
  * @author Plamen
  */
 public class DBFacade {
-
+    public CustomerMapper cs;
+    public DBConnector dbc;
     
     
     
@@ -42,22 +44,12 @@ public class DBFacade {
     
     private final Connection con;
     private static DBFacade instance;
+    BuildingMapper bm;
     
    public void addBuilding(String name, String address, int pno, String size, String cname){
        System.out.println(name + address + pno + size + cname);
-       try { 	
-            Statement statement;
-            statement = con.createStatement();
-            String sql = "INSERT into buildings (name,address,pno,size,cname) values (?,?,?,?,?)";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, name);
-            stmt.setString(2, address);
-            stmt.setInt(3, pno);
-            stmt.setString(4, size);
-            stmt.setString(5, cname);
-            stmt.execute();
-            
-        }catch (SQLException ex){}
+        Building bd = new Building();
+       bm.createBuilding(bd, con);
     }
    
     public Building getBuilding(String bname){
@@ -83,21 +75,8 @@ public class DBFacade {
         return bd;
     }
 
-    public void addCustomer(String cuname, String email, int telephone, String caddress){
-        System.out.println(cuname + email + telephone + caddress);
-        try{
-            Statement statement;
-            statement = con.createStatement();
-            String sql = "INSERT into customers (cuname,email,telephone,caddress) values (?,?,?,?)";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,cuname);
-            stmt.setString(2,email);
-            stmt.setInt(3,telephone);
-            stmt.setString(4,caddress);
-            stmt.executeUpdate();
-        } catch (SQLException ex){
-        ex.printStackTrace();
-                }
+    public void addCustomer(Customer ct){
+        cs.createCustomer(ct,dbc.getInstance().getConnection());
         
     }
     
