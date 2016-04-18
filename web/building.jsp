@@ -16,10 +16,11 @@
         <form name="Form" action="UIServlet" method="POST">
         <table>
             <tr><td>Building Name:</td><td> <input type="text" name="name" value="" /></td></tr>
-            <tr><td>Address:   </td><td> <input type="text" name="address" value="" /></td></tr>
-            <tr><td>ParcelNo:</td><td> <input type="text" name="parcelno" value="" /></td></tr>
+            <tr><td>City:   </td><td> <input type="text" name="city" value="" /></td></tr>
+            <tr><td>Address:</td><td> <input type="text" name="address" value="" /></td></tr>
+            <tr><td>Zip:</td><td> <input type="text" name="zip" value="" /></td></tr>
+            <tr><td>Year:</td><td> <input type="text" name="year" value="" /></td></tr>
             <tr><td>Size:</td><td> <input type="text" name="size" value="" /></td></tr>
-            <tr><td>Owner Name:</td><td> <input type="text" name="cname" value="" /></td></tr>
             <input type="hidden" name="origin" value="building" />
             <tr><td></td><td><input type="submit" value="Submit" /></td></tr>
         </table>
