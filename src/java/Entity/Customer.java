@@ -35,6 +35,19 @@ public class Customer {
         this.address = address;
         this.zip = zip;
     }
+    
+    public Customer( int cid, String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip) {
+        this.cid = cid;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.mail = mail;
+        this.tel = tel;
+        this.city = city;
+        this.address = address;
+        this.zip = zip;
+    }
 
     public Customer() {
     }
@@ -129,7 +142,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "cid=" + cid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", mail=" + mail + ", tel=" + tel + ", city=" + city + ", address=" + address + ", zip=" + zip + ", buildings=" + buildings + '}';
+        return "Customer{" + "cid=" + cid + ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", mail=" + mail + ", tel=" + tel + ", city=" + city + ", address=" + address + ", zip=" + zip + '}';
     }
 
     
