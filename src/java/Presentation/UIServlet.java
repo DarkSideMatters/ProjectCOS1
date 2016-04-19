@@ -49,8 +49,10 @@ public class UIServlet extends HttpServlet {
             Accounts acc = new Accounts();
             ArrayList<Customer> customers = new ArrayList<>();
             ArrayList<Building> buildings = new ArrayList<>();
+            acc.reinit();
             df.readCustomers(acc);
             customers = acc.getCustomers();
+            buildings = new ArrayList<>();
             
             Customer currentcustomer = new Customer();
             
@@ -145,32 +147,44 @@ public class UIServlet extends HttpServlet {
                     }
                     
                     
-                    currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                     
-                    df.addBuilding(currentcustomer.getCid(), bname, bcity, baddress, bzip, year, size);
                     
                     response.sendRedirect("buildinglist.jsp");
                     return;
-                case "loggedin":
-                     currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
-                     df.readBuildings(currentcustomer);
-                     request.getSession().setAttribute("currentcustomer",currentcustomer);
-                
                 case "buildinglist":
                     
+                    
                     currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
-                     df.readBuildings(currentcustomer);
-                     request.getSession().setAttribute("currentcustomer",currentcustomer);
-                     buildings = currentcustomer.getBuildings();
-                     request.getSession().setAttribute("buildings",buildings);
+                    currentcustomer.reinitBuildings();
+                    df.readBuildings(currentcustomer);
+                    request.getSession().setAttribute("currentcustomer",currentcustomer);
                     
                     response.sendRedirect("buildinglist.jsp");
                     return;
+                case "buildingoption":
+                    String btn = request.getParameter("btn");
+                    int bid = Integer.parseInt(request.getParameter("buildingnr"));
+                    
+                    System.out.println(bid);
+                    
+                    if(btn.equals("Delete")){
+                        df.deleteBuilding(bid);
+                        currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                        currentcustomer.reinitBuildings();
+                        df.readBuildings(currentcustomer);
+                        request.getSession().setAttribute("currentcustomer",currentcustomer);
+                        response.sendRedirect("buildinglist.jsp");
+                    }
+                    if(btn.equals("Edit"))
+                        //response.sendRedirect("editbuilding.jsp");
+                        response.sendRedirect("buildinglist.jsp");
+                    if(btn.equals("View Report"))
+                        //df.getReport();
+                        response.sendRedirect("buildinglist.jsp");
+                        
+                    
+                    return;
                 case "report":
-                    
-                    
-                    
-                    
                     response.sendRedirect("loggedin.jsp");
                     return;
                 case "buildingpage":
