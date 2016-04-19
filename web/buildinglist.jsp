@@ -18,12 +18,14 @@
             <tr><th>Cid</th><th>Bid</th><th>Building Name</th><th>City</th><th>Address</th><th>Zip</th><th>Year</th><th>Size</th></tr>
         <% Customer cstm = (Customer)request.getSession().getAttribute("currentcustomer");
             ArrayList<Building> blds = cstm.getBuildings();
-        %><form name="Form2" action="UIServlet" method="post"><%
+        
             
             
             for(int i=0;i<blds.size();i++){
-                
-        %> 
+               
+            %>
+            
+            <form name="Form2" action="UIServlet" method="post">
         
            <tr>
             
@@ -35,6 +37,8 @@
             <td> <%= blds.get(i).getZip() %> </td>
             <td> <%= blds.get(i).getYear() %> </td>
             <td> <%= blds.get(i).getSize() %> </td>
+            <input type="hidden" name="origin" value="buildingoption"/>
+            <input type="hidden" name="buildingnr" value="<%= blds.get(i).getBid() %>" />
             <td> <input type="submit" name="btn" value="Edit"> </td>
             <td> <input type="submit" name="btn" value="Delete"> </td>
             <td> <input type="submit" name="btn" value="View Report"> </td>
