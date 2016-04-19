@@ -164,7 +164,7 @@ public class UIServlet extends HttpServlet {
                      buildings = currentcustomer.getBuildings();
                      request.getSession().setAttribute("buildings",buildings);
                     
-                    response.sendRedirect("building.jsp");
+                    response.sendRedirect("buildinglist.jsp");
                     return;
                 case "report":
                     
