@@ -90,4 +90,8 @@ public class DomainFacade{
     public void readBuildings(Customer c){
         dbf.readBuildings(c);
     }
+    
+    public void deleteBuilding(int bid){
+        dbf.deleteBuilding(bid);
+    }
 }
