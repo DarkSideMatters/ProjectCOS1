@@ -61,6 +61,10 @@ public class DBFacade {
     public void readBuildings(Customer c){
         bm.readBuildings(c, con);
     }
+    
+    public void deleteBuilding(int bid){
+        bm.deleteBuilding(bid, con);
+    }
 
 }
     
