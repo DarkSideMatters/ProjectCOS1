@@ -15,7 +15,7 @@
     <body>
         
         <table>
-            <tr><th>Cid</th><th>Bid</th><th>Building Name</th><th>City</th><th>Address</th><th>Zip</th><th>Year</th><th>Size</th></tr>
+            <tr><th>Nr</th><th>Building Name</th><th>City</th><th>Address</th><th>Zip</th><th>Year</th><th>Size</th></tr>
         <% Customer cstm = (Customer)request.getSession().getAttribute("currentcustomer");
             ArrayList<Building> blds = cstm.getBuildings();
         
@@ -29,8 +29,7 @@
         
            <tr>
             
-            <td> <%= blds.get(i).getCid() %> </td>
-            <td> <%= blds.get(i).getBid() %> </td>
+            <td> <%= i+1 %> </td>
             <td> <%= blds.get(i).getBname() %> </td>
             <td> <%= blds.get(i).getCity()%> </td>
             <td> <%= blds.get(i).getAddress() %> </td>
