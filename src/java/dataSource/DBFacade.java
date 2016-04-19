@@ -66,36 +66,40 @@ public class DBFacade {
         bm.deleteBuilding(bid, con);
     }
 
-    public void updateBnameBuilding(int bid, String newbname) throws SQLException{
+    public void updateBnameBuilding(int bid, String newbname) {
         bm.updateBnameBuilding(bid, newbname, con);
     }
     
-    public void updateSizeBuilding(int bid, String newsize) throws SQLException{
+    public void updateSizeBuilding(int bid, String newsize) {
         bm.updateSizeBuilding(bid, newsize, con);
     }        
     
-    public void updateRoofBuilding(int bid, String newroof) throws SQLException{
+    public void updateRoofBuilding(int bid, String newroof) {
         bm.updateRoofBuilding(bid, newroof, con);
     }      
     
-    public void updateExtwallsBuilding(int bid, String newextwalls) throws SQLException{
+    public void updateExtwallsBuilding(int bid, String newextwalls) {
         bm.updateExtwallsBuilding(bid, newextwalls, con);
     }     
     
-    public void updateUsagecommentBuilding(int bid, String newusagecomment) throws SQLException{
+    public void updateUsagecommentBuilding(int bid, String newusagecomment) {
         bm.updateUsagecommentBuilding(bid, newusagecomment, con);
     }    
     
-    public void updateYearBuilding(int bid, String newyear) throws SQLException{
+    public void updateYearBuilding(int bid, String newyear) {
         bm.updateYearBuilding(bid, newyear, con);
     }   
     
-    public void updateCityBuilding(int bid, String newcity) throws SQLException{
+    public void updateCityBuilding(int bid, String newcity) {
         bm.updateCityBuilding(bid, newcity, con);
     }                
-    public void updateAddressBuilding(int bid, String newaddress) throws SQLException{
+    public void updateAddressBuilding(int bid, String newaddress) {
         bm.updateAddressBuilding(bid, newaddress, con);
-    }        
+    }      
+    
+    public void updateZipBuilding(int bid, String newzip) {
+        bm.updateZipBuilding(bid, newzip, con);
+    }   
 }
     
 
