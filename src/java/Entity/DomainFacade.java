@@ -86,4 +86,8 @@ public class DomainFacade{
         Building bd = new Building (cid,bname,bcity,baddress,bzip,year,size);
         dbf.addBuilding(bd);
     }
+    
+    public void readBuildings(Customer c){
+        dbf.readBuildings(c);
+    }
 }
