@@ -18,6 +18,11 @@
             for(int i=0;i<buildings.size();i++){
         %><li><%buildings.get(i).getCid();%></li>
         <%}%>
+    
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="buildingpage">
+            <input type="submit" name="Buildingpage" value="Add Building"/>
+        <form/>
             
     </body>
 </html>
