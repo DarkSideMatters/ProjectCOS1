@@ -198,13 +198,13 @@ public class BuildingMapper {
               }
 }
     
-    public void deleteBuilding(Building bd, Connection con){
+    public void deleteBuilding(int bid, Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "delete from buildings where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setInt(1,bd.getBid());
+            stmt.setInt(1,bid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
