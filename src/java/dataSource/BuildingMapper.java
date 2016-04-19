@@ -6,6 +6,7 @@
 package dataSource;
 
 import Entity.Building;
+import Entity.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,8 +41,7 @@ public class BuildingMapper {
         }
     }
     
-    public List<Building> readBuildings(Building bd,Connection con){
-        List<Building> buildings = new ArrayList<>();
+    public void readBuildings(Customer c,Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -60,13 +60,12 @@ public class BuildingMapper {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String zip = rs.getString("zip");
-                buildings.add(new Building(bid,cid,bname,city,address,zip,year,size,roof,extwalls,usagecomment));
+                c.add(new Building(bid,cid,bname,city,address,zip,year,size,roof,extwalls,usagecomment));
             }
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               } 
-        return buildings;
 
     }
     
