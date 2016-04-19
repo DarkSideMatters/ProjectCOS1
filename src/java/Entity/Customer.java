@@ -22,7 +22,7 @@ public class Customer {
     String city;
     String address;
     String zip;
-    ArrayList<Building> buildings;
+    ArrayList<Building> buildings = new ArrayList<>();
 
     public Customer( String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip) {
         this.username = username;
@@ -136,7 +136,7 @@ public class Customer {
         return buildings;
     }
 
-    public void addBuildings(Building building) {
+    public void add(Building building) {
         buildings.add(building);
     }
 
