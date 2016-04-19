@@ -69,11 +69,11 @@ public class BuildingMapper {
 
     }
     
-    public void updateBnameBuilding(int bid,String newbname, Connection con) throws SQLException{
+    public void updateBnameBuilding(int bid,String newbname, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set bname=?, where bid=?";
+            String sqlString = "update buildings set bname=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newbname);
             stmt.setInt(2,bid);
@@ -83,11 +83,11 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateSizeBuilding(int bid,String newsize, Connection con) throws SQLException{
+    public void updateSizeBuilding(int bid,String newsize, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set size=?, where bid=?";
+            String sqlString = "update buildings set size=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newsize);
             stmt.setInt(2,bid);
@@ -97,11 +97,11 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateRoofBuilding(int bid, String newroof, Connection con) throws SQLException{
+    public void updateRoofBuilding(int bid, String newroof, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set roof=?, where bid=?";
+            String sqlString = "update buildings set roof=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newroof);
             stmt.setInt(2,bid);
@@ -111,11 +111,11 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateExtwallsBuilding(int bid,String newextwalls, Connection con) throws SQLException{
+    public void updateExtwallsBuilding(int bid,String newextwalls, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set extwalls=?, where bid=?";
+            String sqlString = "update buildings set extwalls=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newextwalls);
             stmt.setInt(2,bid);
@@ -125,11 +125,11 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateUsagecommentBuilding(int bid,String newusagecomment, Connection con) throws SQLException{
+    public void updateUsagecommentBuilding(int bid,String newusagecomment, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set ussagecomment=?, where bid=?";
+            String sqlString = "update buildings set ussagecomment=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newusagecomment);
             stmt.setInt(2,bid);
@@ -139,11 +139,11 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateYearBuilding(int bid,String newyear, Connection con) throws SQLException{
+    public void updateYearBuilding(int bid,String newyear, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set year=?, where bid=?";
+            String sqlString = "update buildings set year=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newyear);
             stmt.setInt(2,bid);
@@ -153,11 +153,11 @@ public class BuildingMapper {
             ex.printStackTrace();
               }
 }
-    public void updateCityBuilding(int bid,String newcity, Connection con) throws SQLException{
+    public void updateCityBuilding(int bid,String newcity, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set city=?, where bid=?";
+            String sqlString = "update buildings set city=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newcity);
             stmt.setInt(2,bid);
@@ -168,11 +168,11 @@ public class BuildingMapper {
               }
 }
     
-    public void updateAddressBuilding(int bid,String newaddress, Connection con) throws SQLException{
+    public void updateAddressBuilding(int bid,String newaddress, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set address=?, where bid=?";
+            String sqlString = "update buildings set address=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newaddress);
             stmt.setInt(2,bid);
@@ -183,11 +183,11 @@ public class BuildingMapper {
               }
 }
     
-    public void updateZipBuilding(int bid,String newzip, Connection con) throws SQLException{
+    public void updateZipBuilding(int bid,String newzip, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update buildings set zip=?, where bid=?";
+            String sqlString = "update buildings set zip=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newzip);
             stmt.setInt(2,bid);
