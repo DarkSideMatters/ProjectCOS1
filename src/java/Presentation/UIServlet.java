@@ -146,8 +146,13 @@ public class UIServlet extends HttpServlet {
                         return;
                     }
                     
+                    currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                     
+                    df.addBuilding( currentcustomer.getCid(), bname, bcity, baddress, bzip, year, size);
                     
+                    currentcustomer.reinitBuildings();
+                    df.readBuildings(currentcustomer);
+                    request.getSession().setAttribute("currentcustomer",currentcustomer);
                     
                     response.sendRedirect("buildinglist.jsp");
                     return;
