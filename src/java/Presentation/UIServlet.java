@@ -7,6 +7,7 @@ package Presentation;
 
 import Entity.DomainFacade;
 import Entity.Accounts;
+import Entity.Building;
 import Entity.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,6 +48,7 @@ public class UIServlet extends HttpServlet {
             
             Accounts acc = new Accounts();
             ArrayList<Customer> customers = new ArrayList<>();
+            ArrayList<Building> buildings = new ArrayList<>();
             df.readCustomers(acc);
             customers = acc.getCustomers();
             
@@ -146,6 +148,28 @@ public class UIServlet extends HttpServlet {
                     currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                     
                     df.addBuilding(currentcustomer.getCid(), bname, bcity, baddress, bzip, year, size);
+                    
+                    response.sendRedirect("buildinglist.jsp");
+                    return;
+                case "loggedin":
+                     currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                     df.readBuildings(currentcustomer);
+                     request.getSession().setAttribute("currentcustomer",currentcustomer);
+                
+                case "buildinglist":
+                    
+                    currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                     df.readBuildings(currentcustomer);
+                     request.getSession().setAttribute("currentcustomer",currentcustomer);
+                     buildings = currentcustomer.getBuildings();
+                     request.getSession().setAttribute("buildings",buildings);
+                    
+                    response.sendRedirect("building.jsp");
+                    return;
+                case "report":
+                    
+                    
+                    
                     
                     response.sendRedirect("loggedin.jsp");
                     return;
