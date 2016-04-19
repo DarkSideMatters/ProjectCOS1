@@ -33,6 +33,11 @@ public class Accounts {
     public void addCustomer(Customer customer) {
         customers.add(customer);
     }
+    
+    public void reinit(){
+        customers = new ArrayList<>();
+        admins = new ArrayList<>();
+    }
 
     @Override
     public String toString() {
