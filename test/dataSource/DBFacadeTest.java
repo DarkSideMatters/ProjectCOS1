@@ -22,7 +22,7 @@ public class DBFacadeTest {
     
     @Before
     public void setUp() {
-        dbf = new DBFacade(TestDBConnector.getTestInstance().getTestConnection());
+        dbf = new DBFacade();
     }
 
 //    @Test
