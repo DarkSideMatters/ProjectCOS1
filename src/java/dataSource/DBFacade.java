@@ -66,6 +66,36 @@ public class DBFacade {
         bm.deleteBuilding(bid, con);
     }
 
+    public void updateBnameBuilding(int bid, String newbname) throws SQLException{
+        bm.updateBnameBuilding(bid, newbname, con);
+    }
+    
+    public void updateSizeBuilding(int bid, String newsize) throws SQLException{
+        bm.updateSizeBuilding(bid, newsize, con);
+    }        
+    
+    public void updateRoofBuilding(int bid, String newroof) throws SQLException{
+        bm.updateRoofBuilding(bid, newroof, con);
+    }      
+    
+    public void updateExtwallsBuilding(int bid, String newextwalls) throws SQLException{
+        bm.updateExtwallsBuilding(bid, newextwalls, con);
+    }     
+    
+    public void updateUsagecommentBuilding(int bid, String newusagecomment) throws SQLException{
+        bm.updateUsagecommentBuilding(bid, newusagecomment, con);
+    }    
+    
+    public void updateYearBuilding(int bid, String newyear) throws SQLException{
+        bm.updateYearBuilding(bid, newyear, con);
+    }   
+    
+    public void updateCityBuilding(int bid, String newcity) throws SQLException{
+        bm.updateCityBuilding(bid, newcity, con);
+    }                
+    public void updateAddressBuilding(int bid, String newaddress) throws SQLException{
+        bm.updateAddressBuilding(bid, newaddress, con);
+    }        
 }
     
 
