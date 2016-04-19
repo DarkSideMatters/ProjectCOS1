@@ -12,10 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>You are now logged in</h1>
+        <h1>You are now logged in!</h1>
+        
         <form name="Form2" action="UIServlet" method="post">
-            <input type="hidden" name="origin" value="buildingpage">
-            <input type="submit" name="buildingpage" value="Add Building"/>
+            <input type="hidden" name="origin" value="buildinglist">
+            <input type="submit" name="Blistingpage" value="List Buildings"/>
         <form/>
         
     </body>
