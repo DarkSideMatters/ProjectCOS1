@@ -45,7 +45,7 @@ public class BuildingMapper {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "SELECT * FROM buildings;";
+            String sqlString = "SELECT * FROM buildings";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -60,7 +60,7 @@ public class BuildingMapper {
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String zip = rs.getString("zip");
-                c.add(new Building(bid,cid,bname,city,address,zip,year,size,roof,extwalls,usagecomment));
+                c.add(new Building(cid,bid,bname,city,address,zip,year,size,roof,extwalls,usagecomment));
             }
 
         } catch (ClassNotFoundException|SQLException ex) {
