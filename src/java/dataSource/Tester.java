@@ -5,9 +5,11 @@
  */
 package dataSource;
 
+import Entity.Accounts;
 import Entity.Building;
 import Entity.Customer;
 import Entity.Report;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,14 +17,14 @@ import Entity.Report;
  */
 public class Tester {
     public static void main(String[] args) {
-    DBFacade dbf = new DBFacade(TestDBConnector.getTestInstance().getTestConnection());
-        Building bd = new Building();
-        String name = "The Building";
-        String address = "The strasse";
-        int pno = 52222222;
-        String size = "big";
-        String cname = "Henrik";
-        System.out.println(bd);
+    CustomerMapper cm = new CustomerMapper();    
+        
+    DBConnector dbc;
+    dbc = DBConnector.getInstance();
+    
+    Accounts acc = new Accounts();
+    
+    cm.readCustomers(acc, dbc.getConnection());
     }
         
 }
