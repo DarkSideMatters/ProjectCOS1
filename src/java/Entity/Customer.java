@@ -136,6 +136,10 @@ public class Customer {
         return buildings;
     }
 
+    public void reinitBuildings(){
+        buildings = new ArrayList<>();
+    }
+    
     public void add(Building building) {
         buildings.add(building);
     }
