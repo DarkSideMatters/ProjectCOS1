@@ -57,6 +57,10 @@ public class DBFacade {
     public void addBuilding(Building bd){
         bm.createBuilding(bd,con);
     }
+    
+    public void readBuildings(Customer c){
+        bm.readBuildings(c, con);
+    }
 
 }
     
