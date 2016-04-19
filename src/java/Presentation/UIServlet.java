@@ -169,6 +169,7 @@ public class UIServlet extends HttpServlet {
                 case "buildingoption":
                     String btn = request.getParameter("btn");
                     int bid = Integer.parseInt(request.getParameter("buildingnr"));
+                    request.getSession().setAttribute("bid", bid);
                     
                     System.out.println(bid);
                     
@@ -181,13 +182,35 @@ public class UIServlet extends HttpServlet {
                         response.sendRedirect("buildinglist.jsp");
                     }
                     if(btn.equals("Edit"))
-                        //response.sendRedirect("editbuilding.jsp");
-                        response.sendRedirect("buildinglist.jsp");
+                        response.sendRedirect("editbuilding.jsp");
                     if(btn.equals("View Report"))
                         //df.getReport();
                         response.sendRedirect("buildinglist.jsp");
                         
+                    return;
+                case "editbuilding":
+                    String ebname = request.getParameter("name");
+                    String ebcity = request.getParameter("city");
+                    String ebaddress = request.getParameter("address");
+                    String ebzip = request.getParameter("zip");
+                    String eyear = request.getParameter("year");
+                    String esize = request.getParameter("size");
                     
+                    bid = (int)request.getSession().getAttribute("bid");
+                    
+                    System.out.println(bid);
+                    
+                    currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                    
+                    System.out.println(bid + " " + ebname + " " + ebcity + " " + ebaddress + " " + ebzip + " " + eyear + " " + esize);
+                    
+                    df.editBuilding(bid, ebname, ebcity, ebaddress, ebzip, eyear, esize);
+                    
+                    currentcustomer.reinitBuildings();
+                    df.readBuildings(currentcustomer);
+                    request.getSession().setAttribute("currentcustomer",currentcustomer);
+                    
+                    response.sendRedirect("buildinglist.jsp");
                     return;
                 case "report":
                     response.sendRedirect("loggedin.jsp");
