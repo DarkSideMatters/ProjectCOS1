@@ -94,4 +94,21 @@ public class DomainFacade{
     public void deleteBuilding(int bid){
         dbf.deleteBuilding(bid);
     }
+    
+    public void editBuilding(int bid, String bname, String bcity, String baddress, String bzip, String year, String size) {
+        if(!bname.equals(""))
+            dbf.updateBnameBuilding(bid,bname);
+        if(!bcity.equals(""))
+            dbf.updateCityBuilding(bid,bcity);
+        if(!baddress.equals(""))
+            dbf.updateAddressBuilding(bid,baddress);
+        if(!bzip.equals(""))
+            dbf.updateZipBuilding(bid,bzip);
+        if(!year.equals(""))
+            dbf.updateYearBuilding(bid,year);
+        if(!size.equals(""))
+            dbf.updateSizeBuilding(bid,size);
+            
+    }
+    
 }
