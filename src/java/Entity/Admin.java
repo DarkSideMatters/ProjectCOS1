@@ -28,6 +28,14 @@ public class Admin {
         this.tel = tel;
         
     }
+    public Admin( String username, String password, String firstname, String lastname, String mail, String tel) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.mail = mail;
+        this.tel = tel;
+    }
 
     public Admin() {
     }
