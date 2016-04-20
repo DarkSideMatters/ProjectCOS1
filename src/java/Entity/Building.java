@@ -27,7 +27,7 @@ public class Building {
     ArrayList<Documents> documents;
     ArrayList<Bimages> bimages;
     ArrayList<Floor> floors;
-    ArrayList<Report> reports;
+    ArrayList<BReport> reports;
     
     public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size, String roof, String extwalls, String usagecomment) {
         this.cid = cid;
@@ -180,11 +180,11 @@ public class Building {
         floors.add(Floor);
     }
 
-    public ArrayList<Report> getReports() {
+    public ArrayList<BReport> getReports() {
         return reports;
     }
 
-    public void addReports(Report report) {
+    public void addReports(BReport report) {
         reports.add(report);
     }
 

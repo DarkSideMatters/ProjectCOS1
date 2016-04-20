@@ -21,20 +21,15 @@ import java.util.List;
 public class RoomMapper {
     
     public void createRoom(Room r,Connection con){
-        boolean dam;
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into rooms (rid,fid,rname,dam) values (?,?,?,?)";
+            String sql = "INSERT into rooms (rid,fid,rname,size) values (?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, r.getRid());
             stmt.setInt(2, r.getFid());
             stmt.setString(3, r.getRname());
-            if(r.getDam())
-                stmt.setString(4,"yes");
-            else
-                stmt.setString(4,"no"); 
-    
+            stmt.setString(4, r.getSize());
             stmt.executeUpdate();
             con.close();
             
@@ -55,12 +50,8 @@ public class RoomMapper {
                 int rid = rs.getInt("rid");
                 int fid = rs.getInt("fid");
                 String rname = rs.getString("rname");
-                boolean dam;
-                if(rs.getString("dam").equals("yes"))
-                    dam = true;
-                else 
-                    dam = false;
-                rooms.add(new Room(rid, fid, rname, dam));
+                String size = rs.getString("size");
+                rooms.add(new Room(rid, fid, rname, size));
             }
             con.close();
 
@@ -86,16 +77,13 @@ public class RoomMapper {
             ex.printStackTrace();
               }
     }
-    public void updateDamRoom(Room r, Boolean dam, Connection con) throws SQLException{
+    public void updateSizeRoom(Room r, String newsize, Connection con) throws SQLException{
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update rooms set dam=? where rid=?";
+            String sqlString = "update rooms set size=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            if(r.getDam())
-                stmt.setString(1,"yes");
-            else
-                stmt.setString(1,"no");
+            stmt.setString(1, newsize);
             stmt.setInt(2, r.getRid());
             stmt.executeUpdate();
         

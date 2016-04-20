@@ -5,7 +5,6 @@
  */
 package Entity;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -15,28 +14,19 @@ public class Room {
     int rid;
     int fid;
     String rname;
-    Boolean dam;
-    ArrayList<Rimages> Rimages;
-    Damage dmg;
+    String size;
 
-    public Room(int rid, int fid, String rname, boolean dam) {
+    public Room(int rid, int fid, String rname, String size) {
         this.rid = rid;
         this.fid = fid;
         this.rname = rname;
-        this.dam = dam;
+        this.size = size;
     }
 
     public Room() {
     }
 
-    public Damage getDmg() {
-        return dmg;
-    }
 
-    public void setDmg(Damage dmg) {
-        this.dmg = dmg;
-    }
-    
     public int getRid() {
         return rid;
     }
@@ -60,25 +50,19 @@ public class Room {
     public void setRname(String rname) {
         this.rname = rname;
     }
-
-    public Boolean getDam() {
-        return dam;
-    }
-
-    public void setDam(Boolean dam) {
-        this.dam = dam;
-    }
-
-    public ArrayList<Rimages> getRimages() {
-        return Rimages;
-    }
-
-    public void addRimages(Rimages Rimage) {
-        Rimages.add(Rimage);
-    }
     
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
-        return "Room{" + "rid=" + rid + ", fid=" + fid + ", rname=" + rname + "dam=" + dam + ", Rimages=" + Rimages + '}';
+        return "Room{" + "rid=" + rid + ", fid=" + fid + ", rname=" + rname + ", size=" + size + '}';
     }
+    
+
 }
