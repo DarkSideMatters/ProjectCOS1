@@ -76,7 +76,7 @@ public class RoomMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update rooms set rname=?, where rid=?";
+            String sqlString = "update rooms set rname=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newrname);
             stmt.setInt(2,r.getRid());
@@ -90,7 +90,7 @@ public class RoomMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update rooms set dam=?, where rid=?";
+            String sqlString = "update rooms set dam=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             if(r.getDam())
                 stmt.setString(1,"yes");
