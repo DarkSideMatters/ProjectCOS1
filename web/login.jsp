@@ -21,10 +21,19 @@
             <input type="hidden" name="origin" value="login">
             <input type="submit" name="login" value="Log in"/>
         </form>
-        <br><br/>
+        <br>
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="adminlogin">
+            <input type="submit" name="login" value="Log in as Administrator"/>
+        </form>
+            <br/>
         <form name="Form2" action="UIServlet" method="post">
             <input type="hidden" name="origin" value="customerpage"/>
             <input type="submit" name="register" value="Register"/>
+        </form> <br>
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="adminregpage"/>
+            <input type="submit" name="register" value="Register an Admin account"/>
         </form>
     </body>
 </html>
