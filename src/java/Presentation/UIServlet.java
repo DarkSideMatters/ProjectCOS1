@@ -173,6 +173,9 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("login.jsp");
                     return;
                 case "adminreg":
+                    response.sendRedirect("adminreg.jsp");
+                    return;
+                case "admin":
                     String ausrn = request.getParameter("usrn");
                     String apwd = request.getParameter("pwd");
                     String afn = request.getParameter("fn");
