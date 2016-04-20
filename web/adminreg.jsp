@@ -12,6 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <h1> Please fill in with your information to create an account:</h1>
+        <br></br>
        <form name="Form1" action="UIServlet" method="POST">
         <table>
             <tr><td>Username:</td><td> <input type="text" name="usrn" value="" /></td></tr>
