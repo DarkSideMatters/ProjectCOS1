@@ -25,7 +25,7 @@ public class BuildingMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into buildings (cid, bname, city, address, zip, year, size) values (?,?,?,?,?,?,?)";
+            String sql = "INSERT into buildings (cid, bname, city, address, zip, byear, size) values (?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, bd.getCid());
             stmt.setString(2,bd.getBname());
@@ -53,14 +53,11 @@ public class BuildingMapper {
                 int cid = rs.getInt("cid");
                 String bname = rs.getString("bname");
                 String size = rs.getString("size");
-                String roof = rs.getString("roof");
-                String extwalls = rs.getString("extwalls");
-                String usagecomment = rs.getString("usagecomment");
-                String year = rs.getString("year");
+                String year = rs.getString("byear");
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String zip = rs.getString("zip");
-                c.add(new Building(cid,bid,bname,city,address,zip,year,size,roof,extwalls,usagecomment));
+                c.add(new Building(cid,bid,bname,city,address,zip,year,size));
             }
 
         } catch (ClassNotFoundException|SQLException|NullPointerException ex) {
