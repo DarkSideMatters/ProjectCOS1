@@ -21,15 +21,10 @@ public class Building {
     String zip;   
     String year;
     String size;
-    String roof;
-    String extwalls;
-    String usagecomment;
-    ArrayList<Documents> documents;
-    ArrayList<Bimages> bimages;
     ArrayList<Floor> floors;
     ArrayList<BReport> reports;
     
-    public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size, String roof, String extwalls, String usagecomment) {
+    public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size) {
         this.cid = cid;
         this.bid = bid;
         this.bname = bname;
@@ -38,21 +33,15 @@ public class Building {
         this.zip = zip;
         this.year = year;
         this.size = size;
-        this.roof = roof;
-        this.extwalls = extwalls;
-        this.usagecomment = usagecomment;
     }
     
-    public Building( String bname, String city, String address, String zip, String year, String size, String roof, String extwalls, String usagecomment) {
+    public Building( String bname, String city, String address, String zip, String year, String size) {
         this.bname = bname;
         this.city = city;
         this.address = address;
         this.zip = zip;
         this.year = year;
         this.size = size;
-        this.roof = roof;
-        this.extwalls = extwalls;
-        this.usagecomment = usagecomment;
     }
     
     public Building( int cid,String bname, String city, String address, String zip, String year, String size) {
@@ -68,13 +57,6 @@ public class Building {
     public Building() {
     }
 
-    public String getExtwalls() {
-        return extwalls;
-    }
-
-    public void setExtwalls(String extwalls) {
-        this.extwalls = extwalls;
-    }
     
     public int getCid() {
         return cid;
@@ -140,38 +122,6 @@ public class Building {
         this.size = size;
     }
 
-    public String getRoof() {
-        return roof;
-    }
-
-    public void setRoof(String roof) {
-        this.roof = roof;
-    }
-
-    public String getUsagecomment() {
-        return usagecomment;
-    }
-
-    public void setUsagecomment(String usagecomment) {
-        this.usagecomment = usagecomment;
-    }
-
-    public ArrayList<Documents> getDocuments() {
-        return documents;
-    }
-
-    public void addDocuments(Documents document) {
-        documents.add(document);
-    }
-
-    public ArrayList<Bimages> getBimages() {
-        return bimages;
-    }
-
-    public void addBimages(Bimages bimage) {
-        bimages.add(bimage);
-    }
-
     public ArrayList<Floor> getFloors() {
         return floors;
     }
@@ -190,7 +140,7 @@ public class Building {
 
     @Override
     public String toString() {
-        return "Building{" + "cid=" + cid + ", bid=" + bid + ", bname=" + bname + ", city=" + city + ", address=" + address + ", zip=" + zip + ", year=" + year + ", size=" + size + ", roof=" + roof + ", usagecomment=" + usagecomment + ", documents=" + documents + ", bimages=" + bimages + ", floors=" + floors + ", reports=" + reports + '}';
+        return "Building{" + "cid=" + cid + ", bid=" + bid + ", bname=" + bname + ", city=" + city + ", address=" + address + ", zip=" + zip + ", year=" + year + ", size=" + size +  '}';
     }
 
     
