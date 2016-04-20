@@ -51,6 +51,7 @@ public class UIServlet extends HttpServlet {
             ArrayList<Building> buildings = new ArrayList<>();
             acc.reinit();
             df.readCustomers(acc);
+            request.getSession().setAttribute("accounts", acc);
             customers = acc.getCustomers();
             buildings = new ArrayList<>();
             
