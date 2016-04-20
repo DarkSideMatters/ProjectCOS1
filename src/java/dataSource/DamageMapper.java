@@ -81,7 +81,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set descr=?, where rid=?";
+            String sqlString = "update damages set descr=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newdescr);
             stmt.setInt(2,rid);
@@ -95,7 +95,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set dtype=?, where rid=?";
+            String sqlString = "update damages set dtype=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newdtype);
             stmt.setInt(2,rid);
@@ -109,7 +109,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set moist=?, where rid=?";
+            String sqlString = "update damages set moist=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             if (dmg.getMoisture())
                stmt.setString(1,"yes");
@@ -126,7 +126,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set moistpoint=?, where rid=?";
+            String sqlString = "update damages set moistpoint=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newmoistpoint);
             stmt.setInt(2,rid);
@@ -140,7 +140,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set ceiling=?, where rid=?";
+            String sqlString = "update damages set ceiling=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newceiling);
             stmt.setInt(2,rid);
@@ -154,7 +154,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set wall=?, where rid=?";
+            String sqlString = "update damages set wall=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newwall);
             stmt.setInt(2,rid);
@@ -168,7 +168,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set floor=?, where rid=?";
+            String sqlString = "update damages set floor=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newfloor);
             stmt.setInt(2,rid);
@@ -182,7 +182,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set windoor=?, where rid=?";
+            String sqlString = "update damages set windoor=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newwindoor);
             stmt.setInt(2,rid);
@@ -196,7 +196,7 @@ public class DamageMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update damages set recommendation=?, where rid=?";
+            String sqlString = "update damages set recommendation=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newrecommendation);
             stmt.setInt(2,rid);
