@@ -18,5 +18,12 @@
             <input type="hidden" name="origin" value="customerlist">
             <input type="submit" name="Blistingpage" value="List Customers"/>
         <form/>
+        
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="editpadmin">
+            <input type="submit" name="Blistingpage" value="Edit Profile"/>
+        <form/>
+        
+        
     </body>
 </html>
