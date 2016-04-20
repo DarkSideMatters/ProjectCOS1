@@ -34,8 +34,11 @@ public class Accounts {
         customers.add(customer);
     }
     
-    public void reinit(){
+    public void reinitCustomers(){
         customers = new ArrayList<>();
+    }
+    
+    public void reinitAdmins(){
         admins = new ArrayList<>();
     }
 

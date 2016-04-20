@@ -29,6 +29,7 @@
         
            <tr>
             
+            <td> <%= i+1 %> </td>
             <td> <%= cms.get(i).getCid() %> </td>
             <td> <%= cms.get(i).getUsername() %> </td>
             <td> <%= cms.get(i).getPassword() %> </td>
