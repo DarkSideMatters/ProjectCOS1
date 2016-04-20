@@ -42,6 +42,7 @@
             <td> <%= cms.get(i).getZip() %> </td>
             <input type="hidden" name="origin" value="customeroption"/>
             <input type="hidden" name="cmnr" value="<%= cms.get(i).getCid() %>" />
+            <td> <input type="submit" name="btn" value="List Buildings"> </td>
             <td> <input type="submit" name="btn" value="Edit"> </td>
             <td> <input type="submit" name="btn" value="Delete"> </td>
             
