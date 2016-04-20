@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dataSource;
+import Entity.Accounts;
 import Entity.Admin;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,15 +25,14 @@ public class AdminMapper{
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into admins (aid,usrn,pwd,fn,ln,mail,tel) values (?,?,?,?,?,?,?)";
+            String sql = "INSERT into admins (usrn,pwd,fn,ln,mail,tel) values (?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, a.getAid());
-            stmt.setString(2, a.getUsername());
-            stmt.setString(3, a.getPassword());
-            stmt.setString(4, a.getFirstname());
-            stmt.setString(5, a.getLastname());
-            stmt.setString(6, a.getMail());
-            stmt.setString(7, a.getTel());
+            stmt.setString(1, a.getUsername());
+            stmt.setString(2, a.getPassword());
+            stmt.setString(3, a.getFirstname());
+            stmt.setString(4, a.getLastname());
+            stmt.setString(5, a.getMail());
+            stmt.setString(6, a.getTel());
             stmt.executeUpdate();
             con.close();
             
@@ -41,8 +41,7 @@ public class AdminMapper{
         }
     }
             
-    public List<Admin> readAdmin(Admin a,Connection con){
-        List<Admin> admins = new ArrayList<>();
+    public void readAdmins(Accounts acc,Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -50,22 +49,25 @@ public class AdminMapper{
             PreparedStatement stmt = con.prepareStatement(sqlString);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int aid = rs.getInt("aid");
-                String username = rs.getString("usrn");
+                int aid = rs.getInt("cid");
+                String usrn = rs.getString("usrn");
                 String pwd = rs.getString("pwd");
-                String firstname = rs.getString("fn");
-                String lastname = rs.getString("ln");
+                String fn = rs.getString("fn");
+                String ln = rs.getString("ln");
                 String mail = rs.getString("mail");
-                String telephone = rs.getString("tel");
-                admins.add(new Admin(aid,username, pwd, firstname, lastname, mail, telephone));
+                String tel = rs.getString("tel");
+                
+                Admin ad = new Admin(aid,usrn,pwd,fn,ln,mail,tel);
+                if(ad==null)
+                    System.out.println("AD must be there");
+                else
+                    System.out.println(ad.toString());
+                acc.addAdmin(ad);
             }
-            con.close();
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
-              } 
-        return admins;
-
+              }
     }
         
     
@@ -73,7 +75,7 @@ public class AdminMapper{
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update admins set pwd=?, where aid=?";
+            String sqlString = "update admins set pwd=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newpassword);
             stmt.setInt(2,a.getAid());
@@ -87,7 +89,7 @@ public class AdminMapper{
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update admins set mail=?, where aid=?";
+            String sqlString = "update admins set mail=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newmail);
             stmt.setInt(2,a.getAid());
@@ -101,7 +103,7 @@ public void updateTelAdmin(Admin a,String newtel, Connection con) throws SQLExce
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update admins set tel=?, where aid=?";
+            String sqlString = "update admins set tel=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newtel);
             stmt.setInt(2,a.getAid());
