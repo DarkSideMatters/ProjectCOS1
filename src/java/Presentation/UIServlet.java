@@ -248,13 +248,12 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("buildinglist.jsp");
                     return;
                 case "buildingoption":
-                    String btn = request.getParameter("btn");
+                    String bbtn = request.getParameter("btn");
                     int bid = Integer.parseInt(request.getParameter("buildingnr"));
                     request.getSession().setAttribute("bid", bid);
                     
-                    System.out.println(bid);
                     
-                    if(btn.equals("Delete")){
+                    if(bbtn.equals("Delete")){
                         df.deleteBuilding(bid);
                         currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                         currentcustomer.reinitBuildings();
@@ -262,9 +261,9 @@ public class UIServlet extends HttpServlet {
                         request.getSession().setAttribute("currentcustomer",currentcustomer);
                         response.sendRedirect("buildinglist.jsp");
                     }
-                    if(btn.equals("Edit"))
+                    if(bbtn.equals("Edit"))
                         response.sendRedirect("editbuilding.jsp");
-                    if(btn.equals("View Report"))
+                    if(bbtn.equals("View Report"))
                         //df.getReport();
                         response.sendRedirect("buildinglist.jsp");
                         
@@ -279,7 +278,6 @@ public class UIServlet extends HttpServlet {
                     
                     bid = (int)request.getSession().getAttribute("bid");
                     
-                    System.out.println(bid);
                     
                     currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                     
@@ -292,6 +290,27 @@ public class UIServlet extends HttpServlet {
                     request.getSession().setAttribute("currentcustomer",currentcustomer);
                     
                     response.sendRedirect("buildinglist.jsp");
+                    return;
+                case "customeroption":
+                    String cbtn = request.getParameter("btn");
+                    int cid = Integer.parseInt(request.getParameter("cmnr"));
+                    request.getSession().setAttribute("cid", cid);
+                    
+                    
+                    if(cbtn.equals("Delete")){
+                        //df.deleteCustomer(cid);
+                        currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                        currentcustomer.reinitBuildings();
+                        df.readBuildings(currentcustomer);
+                        request.getSession().setAttribute("currentcustomer",currentcustomer);
+                        response.sendRedirect("customerlist.jsp");
+                    }
+                    if(cbtn.equals("Edit"))
+                        response.sendRedirect("editcustomer.jsp");
+                    if(cbtn.equals("View Report"))
+                        //df.getReport();
+                        response.sendRedirect("customer.jsp");
+                        
                     return;
                 case "report":
                     response.sendRedirect("loggedin.jsp");
