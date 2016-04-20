@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 public class DBFacade {
     public CustomerMapper cs;
     public BuildingMapper bm;
+    public AdminMapper am;
     public DBConnector dbc;
     
     
@@ -29,6 +30,7 @@ public class DBFacade {
             con = dbc.getInstance().getConnection();  //DBConnector.getInstance().getConnection();
             cs = new CustomerMapper();
             bm = new BuildingMapper();
+            am = new AdminMapper();
 	  }
     
 
@@ -100,6 +102,14 @@ public class DBFacade {
     public void updateZipBuilding(int bid, String newzip) {
         bm.updateZipBuilding(bid, newzip, con);
     }   
+
+    public void addAdmin(Admin ad) {
+        am.createAdmin(ad, con);
+    }
+
+    public void readAdmins(Accounts acc) {
+        am.readAdmins(acc, con);
+    }
 }
     
 

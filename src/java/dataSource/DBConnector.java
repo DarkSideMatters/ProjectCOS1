@@ -17,7 +17,7 @@ public class DBConnector {
     private static String driver = "com.mysql.jdbc.Driver";
     private static String URL = "jdbc:mysql://localhost:3306/polygon";
     private static String id = "root";			
-    private static String pw = "0range";
+    private static String pw = "Conciousn3ss";
     
     private Connection con;
 

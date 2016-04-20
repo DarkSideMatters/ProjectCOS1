@@ -71,6 +71,24 @@ public class DomainFacade{
             return null;
         else return result + "\n" + "have not been  completed";
     }
+    public String checkAFields(String ausrn, String apwd, String afn, String aln, String aemail, String atel) {
+        String result = new String("The Fields: ");
+        if(ausrn.equals(""))
+            result += "\n" + "Username";
+        if(apwd.equals(""))
+            result += "\n" + "Password";
+        if(afn.equals(""))
+            result += "\n" + "Firstname ";
+        if(aln.equals(""))
+            result += "\n" + "Lastname ";
+        if(aemail.equals(""))
+            result += "\n" + "E-mail ";
+        if(atel.equals(""))
+            result += "\n" + "Telephone ";
+        if(result.equals("The Fields: "))
+            return null;
+        else return result + "\n" + "have not been completed.";
+    }
     
     public void addCustomer(String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
         Customer ct = new Customer( username, password, firstname, lastname, mail, tel, city, address, zip);
@@ -109,6 +127,18 @@ public class DomainFacade{
         if(!size.equals(""))
             dbf.updateSizeBuilding(bid,size);
             
+    }
+
+    
+
+    public void addAdmin(String ausrn, String apwd, String afn, String aln, String aemail, String atel) {
+        Admin ad = new Admin(ausrn,apwd,afn,aln,aemail,atel);
+        dbf.addAdmin(ad);
+                
+    }
+
+    public void readAdmins(Accounts acc) {
+        dbf.readAdmins(acc);
     }
     
 }
