@@ -40,6 +40,7 @@
             <input type="hidden" name="buildingnr" value="<%= blds.get(i).getBid() %>" />
             <td> <input type="submit" name="btn" value="Edit"> </td>
             <td> <input type="submit" name="btn" value="Delete"> </td>
+            <td> <input type="submit" name="btn" value="See Floors"> </td>
             <td> <input type="submit" name="btn" value="View Report"> </td>
             
             
