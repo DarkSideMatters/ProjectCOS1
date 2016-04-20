@@ -73,7 +73,7 @@ public class AdminMapper{
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update admins set pwd=?, where aid=?";
+            String sqlString = "update admins set pwd=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newpassword);
             stmt.setInt(2,a.getAid());
@@ -87,7 +87,7 @@ public class AdminMapper{
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update admins set mail=?, where aid=?";
+            String sqlString = "update admins set mail=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newmail);
             stmt.setInt(2,a.getAid());
@@ -101,7 +101,7 @@ public void updateTelAdmin(Admin a,String newtel, Connection con) throws SQLExce
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update admins set tel=?, where aid=?";
+            String sqlString = "update admins set tel=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newtel);
             stmt.setInt(2,a.getAid());
