@@ -79,7 +79,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set usrn=?, where cid=?";
+            String sqlString = "update customers set usrn=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newusrn);
             stmt.setInt(2,c.getCid());
@@ -94,7 +94,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set pwd=?, where cid=?";
+            String sqlString = "update customers set pwd=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newpwd);
             stmt.setInt(2,c.getCid());
@@ -109,7 +109,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set fn=?, where cid=?";
+            String sqlString = "update customers set fn=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newfn);
             stmt.setInt(2,c.getCid());
@@ -124,7 +124,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set ln=?, where cid=?";
+            String sqlString = "update customers set ln=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newln);
             stmt.setInt(2,c.getCid());
@@ -139,7 +139,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set mail=?, where cid=?";
+            String sqlString = "update customers set mail=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newmail);
             stmt.setInt(2,c.getCid());
@@ -154,7 +154,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set tel=?, where cid=?";
+            String sqlString = "update customers set tel=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newtel);
             stmt.setInt(2,c.getCid());
@@ -169,7 +169,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set city=?, where cid=?";
+            String sqlString = "update customers set city=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newcity);
             stmt.setInt(2,c.getCid());
@@ -184,7 +184,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set address=?, where cid=?";
+            String sqlString = "update customers set address=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newaddress);
             stmt.setInt(2,c.getCid());
@@ -199,7 +199,7 @@ public class CustomerMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update customers set zip=?, where cid=?";
+            String sqlString = "update customers set zip=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newzip);
             stmt.setInt(2,c.getCid());
