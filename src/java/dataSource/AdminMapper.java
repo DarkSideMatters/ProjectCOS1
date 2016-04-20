@@ -49,7 +49,7 @@ public class AdminMapper{
             PreparedStatement stmt = con.prepareStatement(sqlString);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int aid = rs.getInt("cid");
+                int aid = rs.getInt("aid");
                 String usrn = rs.getString("usrn");
                 String pwd = rs.getString("pwd");
                 String fn = rs.getString("fn");

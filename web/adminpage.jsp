@@ -12,6 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>You are now logged in!</h1>
+        
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="customerlist">
+            <input type="submit" name="Blistingpage" value="List Customers"/>
+        <form/>
+        
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="editpadmin">
+            <input type="submit" name="Blistingpage" value="Edit Profile"/>
+        <form/>
+        
+        
     </body>
 </html>

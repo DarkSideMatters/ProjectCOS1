@@ -74,7 +74,7 @@ public class ReportMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update reports set repnum=?, where repid=?";
+            String sqlString = "update reports set repnum=? where repid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newrepnum);
             stmt.setInt(2,rp.getRepid());
@@ -88,7 +88,7 @@ public class ReportMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update reports set rdate=?, where repid=?";
+            String sqlString = "update reports set rdate=? where repid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newrdate);
             stmt.setInt(2,rp.getRepid());
@@ -104,7 +104,7 @@ public class ReportMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update reports set conmanager=?, where repid=?";
+            String sqlString = "update reports set conmanager=? where repid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newconmanager);
             stmt.setInt(2,rp.getRepid());
@@ -118,7 +118,7 @@ public class ReportMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update reports set grade=?, where repid=?";
+            String sqlString = "update reports set grade=? where repid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newgrade);
             stmt.setInt(2,rp.getRepid());

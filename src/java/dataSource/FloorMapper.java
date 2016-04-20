@@ -35,7 +35,7 @@ public class FloorMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update floors set bid=?, where bid=?";
+            String sqlString = "update floors set bid=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setInt(1, newbid);
             stmt.setInt(2,bid);
@@ -49,7 +49,7 @@ public class FloorMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update floors set fname=?, where bid=?";
+            String sqlString = "update floors set fname=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newfname);
             stmt.setInt(2,bid);
@@ -63,7 +63,7 @@ public class FloorMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update floors set fpath=?, where bid=?";
+            String sqlString = "update floors set fpath=? where bid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newfpath);
             stmt.setInt(2,bid);

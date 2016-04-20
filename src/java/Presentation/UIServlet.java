@@ -51,9 +51,11 @@ public class UIServlet extends HttpServlet {
             ArrayList<Customer> customers = new ArrayList<>();
             ArrayList<Building> buildings = new ArrayList<>();
             ArrayList<Admin> admins = new ArrayList<>();
-            acc.reinit();
+            acc.reinitCustomers();
+            acc.reinitAdmins();
             df.readCustomers(acc);
             df.readAdmins(acc);
+            request.getSession().setAttribute("accounts", acc);
             customers = acc.getCustomers();
             buildings = new ArrayList<>();
             admins = acc.getAdmins();
@@ -102,6 +104,42 @@ public class UIServlet extends HttpServlet {
                         request.getSession().setAttribute("message", "Account not found.");
                     response.sendRedirect("feedback.jsp");
                     return;
+                case "adminlogin":
+                    String ausername = request.getParameter("username");
+                    String apass = request.getParameter("pass");
+                    System.out.println(ausername);
+                    System.out.println(apass);
+                    
+                    for( i = 0 ; i< admins.size(); i++)
+                        if(admins.get(i).getUsername().equals(ausername))
+                        {
+                            accountfound = true;
+                            if(admins.get(i).getPassword().equals(apass))
+                            {
+                                currentadmin = new Admin(
+                                        admins.get(i).getAid(),
+                                        admins.get(i).getUsername(),
+                                        admins.get(i).getPassword(),
+                                        admins.get(i).getFirstname(),
+                                        admins.get(i).getLastname(),
+                                        admins.get(i).getMail(),
+                                        admins.get(i).getTel());
+                                        
+                                request.getSession().setAttribute("currentadmin",currentadmin);
+                                passwordmatch=true;
+                                response.sendRedirect("adminpage.jsp");
+                                return;
+                            }
+                        }
+                    
+                    
+                    if(!passwordmatch)
+                        request.getSession().setAttribute("message", "You entered the wrong password. Please try again.");
+                    if(!accountfound)
+                        request.getSession().setAttribute("message", "Account not found.");
+                    
+                    response.sendRedirect("feedback.jsp");
+                    return;
                 case "customer":
                     String cusrn = request.getParameter("usrn");
                     String cpwd = request.getParameter("pwd");
@@ -134,41 +172,6 @@ public class UIServlet extends HttpServlet {
                     
                     response.sendRedirect("login.jsp");
                     return;
-                case "adminlogin":
-                    String ausername = request.getParameter("username");
-                    String apass = request.getParameter("pass");
-                    
-                    
-                    for( i = 0 ; i< admins.size(); i++)
-                        if(admins.get(i).getUsername().equals(ausername))
-                        {
-                            accountfound = true;
-                            if(admins.get(i).getPassword().equals(apass))
-                            {
-                                currentadmin = new Admin(
-                                        admins.get(i).getAid(),
-                                        admins.get(i).getUsername(),
-                                        admins.get(i).getPassword(),
-                                        admins.get(i).getFirstname(),
-                                        admins.get(i).getLastname(),
-                                        admins.get(i).getMail(),
-                                        admins.get(i).getTel());
-                                        
-                                request.getSession().setAttribute("currentadmin",currentadmin);
-                                passwordmatch=true;
-                                response.sendRedirect("adminpage.jsp");
-                                return;
-                            }
-                        }
-                    
-                    
-                    if(!passwordmatch)
-                        request.getSession().setAttribute("message", "You entered the wrong password. Please try again.");
-                    if(!accountfound)
-                        request.getSession().setAttribute("message", "Account not found.");
-                    response.sendRedirect("feedback.jsp");
-                    return;
-                    
                 case "adminreg":
                     String ausrn = request.getParameter("usrn");
                     String apwd = request.getParameter("pwd");
@@ -196,7 +199,7 @@ public class UIServlet extends HttpServlet {
                     
                     df.addAdmin(ausrn, apwd, afn, aln, aemail, atel);
                     
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("adminlogin.jsp");
                     return;
                     
                 case "building":
@@ -226,6 +229,14 @@ public class UIServlet extends HttpServlet {
                     
                     response.sendRedirect("buildinglist.jsp");
                     return;
+                case "customerlist":
+                    acc = (Accounts) request.getSession().getAttribute("accounts");
+                    acc.reinitCustomers();
+                    df.readCustomers(acc);
+                    request.getSession().setAttribute("accounts",acc);
+                    
+                    response.sendRedirect("customerlist.jsp");
+                    return;
                 case "buildinglist":
                     
                     
@@ -237,13 +248,12 @@ public class UIServlet extends HttpServlet {
                     response.sendRedirect("buildinglist.jsp");
                     return;
                 case "buildingoption":
-                    String btn = request.getParameter("btn");
+                    String bbtn = request.getParameter("btn");
                     int bid = Integer.parseInt(request.getParameter("buildingnr"));
                     request.getSession().setAttribute("bid", bid);
                     
-                    System.out.println(bid);
                     
-                    if(btn.equals("Delete")){
+                    if(bbtn.equals("Delete")){
                         df.deleteBuilding(bid);
                         currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                         currentcustomer.reinitBuildings();
@@ -251,9 +261,9 @@ public class UIServlet extends HttpServlet {
                         request.getSession().setAttribute("currentcustomer",currentcustomer);
                         response.sendRedirect("buildinglist.jsp");
                     }
-                    if(btn.equals("Edit"))
+                    if(bbtn.equals("Edit"))
                         response.sendRedirect("editbuilding.jsp");
-                    if(btn.equals("View Report"))
+                    if(bbtn.equals("View Report"))
                         //df.getReport();
                         response.sendRedirect("buildinglist.jsp");
                         
@@ -268,7 +278,6 @@ public class UIServlet extends HttpServlet {
                     
                     bid = (int)request.getSession().getAttribute("bid");
                     
-                    System.out.println(bid);
                     
                     currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
                     
@@ -281,6 +290,27 @@ public class UIServlet extends HttpServlet {
                     request.getSession().setAttribute("currentcustomer",currentcustomer);
                     
                     response.sendRedirect("buildinglist.jsp");
+                    return;
+                case "customeroption":
+                    String cbtn = request.getParameter("btn");
+                    int cid = Integer.parseInt(request.getParameter("cmnr"));
+                    request.getSession().setAttribute("cid", cid);
+                    
+                    
+                    if(cbtn.equals("Delete")){
+                        //df.deleteCustomer(cid);
+                        currentcustomer = (Customer)request.getSession().getAttribute("currentcustomer");
+                        currentcustomer.reinitBuildings();
+                        df.readBuildings(currentcustomer);
+                        request.getSession().setAttribute("currentcustomer",currentcustomer);
+                        response.sendRedirect("customerlist.jsp");
+                    }
+                    if(cbtn.equals("Edit"))
+                        response.sendRedirect("editcustomer.jsp");
+                    if(cbtn.equals("View Report"))
+                        //df.getReport();
+                        response.sendRedirect("customer.jsp");
+                        
                     return;
                 case "report":
                     response.sendRedirect("loggedin.jsp");
