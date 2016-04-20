@@ -10,7 +10,6 @@ public class DomainFacade{
     public BuildingMapper bm;
     public AdminMapper am;
     public CustomerMapper cs;
-    public DamageMapper dmg;
     public FloorMapper f;
     public ReportMapper r;
     public RoomMapper ro;
