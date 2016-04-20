@@ -7,6 +7,7 @@ package Presentation;
 
 import Entity.DomainFacade;
 import Entity.Accounts;
+import Entity.Admin;
 import Entity.Building;
 import Entity.Customer;
 import java.io.IOException;
@@ -49,12 +50,16 @@ public class UIServlet extends HttpServlet {
             Accounts acc = new Accounts();
             ArrayList<Customer> customers = new ArrayList<>();
             ArrayList<Building> buildings = new ArrayList<>();
+            ArrayList<Admin> admins = new ArrayList<>();
             acc.reinit();
             df.readCustomers(acc);
+            df.readAdmins(acc);
             customers = acc.getCustomers();
             buildings = new ArrayList<>();
+            admins = acc.getAdmins();
             
             Customer currentcustomer = new Customer();
+            Admin currentadmin = new Admin();
             
             
             
@@ -129,6 +134,71 @@ public class UIServlet extends HttpServlet {
                     
                     response.sendRedirect("login.jsp");
                     return;
+                case "adminlogin":
+                    String ausername = request.getParameter("username");
+                    String apass = request.getParameter("pass");
+                    
+                    
+                    for( i = 0 ; i< admins.size(); i++)
+                        if(admins.get(i).getUsername().equals(ausername))
+                        {
+                            accountfound = true;
+                            if(admins.get(i).getPassword().equals(apass))
+                            {
+                                currentadmin = new Admin(
+                                        admins.get(i).getAid(),
+                                        admins.get(i).getUsername(),
+                                        admins.get(i).getPassword(),
+                                        admins.get(i).getFirstname(),
+                                        admins.get(i).getLastname(),
+                                        admins.get(i).getMail(),
+                                        admins.get(i).getTel());
+                                        
+                                request.getSession().setAttribute("currentadmin",currentadmin);
+                                passwordmatch=true;
+                                response.sendRedirect("adminpage.jsp");
+                                return;
+                            }
+                        }
+                    
+                    
+                    if(!passwordmatch)
+                        request.getSession().setAttribute("message", "You entered the wrong password. Please try again.");
+                    if(!accountfound)
+                        request.getSession().setAttribute("message", "Account not found.");
+                    response.sendRedirect("feedback.jsp");
+                    return;
+                    
+                case "adminreg":
+                    String ausrn = request.getParameter("usrn");
+                    String apwd = request.getParameter("pwd");
+                    String afn = request.getParameter("fn");
+                    String aln = request.getParameter("ln");
+                    String aemail = request.getParameter("email");
+                    String atel = request.getParameter("tel");
+                    
+                    FieldError = df.checkAFields(ausrn,apwd,afn,aln,aemail,atel);
+                    System.out.println(FieldError);
+                    if(FieldError!=null){
+                        request.getSession().setAttribute("message", FieldError);
+                        response.sendRedirect("feedback.jsp");
+                        return;
+                    }
+                    
+                    for( i = 0 ; i< admins.size(); i++)
+                        if(admins.get(i).getUsername().equals(ausrn))
+                        {
+                            request.getSession().setAttribute("message", "Username Taken.");
+                            response.sendRedirect("feedback.jsp");
+                            return;
+                        }
+                    
+                    
+                    df.addAdmin(ausrn, apwd, afn, aln, aemail, atel);
+                    
+                    response.sendRedirect("login.jsp");
+                    return;
+                    
                 case "building":
                     String bname = request.getParameter("name");
                     String bcity = request.getParameter("city");
@@ -220,6 +290,9 @@ public class UIServlet extends HttpServlet {
                     return;
                 case "customerpage":
                     response.sendRedirect("customer.jsp");
+                    return;
+                case "adminregpage":
+                    response.sendRedirect("adminreg.jsp");
                     return;
                 case "reportpage":
                     response.sendRedirect("reportpage.jsp");
