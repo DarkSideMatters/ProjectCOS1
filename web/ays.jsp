@@ -1,6 +1,6 @@
 <%-- 
-    Document   : loggedin
-    Created on : Apr 18, 2016, 5:29:10 PM
+    Document   : ays
+    Created on : Apr 24, 2016, 7:07:41 PM
     Author     : Mircea
 --%>
 
@@ -12,18 +12,20 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>You are now logged in!</h1>
-        
-        <form name="Form2" action="UIServlet" method="post">
-            <input type="hidden" name="origin" value="buildinglist">
-            <input type="submit" name="Blistingpage" value="List Buildings"/>
-        <form/>
+        <h1><%= request.getSession().getAttribute("message")%></h1>
         
         <br></br>
         
         <form name="Form2" action="UIServlet" method="post">
-            <input type="hidden" name="origin" value="loginpage">
-            <input type="submit" name="Editadmin" value="Log Out"/>
+            <input type="hidden" name="origin" value="imsure">
+            <input type="submit" name="Editadmin" value="Yes"/>
+        </form>
+        
+        <br></br>
+        
+        <form name="Form2" action="UIServlet" method="post">
+            <input type="hidden" name="origin" value="imnotsure">
+            <input type="submit" name="Editadmin" value="No"/>
         </form>
         
     </body>

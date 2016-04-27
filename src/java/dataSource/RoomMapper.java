@@ -6,6 +6,7 @@
 package dataSource;
 
 import Entity.Room;
+import Entity.Floor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,15 +32,14 @@ public class RoomMapper {
             stmt.setString(3, r.getRname());
             stmt.setString(4, r.getSize());
             stmt.executeUpdate();
-            con.close();
+            
             
         }catch (SQLException ex){
             ex.printStackTrace();
         }
     }
             
-    public List<Room> readRooms(Room r,Connection con){
-        List<Room> rooms = new ArrayList<>();
+    public void readRooms(Floor f,Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -51,40 +51,38 @@ public class RoomMapper {
                 int fid = rs.getInt("fid");
                 String rname = rs.getString("rname");
                 String size = rs.getString("size");
-                rooms.add(new Room(rid, fid, rname, size));
+                f.addRoom(new Room(rid, fid, rname, size));
             }
-            con.close();
+            
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               } 
-        return rooms;
-
     }
         
     
-    public void updateRnameRoom(Room r,String newrname, Connection con) throws SQLException{
+    public void updateRnameRoom(int rid,String newrname, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update rooms set rname=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newrname);
-            stmt.setInt(2,r.getRid());
+            stmt.setInt(2,rid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               }
     }
-    public void updateSizeRoom(Room r, String newsize, Connection con) throws SQLException{
+    public void updateSizeRoom(int rid, String newsize, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update rooms set size=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newsize);
-            stmt.setInt(2, r.getRid());
+            stmt.setInt(2, rid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -93,13 +91,13 @@ public class RoomMapper {
     }
     
     
-    public void deleteRoom(Room r, Connection con){
+    public void deleteRoom(int rid, Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "delete from rooms where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setInt(1, r.getRid());
+            stmt.setInt(1, rid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {

@@ -66,7 +66,7 @@ public class RReportMapper {
             stmt.setString(19, rrp.getRecommendation());
             stmt.setString(20, rrp.getRconmanager());
             stmt.executeUpdate();
-            con.close();
+            
             
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -128,7 +128,7 @@ public class RReportMapper {
                 String rconmanager = rs.getString("rconmanager");
                 rreports.add(new RReport(rrepid, rid, rrepnum, rrepdate, rcomment, dmg, moist, rot, mould, fire, other, dmgcomment, walls, ceiling, floor, windoor, moistscan, moistpoint, recommendation, rconmanager));
             }
-            con.close();
+            
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();

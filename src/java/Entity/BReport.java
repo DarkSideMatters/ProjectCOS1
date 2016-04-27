@@ -13,22 +13,33 @@ package Entity;
 public class BReport {
     int brepid;
     int bid;
-    String brepnum;
     String brdate;
     String usagecomment;
     String roofcomment;
     String extwallscomment;
+    String pemployee;
     String bconmanager;
     String grade;
 
-    public BReport(int brepid, int bid, String brepnum, String brdate, String usagecomment, String roofcomment, String extwallscomment, String bconmanager, String grade) {
+    public BReport(int brepid, int bid, String brdate, String usagecomment, String roofcomment, String extwallscomment, String pemployee, String bconmanager, String grade) {
         this.brepid = brepid;
         this.bid = bid;
-        this.brepnum = brepnum;
         this.brdate = brdate;
         this.usagecomment = usagecomment;
         this.roofcomment = roofcomment;
         this.extwallscomment = extwallscomment;
+        this.pemployee = pemployee;
+        this.bconmanager = bconmanager;
+        this.grade = grade;
+    }
+    
+    public BReport(int bid, String brdate, String usagecomment, String roofcomment, String extwallscomment, String pemployee, String bconmanager, String grade) {
+        this.bid = bid;
+        this.brdate = brdate;
+        this.usagecomment = usagecomment;
+        this.roofcomment = roofcomment;
+        this.extwallscomment = extwallscomment;
+        this.pemployee = pemployee;
         this.bconmanager = bconmanager;
         this.grade = grade;
     }
@@ -52,14 +63,6 @@ public class BReport {
         this.bid = bid;
     }
 
-    public String getBrepnum() {
-        return brepnum;
-    }
-
-    public void setBrepnum(String brepnum) {
-        this.brepnum = brepnum;
-    }
-
     public String getBrdate() {
         return brdate;
     }
@@ -69,7 +72,10 @@ public class BReport {
     }
 
     public String getUsagecomment() {
-        return usagecomment;
+        if(usagecomment==null)
+            return "No Comment";
+        else
+            return usagecomment;
     }
 
     public void setUsagecomment(String usagecomment) {
@@ -77,7 +83,10 @@ public class BReport {
     }
 
     public String getRoofcomment() {
-        return roofcomment;
+        if(usagecomment==null)
+            return "No Comment";
+        else
+            return roofcomment;
     }
 
     public void setRoofcomment(String roofcomment) {
@@ -85,11 +94,22 @@ public class BReport {
     }
 
     public String getExtwallscomment() {
-        return extwallscomment;
+        if(usagecomment==null)
+            return "No Comment";
+        else
+            return extwallscomment;
     }
 
     public void setExtwallscomment(String extwallscomment) {
         this.extwallscomment = extwallscomment;
+    }
+
+    public String getPemployee() {
+        return pemployee;
+    }
+
+    public void setPemployee(String pemployee) {
+        this.pemployee = pemployee;
     }
 
     public String getBconmanager() {
@@ -110,7 +130,7 @@ public class BReport {
 
     @Override
     public String toString() {
-        return "BReport{" + "brepid=" + brepid + ", bid=" + bid + ", brepnum=" + brepnum + ", brdate=" + brdate + ", usagecomment=" + usagecomment + ", roofcomment=" + roofcomment + ", extwallscomment=" + extwallscomment + ", bconmanager=" + bconmanager + ", grade=" + grade + '}';
+        return "BReport{" + "brepid=" + brepid + ", bid=" + bid + ", brdate=" + brdate + ", usagecomment=" + usagecomment + ", roofcomment=" + roofcomment + ", extwallscomment=" + extwallscomment + ",pemployee" + pemployee + ", bconmanager=" + bconmanager + ", grade=" + grade + '}';
     }
 
 }

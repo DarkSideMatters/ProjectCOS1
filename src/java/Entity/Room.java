@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -15,6 +17,7 @@ public class Room {
     int fid;
     String rname;
     String size;
+    ArrayList<RReport> reports = new ArrayList<>();
 
     public Room(int rid, int fid, String rname, String size) {
         this.rid = rid;
@@ -59,6 +62,18 @@ public class Room {
         this.size = size;
     }
 
+    public ArrayList<RReport> getReports() {
+        return reports;
+    }
+
+    public void setReports(ArrayList<RReport> reports) {
+        this.reports = reports;
+    }
+
+    public void reinitReports(){
+        reports = new ArrayList<>();
+    }
+    
     @Override
     public String toString() {
         return "Room{" + "rid=" + rid + ", fid=" + fid + ", rname=" + rname + ", size=" + size + '}';

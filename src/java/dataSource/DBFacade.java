@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import Entity.Report;
 import java.sql.ResultSet;
 
 /**
@@ -22,6 +21,9 @@ public class DBFacade {
     public CustomerMapper cs;
     public BuildingMapper bm;
     public AdminMapper am;
+    public BReportMapper brm;
+    public FloorMapper fm;
+    public RoomMapper rm;
     public DBConnector dbc;
     
     
@@ -31,6 +33,9 @@ public class DBFacade {
             cs = new CustomerMapper();
             bm = new BuildingMapper();
             am = new AdminMapper();
+            brm = new BReportMapper();
+            fm = new FloorMapper();
+            rm = new RoomMapper();
 	  }
     
 
@@ -97,22 +102,38 @@ public class DBFacade {
 
  //////////////////////////////////////////////////////   FLOOR
 
-    public void updateFnameFloor(int fid, String fname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addFloor(Floor f){
+        fm.createFloor(f,con);
     }
-
-    public void updateFpathFloor(int fid, String fpath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     
+    public void readFloors(Building b){
+        fm.readFloors(b, con);
+    }
+    
+    public void updateFnameFloor(int fid, String fname) {
+        fm.updateFnameDamage(fid, fname, con);
+    }
+    
+    public void deleteFloor(int fid){
+        fm.deleteFloor(fid, con);
+    }
+
     ///////////////////////////////////// ROOM
+    
+    public void addRoom(Room r){
+        rm.createRoom(r, con);
+    }
+    
     public void updateRnameRoom(int rid, String rname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        rm.updateRnameRoom(rid, rname, con);
     }
 
     public void updateSizeRoom(int rid, String size) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        rm.updateSizeRoom(rid, size, con);
+    }
+    
+    public void deleteRoom(int rid){
+        rm.deleteRoom(rid, con);
     }
 
     ////////////////////////////// CUSTOMER
@@ -126,43 +147,47 @@ public class DBFacade {
         cs.readCustomers(acc, con);
     }
     public void updateUsernameCustomer(int cid, String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateUsrnCustomer(cid, username, con);
     }
 
     public void updatePassCustomer(int cid, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updatePwdCustomer(cid, password, con);
     }
 
     public void updateFNCustomer(int cid, String firstname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateFNCustomer(cid, firstname, con);
     }
 
     public void updateLNCustomer(int cid, String lastname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateLNCustomer(cid, lastname, con);
     }
 
     public void updateMailCustomer(int cid, String mail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateMailCustomer(cid, mail, con);
     }
 
     public void updateTelCustomer(int cid, String tel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateTelCustomer(cid, tel, con);
     }
 
     public void updateCityCustomer(int cid, String city) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateCityCustomer(cid, city, con);
     }
 
     public void updateZipCustomer(int cid, String zip) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateZipCustomer(cid, zip, con);
     }
 
     public void updateAddressCustomer(int cid, String address) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cs.updateAddressCustomer(cid, address, con);
+    }
+    
+    public void deleteCustomer(int cid){
+        cs.deleteCustomer(cid, con);
     }
  /////////////////////////////////////////////// ADMIN
     
-        public void addAdmin(Admin ad) {
+    public void addAdmin(Admin ad) {
         am.createAdmin(ad, con);
     }
 
@@ -171,105 +196,126 @@ public class DBFacade {
     }
     
     public void updateUsernameAdmin(int aid, String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        am.updateUsrnAdmin(aid, username, con);
     }
 
     public void updatePassAdmin(int aid, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        am.updatePwdAdmin(aid, password, con);
     }
 
     public void updateFNAdmin(int aid, String firstname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        am.updateFNAdmin(aid, firstname, con);
     }
 
     public void updateLNAdmin(int aid, String lastname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        am.updateLNAdmin(aid, lastname, con);
     }
 
     public void updateMailAdmin(int aid, String mail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        am.updateMailAdmin(aid, mail, con);
     }
 
     public void updateTelAdmin(int aid, String tel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        am.updateTelAdmin(aid, tel, con);
+    }
+    
+    public void deleteAdmin(int aid){
+        am.deleteAdmin(aid, con);
     }
 //////////////////////////////////////// BUILDING REPORT
-    public void updateBrepnumBReport(int brepid, String brepnum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void addBReport(BReport br){
+        brm.createBReport(br, con);
     }
-
-    public void updateBrdateBReport(String brdate, String brepnum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void readBReports(Building b){
+        brm.readBReports(b, con);
+    }
+    
+    public void deleteBReport(int brepid){
+        brm.deleteBReport(brepid, con);
+    }
+    
+    public void updateBrdateBReport(int brepid, String brdate) {
+        brm.updateBrdateReport(brepid, brdate, con);
     }
 
     public void updateUsagecBReport(int brepid, String usagec) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        brm.updateUsagecommentReport(brepid, usagec, con);
+    }
+    
+    public void updateRoofBReport(int brepid, String roofc) {
+        brm.updateRoofcommentReport(brepid, roofc, con);
     }
 
     public void updateExtwallsBReport(int brepid, String extwalls) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        brm.updateExtwallscommentReport(brepid, extwalls, con);
     }
 
+    public void updatePemployeeBReport(int brepid, String pemployee){
+        brm.updatePemployeeReport(brepid, pemployee, con);
+    }
+    
     public void updateBconManagerBReport(int brepid, String bconmanager) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        brm.updateBconmanagerReport(brepid, bconmanager, con);
     }
 
     public void updateGradeBReport(int brepid, String grade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        brm.updateGradeReport(brepid, grade, con);
     }
 
     ////////////////////////////////////// ROOM REPORT
     
     public void updateRrepnumRReport(int rrepid, String rrepnum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateRRdateRReport(int rrepid, String rrdate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateDamageRReport(int rrepid, boolean damage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateMoistRReport(int rrepid, boolean rmoist) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateRotRReport(int rrepid, boolean rrot) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateMouldRReport(int rrepid, boolean rmould) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateFireRReport(int rrepid, boolean rfire) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateOtherDMGRReport(int rrepid, boolean rother) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateWindoorRReport(int rrepid, String windoor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateMoistScanRReport(int rrepid, String moistscan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateMoistPointRReport(int rrepid, String moistpoint) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateRecommendationRReport(int rrepid, String recommendation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public void updateRConManagerRReport(int rrepid, String rconmanager) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 

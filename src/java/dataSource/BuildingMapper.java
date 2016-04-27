@@ -45,19 +45,19 @@ public class BuildingMapper {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "SELECT * FROM buildings";
+            String sqlString = "SELECT * FROM buildings where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
+            stmt.setInt(1, c.getCid());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int bid = rs.getInt("bid");
-                int cid = rs.getInt("cid");
                 String bname = rs.getString("bname");
                 String size = rs.getString("size");
                 String year = rs.getString("byear");
                 String city = rs.getString("city");
                 String address = rs.getString("address");
                 String zip = rs.getString("zip");
-                c.add(new Building(cid,bid,bname,city,address,zip,year,size));
+                c.add(new Building(c.getCid(),bid,bname,city,address,zip,year,size));
             }
 
         } catch (ClassNotFoundException|SQLException|NullPointerException ex) {

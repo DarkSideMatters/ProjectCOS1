@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package dataSource;
+import Entity.Building;
 import Entity.Floor;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 /**
  *
  * @author Berkant
@@ -18,68 +20,59 @@ public class FloorMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into floors (fid,bid,fname,fppath) values (?,?,?,?)";
+            String sql = "INSERT into floors (bid,fname) values (?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, f.getFid());
-            stmt.setInt(2, f.getBid());
-            stmt.setString(3, f.getFname());
-            stmt.setString(4, f.getFppath());
+            stmt.setInt(1, f.getBid());
+            stmt.setString(2, f.getFname());
             stmt.executeUpdate();
-            con.close();
             
         }catch (SQLException ex){
             ex.printStackTrace();
         }
     }
-     public void updateBIDDamage(Floor f,int bid,int newbid, Connection con) throws SQLException{
-    try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            String sqlString = "update floors set bid=? where bid=?";
-            PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setInt(1, newbid);
-            stmt.setInt(2,bid);
-            stmt.executeUpdate();
-        
-    }catch (ClassNotFoundException|SQLException ex) {
-            ex.printStackTrace();
-              }
-    }
-      public void updateFnameDamage(Floor f,int bid,String newfname, Connection con) throws SQLException{
-    try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            String sqlString = "update floors set fname=? where bid=?";
-            PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setString(1, newfname);
-            stmt.setInt(2,bid);
-            stmt.executeUpdate();
-        
-    }catch (ClassNotFoundException|SQLException ex) {
-            ex.printStackTrace();
-              }
-    }
-       public void updateFpathDamage(Floor f,int bid,String newfpath, Connection con) throws SQLException{
-    try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            String sqlString = "update floors set fpath=? where bid=?";
-            PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setString(1, newfpath);
-            stmt.setInt(2,bid);
-            stmt.executeUpdate();
-        
-    }catch (ClassNotFoundException|SQLException ex) {
-            ex.printStackTrace();
-              }
-    }
-           public void deleteFloor(Floor f,int bid, Connection con){
+     
+     public void readFloors(Building b,Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "delete from floors where bid=?";
+            String sqlString = "SELECT * FROM floors";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setInt(1,bid);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int bid = rs.getInt("bid");
+                int fid = rs.getInt("fid");
+                String fname = rs.getString("fname");
+                b.addFloor(new Floor(bid,fid,fname));
+            }
+
+        } catch (ClassNotFoundException|SQLException|NullPointerException ex) {
+            ex.printStackTrace();
+              } 
+
+    }
+     
+      public void updateFnameDamage(int fid,String newfname, Connection con) {
+    try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String sqlString = "update floors set fname=? where fid=?";
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+            stmt.setString(1, newfname);
+            stmt.setInt(2,fid);
+            stmt.executeUpdate();
+        
+    }catch (ClassNotFoundException|SQLException ex) {
+            ex.printStackTrace();
+              }
+    }
+       
+    public void deleteFloor(int fid, Connection con){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String sqlString = "delete from floors where fid=?";
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+            stmt.setInt(1,fid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {

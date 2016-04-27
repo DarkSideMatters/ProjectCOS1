@@ -21,8 +21,8 @@ public class Building {
     String zip;   
     String year;
     String size;
-    ArrayList<Floor> floors;
-    ArrayList<BReport> reports;
+    ArrayList<Floor> floors = new ArrayList<>();
+    ArrayList<BReport> reports = new ArrayList<>();
     
     public Building(int cid, int bid, String bname, String city, String address, String zip, String year, String size) {
         this.cid = cid;
@@ -126,7 +126,7 @@ public class Building {
         return floors;
     }
 
-    public void addFloors(Floor Floor) {
+    public void addFloor(Floor Floor) {
         floors.add(Floor);
     }
 
@@ -134,8 +134,16 @@ public class Building {
         return reports;
     }
 
-    public void addReports(BReport report) {
+    public void addReport(BReport report) {
         reports.add(report);
+    }
+    
+    public void reinitFloors(){
+        floors = new ArrayList<>();
+    }
+    
+    public void reinitReports(){
+        reports = new ArrayList<>();
     }
 
     @Override

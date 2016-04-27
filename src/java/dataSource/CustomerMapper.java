@@ -75,14 +75,14 @@ public class CustomerMapper {
               }
     }
     
-    public void updateUsrnCustomer(Customer c,String newusrn, Connection con) {
+    public void updateUsrnCustomer(int cid,String newusrn, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set usrn=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newusrn);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -90,14 +90,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updatePwdCustomer(Customer c,String newpwd, Connection con) {
+    public void updatePwdCustomer(int cid,String newpwd, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set pwd=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newpwd);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -105,14 +105,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateFNCustomer(Customer c,String newfn, Connection con) {
+    public void updateFNCustomer(int cid,String newfn, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set fn=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newfn);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -120,14 +120,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateLNCustomer(Customer c,String newln, Connection con) {
+    public void updateLNCustomer(int cid,String newln, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set ln=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newln);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -135,14 +135,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateMailCustomer(Customer c,String newmail, Connection con) {
+    public void updateMailCustomer(int cid,String newmail, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set mail=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newmail);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -150,14 +150,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateTelCustomer(Customer c,String newtel, Connection con) {
+    public void updateTelCustomer(int cid,String newtel, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set tel=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newtel);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -165,14 +165,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateCityCustomer(Customer c,String newcity, Connection con) {
+    public void updateCityCustomer(int cid,String newcity, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set city=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newcity);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -180,14 +180,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateAddressCustomer(Customer c,String newaddress, Connection con) {
+    public void updateAddressCustomer(int cid,String newaddress, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set address=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newaddress);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -195,14 +195,14 @@ public class CustomerMapper {
               }
 }
     
-    public void updateZipCustomer(Customer c,String newzip, Connection con) {
+    public void updateZipCustomer(int cid,String newzip, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update customers set zip=? where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newzip);
-            stmt.setInt(2,c.getCid());
+            stmt.setInt(2,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
@@ -210,13 +210,13 @@ public class CustomerMapper {
               }
     }
     
-    public void deleteCustomer(Customer c, Connection con){
+    public void deleteCustomer(int cid, Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "delete from customers where cid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setInt(1,c.getCid());
+            stmt.setInt(1,cid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {

@@ -20,8 +20,8 @@
             <tr><td>Address:</td><td> <input type="text" name="address" value="" /></td></tr>
             <tr><td>Zip:</td><td> <input type="text" name="zip" value="" /></td></tr>
             <tr><td>Year:</td><td> <input type="text" name="year" value="" /></td></tr>
-            <tr><td>Size:</td><td> <input type="text" name="size" value="" /></td></tr>
-            <input type="hidden" name="origin" value="building" />
+            <tr><td>Size(square meters):</td><td> <input type="text" name="size" value="" /></td></tr>
+            <input type="hidden" name="origin" value="addbuilding" />
             <tr><td></td><td><input type="submit" value="Submit" /></td></tr>
         </table>
         </form>

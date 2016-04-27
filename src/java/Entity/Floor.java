@@ -15,14 +15,17 @@ public class Floor {
     int fid;
     int bid;
     String fname;
-    String fppath;
-    ArrayList<Room> rooms;
+    ArrayList<Room> rooms = new ArrayList<>();
 
-    public Floor(int fid, int bid, String fname, String fppath) {
+    public Floor(int fid, int bid, String fname) {
         this.fid = fid;
         this.bid = bid;
         this.fname = fname;
-        this.fppath = fppath;
+    }
+    
+    public Floor(int bid, String fname) {
+        this.bid = bid;
+        this.fname = fname;
     }
 
     public Floor() {
@@ -53,25 +56,17 @@ public class Floor {
         this.fname = fname;
     }
 
-    public String getFppath() {
-        return fppath;
-    }
-
-    public void setFppath(String fppath) {
-        this.fppath = fppath;
-    }
-
     public ArrayList<Room> getRooms() {
         return rooms;
     }
 
-    public void addRooms(Room room) {
+    public void addRoom(Room room) {
         rooms.add(room);
     }
 
     @Override
     public String toString() {
-        return "Floor{" + "fid=" + fid + ", bid=" + bid + ", fname=" + fname + ", fppath=" + fppath + ", rooms=" + rooms + '}';
+        return "Floor{" + "fid=" + fid + ", bid=" + bid + ", fname=" + fname + ", rooms=" + rooms + '}';
     }
    
 

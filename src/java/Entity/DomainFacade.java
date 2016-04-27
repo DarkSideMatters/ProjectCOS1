@@ -6,18 +6,10 @@ import dataSource.*;
 public class DomainFacade{
 
     
-    public DBConnector dbc;
-    public BuildingMapper bm;
-    public AdminMapper am;
-    public CustomerMapper cs;
-    public FloorMapper f;
-    public ReportMapper r;
-    public RoomMapper ro;
     public DBFacade dbf;
     
     public DomainFacade()
     {
-        dbc = DBConnector.getInstance();
         dbf = DBFacade.getInstance();
     }
 
@@ -30,23 +22,23 @@ public class DomainFacade{
     public String checkCFields(String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
         String result = new String("The Fields: ");
         if(username.equals(""))
-            result += "\n" + "Username";
+            result += "\n" + " Username ";
         if(password.equals(""))
-            result += "\n" + "Password";
+            result += "\n" + " Password ";
         if(firstname.equals(""))
-            result += "\n" + "Firstname ";
+            result += "\n" + " Firstname ";
         if(lastname.equals(""))
-            result += "\n" + "Lastname ";
+            result += "\n" + " Lastname ";
         if(mail.equals(""))
-            result += "\n" + "E-mail ";
+            result += "\n" + " E-mail ";
         if(tel.equals(""))
-            result += "\n" + "Telephone ";
+            result += "\n" + " Telephone ";
         if(city.equals(""))
-            result += "\n" + "City ";
+            result += "\n" + " City ";
         if(address.equals(""))
-            result += "\n" + "Address ";
+            result += "\n" + " Address ";
         if(zip.equals(""))
-            result += "\n" + "Zip ";
+            result += "\n" + " Zip ";
         if(result.equals("The Fields: "))
             return null;
         else return result + "\n" + "have not been completed.";
@@ -55,17 +47,17 @@ public class DomainFacade{
     public String checkBFields( String bname, String bcity, String baddress, String bzip, String year, String size){
         String result = new String("The Fields: ");
         if(bname.equals(""))
-            result += "\n" + "Building Name";
+            result += "\n" + " Building Name ";
         if(bcity.equals(""))
-            result += "\n" + "City";
+            result += "\n" + " City ";
         if(baddress.equals(""))
-            result += "\n" + "Address";
+            result += "\n" + " Address ";
         if(bzip.equals(""))
-            result += "\n" + "Zip";
+            result += "\n" + " Zip ";
         if(year.equals(""))
-            result += "\n" + "Year";
+            result += "\n" + " Year ";
         if(size.equals(""))
-            result += "\n" + "Size";
+            result += "\n" + " Size ";
         if(result.equals("The Fields: "))
             return null;
         else return result + "\n" + "have not been  completed";
@@ -73,17 +65,36 @@ public class DomainFacade{
     public String checkAFields(String ausrn, String apwd, String afn, String aln, String aemail, String atel) {
         String result = new String("The Fields: ");
         if(ausrn.equals(""))
-            result += "\n" + "Username";
+            result += "\n" + " Username ";
         if(apwd.equals(""))
-            result += "\n" + "Password";
+            result += "\n" + " Password ";
         if(afn.equals(""))
-            result += "\n" + "Firstname ";
+            result += "\n" + " Firstname ";
         if(aln.equals(""))
-            result += "\n" + "Lastname ";
+            result += "\n" + " Lastname ";
         if(aemail.equals(""))
-            result += "\n" + "E-mail ";
+            result += "\n" + " E-mail ";
         if(atel.equals(""))
-            result += "\n" + "Telephone ";
+            result += "\n" + " Telephone ";
+        if(result.equals("The Fields: "))
+            return null;
+        else return result + "\n" + "have not been completed.";
+    }
+    
+    public String checkBRFields(String date, String usgcom, String roofcom, String extwallscom, String conmng, String grade){
+        String result = new String("The Fields: ");
+        if(date.equals(""))
+            result += "\n" + " Date ";
+        if(usgcom.equals(""))
+            result += "\n" + " Usage Comment ";
+        if(roofcom.equals(""))
+            result += "\n" + " Roof Comment ";
+        if(extwallscom.equals(""))
+            result += "\n" + " External Walls Comment ";
+        if(conmng.equals(""))
+            result += "\n" + " Constructor Manager ";
+        if(grade.equals(""))
+            result += "\n" + " Grade ";
         if(result.equals("The Fields: "))
             return null;
         else return result + "\n" + "have not been completed.";
@@ -98,6 +109,9 @@ public class DomainFacade{
         dbf.readCustomers(acc);
     }
     
+    public void deleteCustomer(int cid){
+        dbf.deleteCustomer(cid);
+    }
     
     public void addBuilding(int cid, String bname, String bcity, String baddress, String bzip, String year, String size){
         Building bd = new Building (cid,bname,bcity,baddress,bzip,year,size);
@@ -110,6 +124,46 @@ public class DomainFacade{
     
     public void deleteBuilding(int bid){
         dbf.deleteBuilding(bid);
+    }
+    
+    public void addAdmin(String ausrn, String apwd, String afn, String aln, String aemail, String atel) {
+        Admin ad = new Admin(ausrn,apwd,afn,aln,aemail,atel);
+        dbf.addAdmin(ad);
+                
+    }
+    
+    public void readAdmins(Accounts acc) {
+        dbf.readAdmins(acc);
+    }
+    
+    public void deleteAdmin(int aid){
+        dbf.deleteAdmin(aid);
+    }
+    
+    public void addBReport(int bid, String date, String usgcom, String roofcom, String extwallscom, String pemployee, String conmng, String grade){
+        BReport br = new BReport(bid,date,usgcom,roofcom,extwallscom,pemployee,conmng,grade);
+        dbf.addBReport(br);
+    }
+    
+    public void readBReports(Building b){
+        dbf.readBReports(b);
+    }
+    
+    public void deleteBReport(int brepid){
+        dbf.deleteBReport(brepid);
+    }
+    
+    public void addFloor(int bid, String fname){
+        Floor f = new Floor(bid,fname);
+        dbf.addFloor(f);
+    }
+    
+    public void readFloors(Building b){
+        dbf.readFloors(b);
+    }
+    
+    public void deleteFloor(int fid){
+        dbf.deleteFloor(fid);
     }
     
     public void editAdmin(int aid, String username, String password, String firstname, String lastname, String mail, String tel) {
@@ -161,15 +215,11 @@ public class DomainFacade{
             dbf.updateYearBuilding(bid,year);
         if(!size.equals(""))
             dbf.updateSizeBuilding(bid,size);
-            
     }
-
     
-    public void editFloor(int fid, String fname, String fpath) {
+    public void editFloor(int fid, String fname) {
         if(!fname.equals(""))
             dbf.updateFnameFloor(fid,fname);
-        if(!fpath.equals(""))
-            dbf.updateFpathFloor(fid,fpath);   
     }
     
     public void editRoom(int rid, String rname, String size) {
@@ -179,18 +229,20 @@ public class DomainFacade{
             dbf.updateSizeRoom(rid,size);       
     }
 
-    public void editBReport(int brepid, String brepnum, String brdate, String usagec, String extwalls, String bconmanager, String grade){
-        if(!brepnum.equals(""))
-            dbf.updateBrepnumBReport(brepid,brepnum);
+    public void editBReport(int brepid, String brdate, String usagec, String roofc, String extwalls, String pemployee,String bconmanager, String grade){
         if(!brdate.equals(""))
-            dbf.updateBrdateBReport(brdate,brepnum);
+            dbf.updateBrdateBReport(brepid,brdate);
         if(!usagec.equals(""))
             dbf.updateUsagecBReport(brepid,usagec);
+        if(!roofc.equals(""))
+            dbf.updateRoofBReport(brepid, roofc);
         if(!extwalls.equals(""))
             dbf.updateExtwallsBReport(brepid,extwalls);
+        if(!pemployee.equals(""))
+            dbf.updatePemployeeBReport(brepid,pemployee);
         if(!bconmanager.equals(""))
             dbf.updateBconManagerBReport(brepid,bconmanager);
-        if(!grade.equals(""))
+        if(grade==null)
             dbf.updateGradeBReport(brepid,grade);
     }
 
@@ -268,14 +320,5 @@ public class DomainFacade{
         
     }    
 
-    public void addAdmin(String ausrn, String apwd, String afn, String aln, String aemail, String atel) {
-        Admin ad = new Admin(ausrn,apwd,afn,aln,aemail,atel);
-        dbf.addAdmin(ad);
-                
-    }
-    
-    public void readAdmins(Accounts acc) {
-        dbf.readAdmins(acc);
-    }
     
 }

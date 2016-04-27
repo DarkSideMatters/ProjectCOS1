@@ -34,7 +34,7 @@ public class AdminMapper{
             stmt.setString(5, a.getMail());
             stmt.setString(6, a.getTel());
             stmt.executeUpdate();
-            con.close();
+            
             
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -45,7 +45,7 @@ public class AdminMapper{
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "SELECT * FROM admins;";
+            String sqlString = "SELECT * FROM admins";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -69,57 +69,102 @@ public class AdminMapper{
             ex.printStackTrace();
               }
     }
+     
+    public void updateUsrnAdmin(int aid, String newusrn, Connection con){
+    try{
+        Class.forName("com.mysql.jdbc.Driver");
         
+        String sqlString = "update admins set usrn=? where aid=?";
+        PreparedStatement stmt = con.prepareStatement(sqlString);
+        stmt.setString(1, newusrn);
+        stmt.setInt(2, aid);
+        stmt.executeUpdate();
+    }catch (ClassNotFoundException|SQLException ex) {
+            ex.printStackTrace();
+              }
+    }
     
-    public void updatePwdAdmin(Admin a,String newpassword, Connection con) throws SQLException{
+    public void updatePwdAdmin(int aid,String newpassword, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update admins set pwd=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newpassword);
-            stmt.setInt(2,a.getAid());
+            stmt.setInt(2,aid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               }
 }
-    public void updateMailAdmin(Admin a,String newmail, Connection con) throws SQLException{
+    
+        public void updateFNAdmin(int aid,String newfn, Connection con) {
+    try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String sqlString = "update admins set fn=? where aid=?";
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+            stmt.setString(1, newfn);
+            stmt.setInt(2,aid);
+            stmt.executeUpdate();
+        
+    }catch (ClassNotFoundException|SQLException ex) {
+            ex.printStackTrace();
+              }
+}
+    
+    public void updateLNAdmin(int aid,String newln, Connection con) {
+    try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String sqlString = "update admins set ln=? where aid=?";
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+            stmt.setString(1, newln);
+            stmt.setInt(2,aid);
+            stmt.executeUpdate();
+        
+    }catch (ClassNotFoundException|SQLException ex) {
+            ex.printStackTrace();
+              }
+}
+    
+    
+    public void updateMailAdmin(int aid,String newmail, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update admins set mail=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newmail);
-            stmt.setInt(2,a.getAid());
+            stmt.setInt(2,aid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               }
     }
-public void updateTelAdmin(Admin a,String newtel, Connection con) throws SQLException{
+public void updateTelAdmin(int aid,String newtel, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update admins set tel=? where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newtel);
-            stmt.setInt(2,a.getAid());
+            stmt.setInt(2,aid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               }
 }
-    public void deleteAdmin(Admin a, Connection con){
+    public void deleteAdmin(int aid, Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "delete from admins where aid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setInt(1,a.getAid());
+            stmt.setInt(1,aid);
             stmt.executeUpdate();
         
     }catch (ClassNotFoundException|SQLException ex) {

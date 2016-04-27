@@ -24,7 +24,7 @@
             <tr><td>E-mail:</td><td> <input type="text" name="email" value="" /></td></tr>
             <tr><td>Telephone:</td><td> <input type="text" name="tel" value="" /></td></tr>
             
-            <input type="hidden" name="origin" value="adminreg" />
+            <input type="hidden" name="origin" value="addadmin" />
             <tr><td></td><td><input type="submit" value="Submit" /></td></tr>
         </table>
         </form>

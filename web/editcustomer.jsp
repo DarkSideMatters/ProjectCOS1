@@ -1,7 +1,7 @@
 <%-- 
-    Document   : customer
-    Created on : Apr 4, 2016, 1:21:30 PM
-    Author     : Plamen
+    Document   : editcustomer
+    Created on : Apr 27, 2016, 1:39:45 PM
+    Author     : Mircea
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +24,7 @@
             <tr><td>City:   </td><td> <input type="text" name="city" value="" /></td></tr>
             <tr><td>Address:</td><td> <input type="text" name="caddress" value="" /></td></tr>
             <tr><td>Zip:</td><td> <input type="text" name="zip" value="" /></td></tr>
-            <input type="hidden" name="origin" value="addcustomer" />
+            <input type="hidden" name="origin" value="editcustomer" />
             <tr><td></td><td><input type="submit" value="Submit" /></td></tr>
         </table>
         </form>

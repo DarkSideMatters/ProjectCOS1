@@ -15,7 +15,6 @@
     <body>
         
         <table>
-            
         <% Customer cstm = (Customer)request.getSession().getAttribute("currentcustomer");
             ArrayList<Building> blds = cstm.getBuildings();
         
@@ -43,10 +42,11 @@
             <td> <%= blds.get(i).getYear() %> </td>
             <td> <%= blds.get(i).getSize() %> </td>
             <input type="hidden" name="origin" value="buildingoption"/>
-            <input type="hidden" name="buildingnr" value="<%= blds.get(i).getBid() %>" />
+            <input type="hidden" name="buildingnr" value="<%=blds.get(i).getBid()%>" />
             <td> <input type="submit" name="btn" value="Edit"> </td>
             <td> <input type="submit" name="btn" value="Delete"> </td>
             <td> <input type="submit" name="btn" value="List Floors"> </td>
+            <td> <input type="submit" name="btn" value="Add Report"> </td>
             <td> <input type="submit" name="btn" value="List Reports"> </td>
             
             
@@ -59,12 +59,12 @@
         <form name="Form2" action="UIServlet" method="post">
             <input type="hidden" name="origin" value="buildingpage">
             <input type="submit" name="Buildingpage" value="Add Building"/>
-        <form/>
+        </form>
         
         <br></br>
         
         <form name="Form2" action="UIServlet" method="post">
-            <input type="hidden" name="origin" value="loggedinpage">
+            <input type="hidden" name="origin" value="customerlistpage">
             <input type="submit" name="Buildingpage" value="Back"/>
         </form>
             
