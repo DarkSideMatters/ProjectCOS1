@@ -42,7 +42,7 @@ public class FloorMapper {
                 int bid = rs.getInt("bid");
                 int fid = rs.getInt("fid");
                 String fname = rs.getString("fname");
-                b.addFloor(new Floor(bid,fid,fname));
+                b.addFloor(new Floor(fid,bid,fname));
             }
 
         } catch (ClassNotFoundException|SQLException|NullPointerException ex) {
@@ -80,6 +80,6 @@ public class FloorMapper {
               }
         
     
-        }
+    }
     
 }

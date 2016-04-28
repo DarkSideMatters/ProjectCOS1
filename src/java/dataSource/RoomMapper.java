@@ -25,14 +25,12 @@ public class RoomMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into rooms (rid,fid,rname,size) values (?,?,?,?)";
+            String sql = "INSERT into rooms (fid,rname,rsize) values (?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, r.getRid());
-            stmt.setInt(2, r.getFid());
-            stmt.setString(3, r.getRname());
-            stmt.setString(4, r.getSize());
+            stmt.setInt(1, r.getFid());
+            stmt.setString(2, r.getRname());
+            stmt.setString(3, r.getRsize());
             stmt.executeUpdate();
-            
             
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -50,8 +48,9 @@ public class RoomMapper {
                 int rid = rs.getInt("rid");
                 int fid = rs.getInt("fid");
                 String rname = rs.getString("rname");
-                String size = rs.getString("size");
+                String size = rs.getString("rsize");
                 f.addRoom(new Room(rid, fid, rname, size));
+                System.out.println(rid + " " + fid + " " + rname + " " + size);
             }
             
 
@@ -79,7 +78,7 @@ public class RoomMapper {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update rooms set size=? where rid=?";
+            String sqlString = "update rooms set rsize=? where rid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newsize);
             stmt.setInt(2, rid);

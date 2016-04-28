@@ -35,8 +35,7 @@
               Admin adm = (Admin)request.getSession().getAttribute("currentadmin");
            %>
         <form name="Form2" action="UIServlet" method="post">
-        <table id="tabel1">
-            <tr><td>ReportNo:</td><td> <%= "The Report Number will be generated and will show up in the View Report Option" %></td></tr>    
+        <table id="tabel1">   
             <tr><td>Date:</td><td> <input type="text" name="date" value="" /></td></tr>
             <tr><td>Name of building:</td><td> <%= bld.getBname() %></td></tr>
             <tr><td>City:   </td><td> <%= bld.getCity() %> </td></tr>

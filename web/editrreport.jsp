@@ -1,7 +1,7 @@
 <%-- 
-    Document   : room rep
-    Created on : Apr 20, 2016, 4:32:15 AM
-    Author     : Radu
+    Document   : editrreport
+    Created on : Apr 27, 2016, 10:45:28 PM
+    Author     : Mircea
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -44,9 +44,8 @@
         </table><br>
         <hr>
         
-        <ul><li>Room Comment:</li></ul> 
-        <ul><li><input type="text" name="rcomm" value="" /></li></ul>
-        
+        <ui><li>Room Comment:</li></ui>
+        <ui><li><input type="text" name="rcomm" value="" /></li></ui>        
         
         <ul><li>Damage and repair</li></ul>
         <table>
@@ -93,7 +92,7 @@
             <tr><td></td><td> <input type="text" name="conmng" value="" /></td></tr>
             (Construction Manager).
         </div><br>
-        <input type="hidden" name="origin" value="addrreport" />
+        <input type="hidden" name="origin" value="editrreport" />
         <br><input type="submit" value="Submit" />
         </form>
             

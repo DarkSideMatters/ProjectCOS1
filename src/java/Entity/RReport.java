@@ -12,46 +12,65 @@ package Entity;
 public class RReport {
     int rrepid;
     int rid;
-    String rrepnum;
     String rrepdate;
-    String rcomment;
-    Boolean dmg;
-    Boolean moist;
-    Boolean rot;
-    Boolean mould;
-    Boolean fire;
-    Boolean other;
-    String dmgcomment;
-    String walls;
-    String ceiling;
-    String floor;
-    String windoor;
-    String moistscan;
+    String rcomm;
+    boolean dmg;
+    boolean moist;
+    boolean rot;
+    boolean mold;
+    boolean fire;
+    boolean other;
+    String dmgcom;
+    String wallscom;
+    String ceilingcom;
+    String floorcom;
+    String windoorcom;
+    boolean moistscan;
     String moistpoint;
-    String recommendation;
-    String rconmanager;
+    String recom;
+    String rconmng;
 
-    public RReport(int rrepid, int rid, String rrepnum, String rrepdate, String rcomment, Boolean dmg, Boolean moist, Boolean rot, Boolean mould, Boolean fire, Boolean other, String dmgcomment, String walls, String ceiling, String floor, String windoor, String moistscan, String moistpoint, String recommendation, String rconmanager) {
+    public RReport(int rrepid, int rid, String rrepdate, String rcomm, boolean dmg, boolean moist, boolean rot, boolean mold, boolean fire, boolean other, String dmgcom, String wallscom, String ceilingcom, String floorcom, String windoorcom, boolean moistscan, String moistpoint, String recom, String rconmng) {
         this.rrepid = rrepid;
         this.rid = rid;
-        this.rrepnum = rrepnum;
         this.rrepdate = rrepdate;
-        this.rcomment = rcomment;
+        this.rcomm = rcomm;
         this.dmg = dmg;
         this.moist = moist;
         this.rot = rot;
-        this.mould = mould;
+        this.mold = mold;
         this.fire = fire;
         this.other = other;
-        this.dmgcomment = dmgcomment;
-        this.walls = walls;
-        this.ceiling = ceiling;
-        this.floor = floor;
-        this.windoor = windoor;
+        this.dmgcom = dmgcom;
+        this.wallscom = wallscom;
+        this.ceilingcom = ceilingcom;
+        this.floorcom = floorcom;
+        this.windoorcom = windoorcom;
         this.moistscan = moistscan;
         this.moistpoint = moistpoint;
-        this.recommendation = recommendation;
-        this.rconmanager = rconmanager;
+        this.recom = recom;
+        this.rconmng = rconmng;
+    }
+
+    public RReport(int rid, String rrepdate, String rcomm, boolean dmg, boolean moist, boolean rot, boolean mold, boolean fire, boolean other, String dmgcom, String wallscom, String ceilingcom, String floorcom, String windoorcom, boolean moistscan, String moistpoint, String recom, String rconmng) {
+        this.rid = rid;
+        this.rrepdate = rrepdate;
+        this.rcomm = rcomm;
+        this.dmg = dmg;
+        this.moist = moist;
+        this.rot = rot;
+        this.mold = mold;
+        this.fire = fire;
+        this.other = other;
+        this.dmgcom = dmgcom;
+        this.wallscom = wallscom;
+        this.ceilingcom = ceilingcom;
+        this.floorcom = floorcom;
+        this.windoorcom = windoorcom;
+        this.moistscan = moistscan;
+        this.moistpoint = moistpoint;
+        this.recom = recom;
+        this.rconmng = rconmng;
     }
 
     public RReport() {
@@ -73,14 +92,6 @@ public class RReport {
         this.rid = rid;
     }
 
-    public String getRrepnum() {
-        return rrepnum;
-    }
-
-    public void setRrepnum(String rrepnum) {
-        this.rrepnum = rrepnum;
-    }
-
     public String getRrepdate() {
         return rrepdate;
     }
@@ -89,107 +100,107 @@ public class RReport {
         this.rrepdate = rrepdate;
     }
 
-    public String getRcomment() {
-        return rcomment;
+    public String getRcomm() {
+        return rcomm;
     }
 
-    public void setRcomment(String rcomment) {
-        this.rcomment = rcomment;
+    public void setRcomm(String rcomm) {
+        this.rcomm = rcomm;
     }
 
-    public Boolean getDmg() {
+    public boolean isDmg() {
         return dmg;
     }
 
-    public void setDmg(Boolean dmg) {
+    public void setDmg(boolean dmg) {
         this.dmg = dmg;
     }
 
-    public Boolean getMoist() {
+    public boolean isMoist() {
         return moist;
     }
 
-    public void setMoist(Boolean moist) {
+    public void setMoist(boolean moist) {
         this.moist = moist;
     }
 
-    public Boolean getRot() {
+    public boolean isRot() {
         return rot;
     }
 
-    public void setRot(Boolean rot) {
+    public void setRot(boolean rot) {
         this.rot = rot;
     }
 
-    public Boolean getMould() {
-        return mould;
+    public boolean isMold() {
+        return mold;
     }
 
-    public void setMould(Boolean mould) {
-        this.mould = mould;
+    public void setMould(boolean mold) {
+        this.mold = mold;
     }
 
-    public Boolean getFire() {
+    public boolean isFire() {
         return fire;
     }
 
-    public void setFire(Boolean fire) {
+    public void setFire(boolean fire) {
         this.fire = fire;
     }
 
-    public Boolean getOther() {
+    public boolean isOther() {
         return other;
     }
 
-    public void setOther(Boolean other) {
+    public void setOther(boolean other) {
         this.other = other;
     }
 
-    public String getDmgcomment() {
-        return dmgcomment;
+    public String getDmgcom() {
+        return dmgcom;
     }
 
-    public void setDmgcomment(String dmgcomment) {
-        this.dmgcomment = dmgcomment;
+    public void setDmgcom(String dmgcom) {
+        this.dmgcom = dmgcom;
     }
 
-    public String getWalls() {
-        return walls;
+    public String getWallscom() {
+        return wallscom;
     }
 
-    public void setWalls(String walls) {
-        this.walls = walls;
+    public void setWallscom(String wallscom) {
+        this.wallscom = wallscom;
     }
 
-    public String getCeiling() {
-        return ceiling;
+    public String getCeilingcom() {
+        return ceilingcom;
     }
 
-    public void setCeiling(String ceiling) {
-        this.ceiling = ceiling;
+    public void setCeilingcom(String ceilingcom) {
+        this.ceilingcom = ceilingcom;
     }
 
-    public String getFloor() {
-        return floor;
+    public String getFloorcom() {
+        return floorcom;
     }
 
-    public void setFloor(String floor) {
-        this.floor = floor;
+    public void setFloorcom(String floorcom) {
+        this.floorcom = floorcom;
     }
 
-    public String getWindoor() {
-        return windoor;
+    public String getWindoorcom() {
+        return windoorcom;
     }
 
-    public void setWindoor(String windoor) {
-        this.windoor = windoor;
+    public void setWindoorcom(String windoorcom) {
+        this.windoorcom = windoorcom;
     }
 
-    public String getMoistscan() {
+    public boolean isMoistscan() {
         return moistscan;
     }
 
-    public void setMoistscan(String moistscan) {
+    public void setMoistscan(boolean moistscan) {
         this.moistscan = moistscan;
     }
 
@@ -201,25 +212,25 @@ public class RReport {
         this.moistpoint = moistpoint;
     }
 
-    public String getRecommendation() {
-        return recommendation;
+    public String getRecom() {
+        return recom;
     }
 
-    public void setRecommendation(String recommendation) {
-        this.recommendation = recommendation;
+    public void setRecom(String recom) {
+        this.recom = recom;
     }
 
-    public String getRconmanager() {
-        return rconmanager;
+    public String getRconmng() {
+        return rconmng;
     }
 
-    public void setRconmanager(String rconmanager) {
-        this.rconmanager = rconmanager;
+    public void setRconmng(String rconmng) {
+        this.rconmng = rconmng;
     }
 
     @Override
     public String toString() {
-        return "RReport{" + "rrepid=" + rrepid + ", rid=" + rid + ", rrepnum=" + rrepnum + ", rrepdate=" + rrepdate + ", rcomment=" + rcomment + ", dmg=" + dmg + ", moist=" + moist + ", rot=" + rot + ", mould=" + mould + ", fire=" + fire + ", other=" + other + ", dmgcomment=" + dmgcomment + ", walls=" + walls + ", ceiling=" + ceiling + ", floor=" + floor + ", windoor=" + windoor + ", moistscan=" + moistscan + ", moistpoint=" + moistpoint + ", recommendation=" + recommendation + ", rconmanager=" + rconmanager + '}';
+        return "RReport{" + "rrepid=" + rrepid + ", rid=" + rid + ", rrepdate=" + rrepdate + ", rcomm=" + rcomm + ", dmg=" + dmg + ", moist=" + moist + ", rot=" + rot + ", mold=" + mold + ", fire=" + fire + ", other=" + other + ", dmgcom=" + dmgcom + ", wallscom=" + wallscom + ", ceilingcom=" + ceilingcom + ", floorcom=" + floorcom + ", windoorcom=" + windoorcom + ", moistscan=" + moistscan + ", moistpoint=" + moistpoint + ", recom=" + recom + ", rconmng=" + rconmng + '}';
     }
-    
+
 }

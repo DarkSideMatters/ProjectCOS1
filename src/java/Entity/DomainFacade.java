@@ -100,6 +100,33 @@ public class DomainFacade{
         else return result + "\n" + "have not been completed.";
     }
     
+    public String checkRFields(String rname, String rsize){
+        String result = new String("The Fields: ");
+        if(rname.equals(""))
+            result += "\n" + " Room Name ";
+        if(rsize.equals(""))
+            result += "\n" + " Room Size ";
+        if(result.equals("The Fields: "))
+            return null;
+        else return result + "\n" + "have not been completed.";
+    }
+    
+    public String checkRRFields(String rrepdate,String rcomm,boolean dmg,boolean moist,boolean rot,boolean  mold,boolean fire,boolean other,String dmgcom,String wallscom,String ceilingcom,String floorcom,String windoorcom,boolean moistscan,String moistpoint,String recom,String rconmng){
+        String result = new String("The Fields: ");
+        if(rrepdate.equals(""))
+            result += "\n" + " Report Date ";
+        if(moistscan)
+            if(moistpoint.equals(""))
+                result += "\n" + " Moisture Point";
+        if(recom.equals(""))
+            result += "\n" + "Recommandations";
+        if(rconmng.equals(""))
+            result += "\n" + "Construction Manager";
+        if(result.equals("The Fields: "))
+            return null;
+        else return result + "\n" + "have not been completed.";
+    }
+    
     public void addCustomer(String username, String password, String firstname, String lastname, String mail, String tel, String city, String address, String zip){
         Customer ct = new Customer( username, password, firstname, lastname, mail, tel, city, address, zip);
         dbf.addCustomer(ct);
@@ -164,6 +191,36 @@ public class DomainFacade{
     
     public void deleteFloor(int fid){
         dbf.deleteFloor(fid);
+    }
+    
+    public void addRoom(int fid, String rname, String rsize){
+        Room r = new Room(fid,rname,rsize);
+        dbf.addRoom(r);
+    }
+    
+    public void readRooms(Floor f){
+        dbf.readRooms(f);
+    }
+    
+    public void deleteRoom(int rid){
+        dbf.deleteRoom(rid);
+    }
+    
+    public void addRReport(int rid,String rrepdate,String rcomm,boolean dmg,boolean moist,boolean rot,boolean  mold,boolean fire,boolean other,
+            String dmgcom,String wallscom,String ceilingcom,String floorcom,
+            String windoorcom,boolean moistscan,String moistpoint,String recom,String rconmng){
+        
+        RReport rrep = new RReport(rid,rrepdate,rcomm,dmg,moist,rot,mold,fire,other,dmgcom,wallscom,ceilingcom,floorcom,windoorcom,moistscan,moistpoint,recom,rconmng);
+        
+        dbf.addRReport(rrep);
+    }
+    
+    public void readRReports(Room r){
+        dbf.readRReport(r);
+    }
+    
+    public void deleteRReport(int rrepid){
+        dbf.deleteRReport(rrepid);
     }
     
     public void editAdmin(int aid, String username, String password, String firstname, String lastname, String mail, String tel) {
@@ -246,69 +303,48 @@ public class DomainFacade{
             dbf.updateGradeBReport(brepid,grade);
     }
 
-    public void editRReport(int rrepid, String rrepnum, String rrdate, String roomc, String dmg, String moist, String rot, String mould, String fire, String other, String windoor, String moistscan, String moistpoint, String recommendation, String rconmanager ){
-        if(!rrepnum.equals(""))
-            dbf.updateRrepnumRReport(rrepid,rrepnum);
+    public void editRReport(int rrepid, String rrdate, String roomc, boolean dmg, boolean moist, boolean rot, boolean mold, boolean fire, boolean other, String dmgcom, String wallscom, String ceilingcom, String floorcom, String windoorcom, boolean moistscan, String moistpoint, String recommendation, String rconmanager ){
         if(!rrdate.equals(""))
             dbf.updateRRdateRReport(rrepid,rrdate);
-        
-        boolean damage;
-        if(dmg.equals("yes")){
-                damage=true;
-                dbf.updateDamageRReport(rrepid,damage);
-        }
-        if(dmg.equals("no")){
-                damage=false;
-                dbf.updateDamageRReport(rrepid,damage);
-        }
-        boolean rmoist;
-        if(moist.equals("yes")){
-                rmoist=true;
-                dbf.updateMoistRReport(rrepid,rmoist);
-        }
-        if(moist.equals("no")){
-                rmoist=false;
-                dbf.updateMoistRReport(rrepid,rmoist);
-        }
-        boolean rrot;
-        if(rot.equals("yes")){
-                rrot=true;
-                dbf.updateRotRReport(rrepid,rrot);
-        }
-        if(rot.equals("no")){
-                rrot=false;
-                dbf.updateRotRReport(rrepid,rrot);
-        }
-        boolean rmould;
-        if(mould.equals("yes")){
-                rmould=true;
-                dbf.updateMouldRReport(rrepid,rmould);
-        }
-        if(mould.equals("no")){
-                rmould=false;
-                dbf.updateMouldRReport(rrepid,rmould);
-        }
-        boolean rfire;
-        if(fire.equals("yes")){
-                rfire=true;
-                dbf.updateFireRReport(rrepid,rfire);
-        }
-        if(fire.equals("no")){
-                rfire=false;
-                dbf.updateFireRReport(rrepid,rfire);
-        }
-        boolean rother;
-        if(other.equals("yes")){
-                rother=true;
-                dbf.updateOtherDMGRReport(rrepid,rother);
-        }
-        if(dmg.equals("no")){
-                rother=false;
-                dbf.updateOtherDMGRReport(rrepid,rother);
-        }
-        if(!windoor.equals(""))
-            dbf.updateWindoorRReport(rrepid,windoor);
-        if(!moistscan.equals(""))
+        if(!roomc.equals(""))
+            dbf.updateRoomComReport(rrepid,roomc);
+        if(dmg)
+                dbf.updateDamageRReport(rrepid,dmg);
+        else
+                dbf.updateDamageRReport(rrepid,dmg);
+        if(moist)
+                dbf.updateMoistRReport(rrepid,moist);
+        else
+                dbf.updateMoistRReport(rrepid,moist);
+        if(rot)
+                dbf.updateRotRReport(rrepid,rot);
+        else
+                dbf.updateRotRReport(rrepid,rot);
+        if(mold)
+                dbf.updateMoldRReport(rrepid,mold);
+        else
+                dbf.updateMoldRReport(rrepid,mold);
+        if(fire)
+                dbf.updateFireRReport(rrepid,fire);
+        else
+                dbf.updateFireRReport(rrepid,fire);
+        if(other)
+                dbf.updateOtherDMGRReport(rrepid,other);
+        else
+                dbf.updateOtherDMGRReport(rrepid,other);
+        if(!dmgcom.equals(""))
+            dbf.updateDmgComRReport(rrepid,dmgcom);
+        if(!wallscom.equals(""))
+            dbf.updateWallsComRReport(rrepid, wallscom);
+        if(!ceilingcom.equals(""))
+            dbf.updateCeilingComRReport(rrepid,ceilingcom);
+        if(!floorcom.equals(""))
+            dbf.updateFloorComRReport(rrepid,floorcom);
+        if(!windoorcom.equals(""))
+            dbf.updateWindoorRReport(rrepid,windoorcom);
+        if(moistscan)
+            dbf.updateMoistScanRReport(rrepid,moistscan);
+        else
             dbf.updateMoistScanRReport(rrepid,moistscan);
         if(!moistpoint.equals(""))
             dbf.updateMoistPointRReport(rrepid,moistpoint);
@@ -316,8 +352,6 @@ public class DomainFacade{
             dbf.updateRecommendationRReport(rrepid,recommendation);
         if(!rconmanager.equals(""))
             dbf.updateRConManagerRReport(rrepid,rconmanager);
-        
-        
     }    
 
     

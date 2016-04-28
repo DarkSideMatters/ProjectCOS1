@@ -6,6 +6,7 @@
 package dataSource;
 
 import Entity.RReport;
+import Entity.Room;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,46 +26,50 @@ public class RReportMapper {
         try{
             Statement statement;
             statement = con.createStatement();
-            String sql = "INSERT into roomreports () values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT into roomreports (rid,rrepdate,rcomment,dmg,moist,rot"
+                    + ",mold,fire,other,dmgcomment,walls,ceiling,floor"
+                    + ",windoor,moistscan,moistpoint,recommendation,rconmanager)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, rrp.getRrepid());
-            stmt.setInt(2, rrp.getRid());
-            stmt.setString(3, rrp.getRrepnum());
-            stmt.setString(4, rrp.getRrepdate());
-            stmt.setString(5, rrp.getRcomment());
-            if(rrp.getDmg())
+            stmt.setInt(1, rrp.getRid());
+            stmt.setString(2, rrp.getRrepdate());
+            stmt.setString(3, rrp.getRcomm());
+            if(rrp.isDmg())
+                stmt.setString(4, "yes");
+            else
+                stmt.setString(4, "no");
+            if(rrp.isMoist())
+                stmt.setString(5, "yes");
+            else
+                stmt.setString(5, "no");
+            if(rrp.isRot())
                 stmt.setString(6, "yes");
             else
                 stmt.setString(6, "no");
-            if(rrp.getMoist())
+            if(rrp.isMold())
                 stmt.setString(7, "yes");
             else
                 stmt.setString(7, "no");
-            if(rrp.getRot())
+            if(rrp.isFire())
                 stmt.setString(8, "yes");
             else
                 stmt.setString(8, "no");
-            if(rrp.getMould())
+            if(rrp.isOther())
                 stmt.setString(9, "yes");
             else
                 stmt.setString(9, "no");
-            if(rrp.getFire())
-                stmt.setString(10, "yes");
+            stmt.setString(10, rrp.getDmgcom());
+            stmt.setString(11, rrp.getWallscom());
+            stmt.setString(12, rrp.getCeilingcom());
+            stmt.setString(13, rrp.getFloorcom());
+            stmt.setString(14, rrp.getWindoorcom());
+            if(rrp.isMoist())
+                stmt.setString(15, "yes");
             else
-                stmt.setString(10, "no");
-            if(rrp.getOther())
-                stmt.setString(11, "yes");
-            else
-                stmt.setString(11, "no");
-            stmt.setString(12, rrp.getDmgcomment());
-            stmt.setString(13, rrp.getWalls());
-            stmt.setString(14, rrp.getCeiling());
-            stmt.setString(15, rrp.getFloor());
-            stmt.setString(16, rrp.getWindoor());
-            stmt.setString(17, rrp.getMoistscan());
-            stmt.setString(18, rrp.getMoistpoint());
-            stmt.setString(19, rrp.getRecommendation());
-            stmt.setString(20, rrp.getRconmanager());
+                stmt.setString(15, "no");
+            stmt.setString(16, rrp.getMoistpoint());
+            stmt.setString(17, rrp.getRecom());
+            stmt.setString(18, rrp.getRconmng());
             stmt.executeUpdate();
             
             
@@ -73,8 +78,7 @@ public class RReportMapper {
         }
     }
             
-    public List<RReport> readRReports(RReport rrp ,Connection con){
-        List<RReport> rreports = new ArrayList<>();
+    public void readRReports(Room r,Connection con){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -84,35 +88,34 @@ public class RReportMapper {
             while (rs.next()) {
                 int rrepid = rs.getInt("rrepid");
                 int rid = rs.getInt("rid");
-                String rrepnum = rs.getString("rrepnum");
                 String rrepdate = rs.getString("rrepdate");
                 String rcomment = rs.getString("rcomment");
-                Boolean dmg;
+                boolean dmg;
                 if(rs.getString("dmg").equals("yes"))
                     dmg = true;
                 else
                     dmg = false;
-                Boolean moist;
+                boolean moist;
                 if(rs.getString("moist").equals("yes"))
                     moist = true;
                 else
                     moist = false;
-                Boolean rot;
+                boolean rot;
                 if(rs.getString("rot").equals("rot"))
                     rot = true;
                 else
                     rot = false;
-                Boolean mould;
-                if(rs.getString("mould").equals("yes"))
-                    mould = true;
+                boolean mold;
+                if(rs.getString("mold").equals("yes"))
+                    mold = true;
                 else
-                    mould = false;
-                Boolean fire;
+                    mold = false;
+                boolean fire;
                 if(rs.getString("fire").equals("yes"))
                     fire = true;
                 else
                     fire = false;
-                Boolean other;
+                boolean other;
                 if(rs.getString("other").equals("yes"))
                     other = true;
                 else
@@ -122,37 +125,27 @@ public class RReportMapper {
                 String ceiling = rs.getString("ceiling");
                 String floor = rs.getString("floor");
                 String windoor = rs.getString("windoor");
-                String moistscan = rs.getString("moistscan");
+                boolean moistscan;
+                if(rs.getString("moistscan").equals("yes"))
+                    moistscan = true;
+                else
+                    moistscan = false;
                 String moistpoint = rs.getString("moistpoint");
                 String recommendation = rs.getString("recommendation");
                 String rconmanager = rs.getString("rconmanager");
-                rreports.add(new RReport(rrepid, rid, rrepnum, rrepdate, rcomment, dmg, moist, rot, mould, fire, other, dmgcomment, walls, ceiling, floor, windoor, moistscan, moistpoint, recommendation, rconmanager));
+                RReport rrep = new RReport(rrepid, rid, rrepdate, rcomment, dmg, moist, rot, mold, fire, other, dmgcomment, walls, ceiling, floor, windoor, moistscan, moistpoint, recommendation, rconmanager);
+                r.addReport(rrep);
             }
             
 
         } catch (ClassNotFoundException|SQLException ex) {
             ex.printStackTrace();
               } 
-        return rreports;
-
     }
         
     
-    public void updateRrepnumReport(int rrepid, String newrrepnum, Connection con) throws SQLException{
-    try {
-            Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update roomreports set rrepnum=? where rrepid=?";
-            PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setString(1, newrrepnum);
-            stmt.setInt(2, rrepid);
-            stmt.executeUpdate();
-        
-    }catch (ClassNotFoundException|SQLException ex) {
-            ex.printStackTrace();
-              }
-    }
-    public void updateRrepdateReport(int rrepid, String newrrepdate, Connection con) throws SQLException{
+    public void updateRrepdateReport(int rrepid, String newrrepdate, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -166,11 +159,11 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateRcommentReport(int rrepid, String newrcomment, Connection con) throws SQLException{
+    public void updateRcommentReport(int rrepid, String newrcomment, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update roomreports set rrepcomment=? where rrepid=?";
+            String sqlString = "update roomreports set rcomment=? where rrepid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
             stmt.setString(1, newrcomment);
             stmt.setInt(2, rrepid);
@@ -180,7 +173,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateDmgReport(int rrepid, Boolean newdmg, Connection con) throws SQLException{
+    public void updateDmgReport(int rrepid, boolean newdmg, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -197,7 +190,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateMoistReport(int rrepid, Boolean newmoist, Connection con) throws SQLException{
+    public void updateMoistReport(int rrepid, boolean newmoist, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -214,7 +207,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateRotReport(int rrepid, Boolean newrot, Connection con) throws SQLException{
+    public void updateRotReport(int rrepid, boolean newrot, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -231,13 +224,13 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateMouldReport(int rrepid, Boolean newmould, Connection con) throws SQLException{
+    public void updateMoldReport(int rrepid, boolean newmold, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String sqlString = "update roomreports set mould=? where rrepid=?";
+            String sqlString = "update roomreports set mold=? where rrepid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            if(newmould == true)
+            if(newmold == true)
                 stmt.setString(1, "yes");
             else
                 stmt.setString(1, "no");
@@ -248,7 +241,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateFireReport(int rrepid, Boolean newfire, Connection con) throws SQLException{
+    public void updateFireReport(int rrepid, boolean newfire, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -265,7 +258,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateOtherReport(int rrepid, Boolean newother, Connection con) throws SQLException{
+    public void updateOtherReport(int rrepid, boolean newother, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -282,7 +275,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateDmgcommentReport(int rrepid, String newdmgcomment, Connection con) throws SQLException{
+    public void updateDmgcommentReport(int rrepid, String newdmgcomment, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -296,7 +289,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateWallsReport(int rrepid, String newwalls, Connection con) throws SQLException{
+    public void updateWallscommentReport(int rrepid, String newwalls, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -310,7 +303,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateCeilingReport(int rrepid, String newceiling, Connection con) throws SQLException{
+    public void updateCeilingcommentReport(int rrepid, String newceiling, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -324,7 +317,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateFloorReport(int rrepid, String newfloor, Connection con) throws SQLException{
+    public void updateFloorcommentReport(int rrepid, String newfloor, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -338,7 +331,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateWindoorReport(int rrepid, String newwindoor, Connection con) throws SQLException{
+    public void updateWindoorcommentReport(int rrepid, String newwindoor, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -352,13 +345,16 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateMoistscanReport(int rrepid, String newmoistscan, Connection con) throws SQLException{
+    public void updateMoistscanReport(int rrepid, boolean newmoistscan, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
             String sqlString = "update roomreports set moistscan=? where rrepid=?";
             PreparedStatement stmt = con.prepareStatement(sqlString);
-            stmt.setString(1, newmoistscan);
+            if(newmoistscan)
+                stmt.setString(1, "yes");
+            else
+                stmt.setString(1, "no");
             stmt.setInt(2, rrepid);
             stmt.executeUpdate();
         
@@ -366,7 +362,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateMoistpointReport(int rrepid, String newmoistpoint, Connection con) throws SQLException{
+    public void updateMoistpointReport(int rrepid, String newmoistpoint, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -380,7 +376,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateRecommendationReport(int rrepid, String newrecommendation, Connection con) throws SQLException{
+    public void updateRecommendationReport(int rrepid, String newrecommendation, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -394,7 +390,7 @@ public class RReportMapper {
             ex.printStackTrace();
               }
     }
-    public void updateRconmanageReport(int rrepid, String newrconmanager, Connection con) throws SQLException{
+    public void updateRconmanagerReport(int rrepid, String newrconmanager, Connection con) {
     try {
             Class.forName("com.mysql.jdbc.Driver");
 

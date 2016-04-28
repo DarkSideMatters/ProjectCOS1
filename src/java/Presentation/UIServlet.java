@@ -42,7 +42,7 @@ public class UIServlet extends HttpServlet {
             DomainFacade df = new DomainFacade();
             boolean accountfound = false;
             boolean passwordmatch = false;
-            int i,bid;
+            int i,bid,cid,rid,brepid,rrepid;
             String FieldError;
             
             
@@ -53,6 +53,7 @@ public class UIServlet extends HttpServlet {
             ArrayList<Floor> floors = new ArrayList<>();
             ArrayList<Room> rooms = new ArrayList<>();
             ArrayList<BReport> breports = new ArrayList<>();
+            ArrayList<RReport> rreports = new ArrayList<>();
             acc.reinitCustomers();
             acc.reinitAdmins();
             df.readCustomers(acc);
@@ -67,6 +68,7 @@ public class UIServlet extends HttpServlet {
             Floor currentfloor = new Floor();
             Room currentroom = new Room();
             BReport currentbreport = new BReport();
+            RReport currentrreport = new RReport();
             
             System.out.println("NEW RUN");
             
@@ -249,8 +251,6 @@ public class UIServlet extends HttpServlet {
                 case "editfloor":
                     String efname = request.getParameter("fname");
                     
-                        
-                    
                     df.editFloor((int)request.getSession().getAttribute("fid"), efname);
                     
                     currentbuilding = (Building)request.getSession().getAttribute("currentbuilding");
@@ -259,6 +259,70 @@ public class UIServlet extends HttpServlet {
                     request.getSession().setAttribute("currentbuilding", currentbuilding);
                     
                     response.sendRedirect("floorslist.jsp");
+                    return;
+                case "editroom":
+                    String ername = request.getParameter("rname");
+                    String ersize = request.getParameter("rsize");
+                    
+                    df.editRoom((int)request.getSession().getAttribute("rid"), ername, ersize);
+                    
+                    currentfloor = (Floor)request.getSession().getAttribute("currentfloor");
+                    currentfloor.reinitRooms();
+                    df.readRooms(currentfloor);
+                    request.getSession().setAttribute("currentfloor", currentfloor);
+                    
+                    if(adminloggedin)
+                        response.sendRedirect("aroomslist.jsp");
+                    else
+                        response.sendRedirect("roomslist.jsp");
+                    return;
+                case "editrreport":
+                    String errepdate = request.getParameter("date");
+                    String ercomm = request.getParameter("rcomm");
+                    boolean edmg;
+                    if( request.getParameter("damage").equals("yes"))
+                        edmg = true;
+                    else
+                        edmg = false;
+                    boolean emoist = request.getParameter("moist")!=null;
+                    boolean erot = request.getParameter("rot")!=null;
+                    boolean emold = request.getParameter("mold")!=null;
+                    boolean efire = request.getParameter("fire")!=null;
+                    boolean eother = request.getParameter("other")!=null;
+                    String edmgcom = new String("");
+                    String ewallscom = new String("");
+                    String eceilingcom = new String("");
+                    String efloorcom = new String("");
+                    String ewindoorcom = new String("");
+                    if(edmg){
+                        edmgcom = request.getParameter("dmgcom");
+                        ewallscom = request.getParameter("walls");
+                        eceilingcom = request.getParameter("ceiling");
+                        efloorcom = request.getParameter("floor");
+                        ewindoorcom = request.getParameter("windoor");
+                    }
+                    boolean emoistscan;
+                    if(request.getParameter("moistscan").equals("yes"))
+                        emoistscan = true;
+                    else
+                        emoistscan = false;
+                    String emoistpoint = new String("");
+                    if(emoistscan)
+                        emoistpoint = request.getParameter("moistpoint");
+                    String erecom = request.getParameter("recom");
+                    String erconmng = request.getParameter("conmng");
+                    
+                    df.editRReport((int)request.getSession().getAttribute("rrepid"),errepdate,ercomm,edmg,emoist,erot,emold,efire,eother,edmgcom,ewallscom,eceilingcom,efloorcom,ewindoorcom,emoistscan,emoistpoint,erecom,erconmng);
+                    
+                    currentroom = (Room)request.getSession().getAttribute("currentroom");
+                    currentroom.reinitReports();
+                    df.readRReports(currentroom);
+                    request.getSession().setAttribute("currentroom", currentroom);
+                    
+                    if(adminloggedin)
+                        response.sendRedirect("arreportslist.jsp");
+                    else
+                        response.sendRedirect("rreportslist.jsp");
                     return;
                 case "addcustomer":
                     String cusrn = request.getParameter("usrn");
@@ -409,8 +473,153 @@ public class UIServlet extends HttpServlet {
                     
                     response.sendRedirect("floorslist.jsp");
                     return;
+                case "addroom":
+                    String rname = request.getParameter("rname");
+                    String rsize = request.getParameter("rsize");
+                    
+                    FieldError = df.checkRFields(rname,rsize);
+                    System.out.println(FieldError);
+                    if(FieldError!=null){
+                        request.getSession().setAttribute("message", FieldError);
+                        response.sendRedirect("feedback.jsp");
+                        return;
+                    }
+                    
+                    df.addRoom((int)request.getSession().getAttribute("fid"), rname, rsize);
+                    
+                    currentfloor = (Floor)request.getSession().getAttribute("currentfloor");
+                    currentfloor.reinitRooms();
+                    df.readRooms(currentfloor);
+                    request.getSession().setAttribute("currentfloor", currentfloor);
+                    
+                    if(adminloggedin)
+                        response.sendRedirect("aroomslist.jsp");
+                    else
+                        response.sendRedirect("roomslist.jsp");
+                    return;
+                case "addrreport":
+                    String rrepdate = request.getParameter("date");
+                    String rcomm = request.getParameter("rcomm");
+                    boolean dmg;
+                    if( request.getParameter("damage").equals("yes"))
+                        dmg = true;
+                    else
+                        dmg = false;
+                    boolean moist = request.getParameter("moist")!=null;
+                    boolean rot = request.getParameter("rot")!=null;
+                    boolean mold = request.getParameter("mold")!=null;
+                    boolean fire = request.getParameter("fire")!=null;
+                    boolean other = request.getParameter("other")!=null;
+                    String dmgcom = new String("");
+                    String wallscom = new String("");
+                    String ceilingcom = new String("");
+                    String floorcom = new String("");
+                    String windoorcom = new String("");
+                    if(dmg){
+                        dmgcom = request.getParameter("dmgcom");
+                        wallscom = request.getParameter("walls");
+                        ceilingcom = request.getParameter("ceiling");
+                        floorcom = request.getParameter("floor");
+                        windoorcom = request.getParameter("windoor");
+                    }
+                    boolean moistscan;
+                    if(request.getParameter("moistscan").equals("yes"))
+                        moistscan = true;
+                    else
+                        moistscan = false;
+                    String moistpoint = new String("");
+                    if(moistscan)
+                        moistpoint = request.getParameter("moistpoint");
+                    String recom = request.getParameter("recom");
+                    String rconmng = request.getParameter("conmng");
+                    
+                    FieldError = df.checkRRFields(rrepdate,rcomm,dmg,moist,rot,mold,fire,other,dmgcom,wallscom,ceilingcom,floorcom,windoorcom,moistscan,moistpoint,recom,rconmng);
+                    System.out.println(FieldError);
+                    if(FieldError!=null){
+                        request.getSession().setAttribute("message", FieldError);
+                        response.sendRedirect("feedback.jsp");
+                        return;
+                    }
+                    
+                    df.addRReport((int)request.getSession().getAttribute("rid"),rrepdate,rcomm,dmg,moist,rot,mold,fire,other,dmgcom,wallscom,ceilingcom,floorcom,windoorcom,moistscan,moistpoint,recom,rconmng);
+                    
+                    currentroom = (Room)request.getSession().getAttribute("currentroom");
+                    currentroom.reinitReports();
+                    df.readRReports(currentroom);
+                    request.getSession().setAttribute("currentroom", currentroom);
+                    
+                    if(adminloggedin)
+                        response.sendRedirect("arreportslist.jsp");
+                    else
+                        response.sendRedirect("rreportslist.jsp");
+                    return;
+                case "rreplist":
+                    if(adminloggedin)
+                        response.sendRedirect("arreportslist.jsp");
+                    else
+                        response.sendRedirect("rreportslist.jsp");
+                    return;
+                case "rrepoption":
+                    String rrepbtn = request.getParameter("btn");
+                    rrepid = Integer.parseInt(request.getParameter("rrepid"));
+                    request.getSession().setAttribute("rrepid", rrepid);
+                    
+                    currentroom = (Room)request.getSession().getAttribute("currentroom");
+                    rreports = currentroom.getReports();
+                    
+                    for(i=0;i<rreports.size();i++)
+                        if(rreports.get(i).getRrepid()==rrepid){
+                            currentrreport=rreports.get(i);
+                            request.getSession().setAttribute("currentrreport", currentrreport);
+                        }
+                    
+                    if(rrepbtn.equals("Edit"))
+                        response.sendRedirect("editrreport.jsp");
+                    if(rrepbtn.equals("Delete")){
+                        request.getSession().setAttribute("disthing", "Room Report");
+                        request.getSession().setAttribute("message", "Are you sure you want to delete this " + "Room Report" + "?");
+                        response.sendRedirect("ays.jsp");
+                    }
+                    if(rrepbtn.equals("View"))
+                        response.sendRedirect("rreportview.jsp");
+                    return;
+                case "roomslist":
+                    if(adminloggedin)
+                        response.sendRedirect("aroomslist.jsp");
+                    else
+                        response.sendRedirect("roomslist.jsp");
+                    return;
+                case "roomoption":
+                    String rbtn = request.getParameter("btn");
+                    rid = Integer.parseInt(request.getParameter("rid"));
+                    request.getSession().setAttribute("rid", rid);
+                    
+                    currentfloor = (Floor)request.getSession().getAttribute("currentfloor");
+                    rooms = currentfloor.getRooms();
+                    
+                    for(i=0;i<rooms.size();i++)
+                        if(rooms.get(i).getRid()==rid){
+                            currentroom=rooms.get(i);
+                            currentroom.reinitReports();
+                            df.readRReports(currentroom);
+                            request.getSession().setAttribute("currentroom", currentroom);
+                        }
+                    
+                    if(rbtn.equals("Edit"))
+                        response.sendRedirect("editroom.jsp");
+                    if(rbtn.equals("Delete")){
+                        request.getSession().setAttribute("disthing", "Room");
+                        request.getSession().setAttribute("message", "Are you sure you want to delete this " + "Room" + "?");
+                        response.sendRedirect("ays.jsp");
+                    }
+                    if(rbtn.equals("List Reports"))
+                        if(adminloggedin)
+                            response.sendRedirect("arreportslist.jsp");
+                        else
+                            response.sendRedirect("rreportslist.jps");
+                    return;
                 case "floorslist":
-                    response.sendRedirect("floorlist.jsp");
+                    response.sendRedirect("floorslist.jsp");
                     return;
                 case "flooroption":
                     String fbtn = request.getParameter("btn");
@@ -422,6 +631,7 @@ public class UIServlet extends HttpServlet {
                     
                     for(i=0;i<floors.size();i++)
                         if(floors.get(i).getFid()==fid){
+                            System.out.println(floors.get(i).getFid() + " " + fid);
                             currentfloor=floors.get(i);
                             request.getSession().setAttribute("currentfloor", currentfloor);
                         }
@@ -433,8 +643,15 @@ public class UIServlet extends HttpServlet {
                         request.getSession().setAttribute("message", "Are you sure you want to delete this " + "Floor" + "?");
                         response.sendRedirect("ays.jsp");
                     }
-                    if(fbtn.equals("List Rooms"))
-                        response.sendRedirect("roomslist.jsp");
+                    if(fbtn.equals("List Rooms")){
+                        currentfloor.reinitRooms();
+                        df.readRooms(currentfloor);
+                        if(adminloggedin){
+                            response.sendRedirect("aroomslist.jsp");
+                        }
+                        else
+                            response.sendRedirect("roomslist.jps");
+                    }
                     return;
                 case "breplist":
                     if(adminloggedin)
@@ -444,7 +661,7 @@ public class UIServlet extends HttpServlet {
                     return;
                 case "breportoption":
                     String brepbtn = request.getParameter("btn");
-                    int brepid = Integer.parseInt(request.getParameter("brnum"));
+                    brepid = Integer.parseInt(request.getParameter("brnum"));
                     request.getSession().setAttribute("brepid",brepid);
                     
                     currentbuilding = (Building)request.getSession().getAttribute("currentbuilding");
@@ -476,7 +693,7 @@ public class UIServlet extends HttpServlet {
                     return;
                 case "customeroption":
                     String cbtn = request.getParameter("btn");
-                    int cid = Integer.parseInt(request.getParameter("cmnr"));
+                    cid = Integer.parseInt(request.getParameter("cmnr"));
                     request.getSession().setAttribute("cid", cid);
                     
                     
@@ -544,9 +761,6 @@ public class UIServlet extends HttpServlet {
                             response.sendRedirect("abreportlist.jsp");
                         else
                             response.sendRedirect("breportlist.jsp");
-                    if(btn.equals("Add Report")){
-                        response.sendRedirect("breport.jsp");
-                    }
                     return;
                 case "buildingpage":
                     response.sendRedirect("building.jsp");
@@ -560,8 +774,11 @@ public class UIServlet extends HttpServlet {
                 case "adminregpage":
                     response.sendRedirect("adminreg.jsp");
                     return;
-                case "reportpage":
-                    response.sendRedirect("reportpage.jsp");
+                case "breportpage":
+                    response.sendRedirect("breport.jsp");
+                    return;
+                case "rreportpage":
+                    response.sendRedirect("roomreport.jsp");
                     return;
                 case "adminpage":
                     response.sendRedirect("adminpage.jsp");
@@ -581,6 +798,9 @@ public class UIServlet extends HttpServlet {
                     return;
                 case "floorpage":
                     response.sendRedirect("createfloor.jsp");
+                    return;
+                case "roompage":
+                    response.sendRedirect("createroom.jsp");
                     return;
                 case "ays":
                     String disthing = (String)request.getSession().getAttribute("disthing");
@@ -630,8 +850,28 @@ public class UIServlet extends HttpServlet {
                         request.getSession().setAttribute("currentbuilding", currentbuilding);
                         response.sendRedirect("floorslist.jsp");
                     }
-//                    if(thisthing.equals("Room")
-//                    if(thisthing.equals("Room Report")
+                    if(thisthing.equals("Room")){
+                        df.deleteRoom((int)request.getSession().getAttribute("rid"));
+                        currentfloor = (Floor)request.getSession().getAttribute("currentfloor");
+                        currentfloor.reinitRooms();
+                        df.readRooms(currentfloor);
+                        request.getSession().setAttribute("currentfloor", currentfloor);
+                        if(adminloggedin)
+                            response.sendRedirect("aroomslist.jsp");
+                        else
+                            response.sendRedirect("roomslist.jsp");
+                    }
+                    if(thisthing.equals("Room Report")){
+                        df.deleteRReport((int)request.getSession().getAttribute("rrepid"));
+                        currentroom = (Room)request.getSession().getAttribute("currentroom");
+                        currentroom.reinitReports();
+                        df.readRReports(currentroom);
+                        request.getSession().setAttribute("currentroom", currentroom);
+                        if(adminloggedin)
+                            response.sendRedirect("arreportslist.jsp");
+                        else
+                            response.sendRedirect("rreportslist.jsp");
+                    }
                     return;     
                 case "imnotsure":
                     thisthing = (String)request.getSession().getAttribute("disthing");
@@ -651,8 +891,16 @@ public class UIServlet extends HttpServlet {
                             response.sendRedirect("breportlist.jsp");
                     if(thisthing.equals("Floor"))
                         response.sendRedirect("floorslist.jsp");
-//                    if(thisthing.equals("Room"))
-//                    if(thisthing.equals("Room Report"))
+                    if(thisthing.equals("Room"))
+                        if(adminloggedin)
+                            response.sendRedirect("aroomslist.jsp");
+                        else
+                            response.sendRedirect("roomslist.jsp");
+                    if(thisthing.equals("Room Report"))
+                        if(adminloggedin)
+                            response.sendRedirect("arreportslist.jsp");
+                        else
+                            response.sendRedirect("rreportslist.jsp");
                     return;     
             
         }

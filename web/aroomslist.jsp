@@ -1,8 +1,7 @@
-
 <%-- 
-    Document   : roomslist
-    Created on : Apr 20, 2016, 7:31:44 AM
-    Author     : Radu
+    Document   : aroomslist
+    Created on : Apr 27, 2016, 5:04:28 PM
+    Author     : Mircea
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

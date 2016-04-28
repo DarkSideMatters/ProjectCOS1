@@ -46,7 +46,6 @@
             <td> <input type="submit" name="btn" value="Edit"> </td>
             <td> <input type="submit" name="btn" value="Delete"> </td>
             <td> <input type="submit" name="btn" value="List Floors"> </td>
-            <td> <input type="submit" name="btn" value="Add Report"> </td>
             <td> <input type="submit" name="btn" value="List Reports"> </td>
             
             

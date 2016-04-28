@@ -16,14 +16,20 @@ public class Room {
     int rid;
     int fid;
     String rname;
-    String size;
+    String rsize;
     ArrayList<RReport> reports = new ArrayList<>();
 
-    public Room(int rid, int fid, String rname, String size) {
+    public Room(int rid, int fid, String rname, String rsize) {
         this.rid = rid;
         this.fid = fid;
         this.rname = rname;
-        this.size = size;
+        this.rsize = rsize;
+    }
+    
+    public Room(int fid, String rname, String rsize) {
+        this.fid = fid;
+        this.rname = rname;
+        this.rsize = rsize;
     }
 
     public Room() {
@@ -54,12 +60,12 @@ public class Room {
         this.rname = rname;
     }
     
-    public String getSize() {
-        return size;
+    public String getRsize() {
+        return rsize;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setRsize(String rsize) {
+        this.rsize = rsize;
     }
 
     public ArrayList<RReport> getReports() {
@@ -74,9 +80,13 @@ public class Room {
         reports = new ArrayList<>();
     }
     
+    public void addReport(RReport rrep){
+        reports.add(rrep);
+    }
+    
     @Override
     public String toString() {
-        return "Room{" + "rid=" + rid + ", fid=" + fid + ", rname=" + rname + ", size=" + size + '}';
+        return "Room{" + "rid=" + rid + ", fid=" + fid + ", rname=" + rname + ", rsize=" + rsize + '}';
     }
     
 

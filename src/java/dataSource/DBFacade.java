@@ -24,6 +24,7 @@ public class DBFacade {
     public BReportMapper brm;
     public FloorMapper fm;
     public RoomMapper rm;
+    public RReportMapper rrm;
     public DBConnector dbc;
     
     
@@ -36,6 +37,7 @@ public class DBFacade {
             brm = new BReportMapper();
             fm = new FloorMapper();
             rm = new RoomMapper();
+            rrm = new RReportMapper();
 	  }
     
 
@@ -122,6 +124,10 @@ public class DBFacade {
     
     public void addRoom(Room r){
         rm.createRoom(r, con);
+    }
+    
+    public void readRooms(Floor f){
+        rm.readRooms(f, con);
     }
     
     public void updateRnameRoom(int rid, String rname) {
@@ -266,56 +272,85 @@ public class DBFacade {
 
     ////////////////////////////////////// ROOM REPORT
     
-    public void updateRrepnumRReport(int rrepid, String rrepnum) {
-        
+    public void addRReport(RReport rrep){
+        rrm.createRReport(rrep, con);
     }
+    
+    public void readRReport(Room r){
+        rrm.readRReports(r, con);
+    }
+    
+    public void deleteRReport(int rrepid){
+        rrm.deleteReport(rrepid, con);
+    }
+    
 
     public void updateRRdateRReport(int rrepid, String rrdate) {
-        
+        rrm.updateRrepdateReport(rrepid, rrdate, con);
     }
 
+    public void updateRoomComReport(int rrepid, String rcomm){
+        rrm.updateRcommentReport(rrepid, rcomm, con);
+    }
+    
     public void updateDamageRReport(int rrepid, boolean damage) {
-        
+        rrm.updateDmgReport(rrepid, damage, con);
     }
 
     public void updateMoistRReport(int rrepid, boolean rmoist) {
-        
+        rrm.updateMoistReport(rrepid, rmoist, con);
     }
 
     public void updateRotRReport(int rrepid, boolean rrot) {
-        
+        rrm.updateRotReport(rrepid, rrot, con);
     }
 
-    public void updateMouldRReport(int rrepid, boolean rmould) {
-        
+    public void updateMoldRReport(int rrepid, boolean rmold) {
+        rrm.updateMoldReport(rrepid, rmold, con);
     }
 
     public void updateFireRReport(int rrepid, boolean rfire) {
-        
+        rrm.updateFireReport(rrepid, rfire, con);
     }
 
     public void updateOtherDMGRReport(int rrepid, boolean rother) {
-        
+        rrm.updateOtherReport(rrepid, rother, con);
+    }
+    
+    public void updateDmgComRReport(int rrepid, String dmgcom){
+        rrm.updateDmgcommentReport(rrepid, dmgcom, con);
     }
 
-    public void updateWindoorRReport(int rrepid, String windoor) {
-        
+    public void updateWallsComRReport(int rrepid, String wallscom) {
+        rrm.updateWallscommentReport(rrepid, wallscom, con);
+    }
+    
+    public void updateCeilingComRReport(int rrepid, String ceilingcom) {
+        rrm.updateCeilingcommentReport(rrepid, ceilingcom, con);
+    }
+    
+    public void updateFloorComRReport(int rrepid, String floorcom) {
+        rrm.updateFloorcommentReport(rrepid, floorcom, con);
+    }
+    
+    public void updateWindoorRReport(int rrepid, String windoorcom) {
+        rrm.updateWindoorcommentReport(rrepid, windoorcom, con);
     }
 
-    public void updateMoistScanRReport(int rrepid, String moistscan) {
-        
+    public void updateMoistScanRReport(int rrepid, boolean moistscan) {
+        rrm.updateMoistscanReport(rrepid, moistscan, con);
     }
 
     public void updateMoistPointRReport(int rrepid, String moistpoint) {
-        
+        rrm.updateMoistpointReport(rrepid, moistpoint, con);
     }
 
     public void updateRecommendationRReport(int rrepid, String recommendation) {
-        
+        rrm.updateRecommendationReport(rrepid, recommendation, con);
     }
 
     public void updateRConManagerRReport(int rrepid, String rconmanager) {
-        
+        rrm.updateRconmanagerReport(rrepid, rconmanager, con);
     }
     
 

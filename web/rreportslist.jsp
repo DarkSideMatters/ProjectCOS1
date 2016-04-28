@@ -1,6 +1,6 @@
 <%-- 
-    Document   : abreportlist
-    Created on : Apr 24, 2016, 6:28:19 PM
+    Document   : rreportlist
+    Created on : Apr 27, 2016, 10:46:06 PM
     Author     : Mircea
 --%>
 
@@ -15,8 +15,9 @@
     <body>
         
         <table>
-        <% Building bld = (Building)request.getSession().getAttribute("currentbuilding");
-            ArrayList<BReport> reps = bld.getReports();
+            <%  Admin am = (Admin)request.getSession().getAttribute("currentadmin");
+            Room rm = (Room)request.getSession().getAttribute("currentroom");
+            ArrayList<RReport> reps = rm.getReports();
         
             if(reps.size()==0){%>
             <%= "There are no reports." %>
@@ -27,7 +28,7 @@
                
             
             if(i==0) {%>
-            <tr><th>Nr</th><th>Date</th><th>Polygon Author</th><th>Construction Manager</th></tr>
+            <tr><th>Nr</th><th>Report Id</th><th>Report Date</th><th>Polygon Author</th><th>Construction Manager</th></tr>
             <%}%>
             
             <form name="Form2" action="UIServlet" method="post">
@@ -35,14 +36,13 @@
            <tr>
             
             <td> <%= i+1%> </td>
-            <td> <%= reps.get(i).getBrdate()%> </td>
-            <td> <%= reps.get(i).getPemployee()%> </td>
-            <td> <%= reps.get(i).getBconmanager()%> </td>
-            <input type="hidden" name="origin" value="breportoption"/>
-            <input type="hidden" name="brnum" value="<%= reps.get(i).getBrepid() %>" />
+            <td> <%= reps.get(i).getRrepid() %> </td>
+            <td> <%= reps.get(i).getRrepdate() %> </td>
+            <td> <%= am.getFirstname() + " " %><%= am.getLastname() %> </td>
+            <td> <%= reps.get(i).getRconmng() %> </td>
+            <input type="hidden" name="origin" value="rrepoption"/>
+            <input type="hidden" name="rrepid" value="<%= reps.get(i).getRrepid() %>" />
             <td> <input type="submit" name="btn" value="View"> </td>
-            <td> <input type="submit" name="btn" value="Edit"> </td>
-            <td> <input type="submit" name="btn" value="Delete"> </td>
             
             
            </tr>
@@ -53,14 +53,7 @@
         </table>
         
         <form name="Form2" action="UIServlet" method="post">
-            <input type="hidden" name="origin" value="breportpage">
-            <input type="submit" name="Buildingpage" value="Add Report"/>
-        </form>
-        
-        <br></br>
-        
-        <form name="Form2" action="UIServlet" method="post">
-            <input type="hidden" name="origin" value="buildinglist">
+            <input type="hidden" name="origin" value="roomslist">
             <input type="submit" name="Buildingpage" value="Back"/>
         </form>
         

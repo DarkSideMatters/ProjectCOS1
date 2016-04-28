@@ -15,8 +15,8 @@
         <h1>Edit room:</h1>
         <form name="Form" action="UIServlet" method="POST">
         <table>
-        <tr><td>RoomNo:</td><td> <input type="text" name="roomno" value="" /></td></tr><br>  
-        <tr><td>Room size(square meters):</td><td> <input type="text" name="roomsize" value="" /></td></tr>
+        <tr><td>Room Name:</td><td> <input type="text" name="rname" value="" /></td></tr><br>  
+        <tr><td>Room size(square meters):</td><td> <input type="text" name="rsize" value="" /></td></tr>
         </table>
         <br>
         <input type="hidden" name="origin" value="editroom"/>

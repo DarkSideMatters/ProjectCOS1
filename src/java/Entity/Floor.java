@@ -63,6 +63,10 @@ public class Floor {
     public void addRoom(Room room) {
         rooms.add(room);
     }
+    
+    public void reinitRooms(){
+        rooms = new ArrayList<>();
+    }
 
     @Override
     public String toString() {
