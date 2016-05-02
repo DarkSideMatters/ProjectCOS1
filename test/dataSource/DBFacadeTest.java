@@ -5,9 +5,8 @@
  */
 package dataSource;
 
-import Entity.Building;
-import Entity.Customer;
-import Entity.Report;
+import Entity.*;
+import dataSource.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,74 +17,59 @@ import static org.junit.Assert.*;
  */
 public class DBFacadeTest {
     
+    DomainFacade df;
+    TestDBConnector dbc;
     DBFacade dbf;
+    Accounts acc;
+    String username;
+    String password;
+    String fn;
+    String ln;
+    String email;
+    String tel;
+    String city;
+    String address;
+    String zip;
+    int i;
     
     @Before
     public void setUp() {
-        dbf = new DBFacade();
+        
     }
 
-//    @Test
-//    public void testBuilding() {
-//        Customer ct = new Customer();
-//        String name = "Henrik";
-//        String email = "henrik@genericmail.dk";
-//        int tel = 52222222;
-//        String address = "The strasse";
-//        dbf.addCustomer(name, email, tel, address);
-//        
-//        Building bd = new Building();
-//        String bname = "Kommune";
-//        String baddress = "Noname Boulevard 64";
-//        int pno = 2000;
-//        String size = "Big";
-//        String cname = "Henrik";
-//        dbf.addBuilding(bname, baddress, pno, size, cname);
-//        bd = dbf.getBuilding(bname);
-//        System.out.println(bd.getName());
-//        assertTrue(bname.equals(bd.getName()));
-//        
-//    }
-//
-//    @Test
-//    public void testCustomer() {
-//        Customer ct = new Customer();
-//        String name = "Henrik";
-//        String email = "henrik@genericmail.dk";
-//        int tel = 52222222;
-//        String address = "The strasse";
-//        dbf.addCustomer(name, email, tel, address);
-//        ct = dbf.getCustomer(name);
-//        System.out.println(ct.getCuname());
-//        assertTrue(name.equals(ct.getCuname()));
-//    }
-//    
-//    @Test
-//    public void testReport() {
-//        Customer ct = new Customer();
-//        String cuname = "Henrik";
-//        String email = "henrik@genericmail.dk";
-//        int tel = 52222222;
-//        String address = "The strasse";
-//        dbf.addCustomer(cuname, email, tel, address);
-//        
-//        Building bd = new Building();
-//        String name = "Kommune";
-//        String baddress = "Noname Boulevard 64";
-//        int pno = 2000;
-//        String size = "Big";
-//        String cname = "Henrik";
-//        dbf.addBuilding(name, baddress, pno, size, cname);
-//        
-//        Report rp = new Report();
-//        int reportno = 1;
-//        String rdate = "today";
-//        String bname = "Kommune";
-//        String rcomment = "A very nice building indeed";
-//        dbf.addReport(reportno, rdate, bname, rcomment);
-//        rp = dbf.getReport(reportno);
-//        System.out.println(rp);
-//        assertTrue(reportno == rp.getReportno());
-//    }
+
+
+    @Test
+    public void testCustomer() {
+        Customer ct = new Customer();
+        dbf = new DBFacade(dbc.getTestInstance().getTestConnection());
+        acc = new Accounts();
+        username = "Customerusrn";
+        password = "pass";
+        fn = "Henrik";
+        ln = "Goddag";
+        email = "henrik@genericmail.dk";
+        tel = "52222222";
+        city = "Copenhagenen";
+        address = "The strasse";
+        zip = "2016";
+        df.addCustomer(username, password, fn, ln, email, tel, city, address, zip);
+        acc.reinitCustomers();
+        df.readCustomers(acc);
+        for(i = 0; i<= acc.getCustomers().size(); i++);
+        ct = acc.getCustomers().get(i-1);
+        System.out.println(ct);
+        assertTrue(username.equals(ct.getUsername()));
+        assertTrue(password.equals(ct.getPassword()));
+        assertTrue(fn.equals(ct.getFirstname()));
+        assertTrue(ln.equals(ct.getLastname()));
+        assertTrue(email.equals(ct.getMail()));
+        assertTrue(tel.equals(ct.getTel()));
+        assertTrue(city.equals(ct.getCity()));
+        assertTrue(address.equals(ct.getAddress()));
+        assertTrue(zip.equals(ct.getZip()));
+    }
+    
+
     
 }

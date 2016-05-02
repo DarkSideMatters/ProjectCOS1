@@ -40,7 +40,16 @@ public class DBFacade {
             rrm = new RReportMapper();
 	  }
     
-
+    public DBFacade(Connection conn){
+            con = conn; 
+            cs = new CustomerMapper();
+            bm = new BuildingMapper();
+            am = new AdminMapper();
+            brm = new BReportMapper();
+            fm = new FloorMapper();
+            rm = new RoomMapper();
+            rrm = new RReportMapper();
+	  }
     
     public static DBFacade getInstance()
 	  {
@@ -143,7 +152,7 @@ public class DBFacade {
     }
 
     ////////////////////////////// CUSTOMER
-        public void addCustomer(Customer ct){
+    public void addCustomer(Customer ct){
         System.out.println(ct.toString());
         cs.createCustomer(ct,con);
         

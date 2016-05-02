@@ -74,7 +74,7 @@
         
         <ul><li>The building is categorized as:</li></ul>
         <table>
-                <tr><th>State</th><th>Description of the building</th><th>Condition grade</th></tr>
+                <tr><th>Grade</th><th>Description of the building</th></tr>
                 <% if(brep.getGrade().equals("0")){ %>
                 <tr><td>0</td><td>The building part is new and built</td></tr>
                 <%}
