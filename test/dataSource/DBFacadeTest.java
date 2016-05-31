@@ -43,6 +43,7 @@ public class DBFacadeTest {
     public void testCustomer() {
         Customer ct = new Customer();
         dbf = new DBFacade(dbc.getTestInstance().getTestConnection());
+        df = new DomainFacade();
         acc = new Accounts();
         username = "Customerusrn";
         password = "pass";
@@ -56,7 +57,7 @@ public class DBFacadeTest {
         df.addCustomer(username, password, fn, ln, email, tel, city, address, zip);
         acc.reinitCustomers();
         df.readCustomers(acc);
-        for(i = 0; i<= acc.getCustomers().size(); i++);
+        for(i = 0; i< acc.getCustomers().size(); i++);
         ct = acc.getCustomers().get(i-1);
         System.out.println(ct);
         assertTrue(username.equals(ct.getUsername()));
